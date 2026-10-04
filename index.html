@@ -895,7 +895,7 @@
                         <div class="editorial-row" style="margin-bottom: 0;">
                             <div class="editorial-left">
                                 <select id="deliveryDate" onchange="toggleDeliveryNote()">
-                                    <option value="" disabled selected hidden>Fecha de entrega deseada</option>
+                                    <option value="" disabled selected hidden>Seleccione su fecha de entrega</option>
                                     <option value="2026-10-26">Lunes 26 de octubre</option>
                                     <option value="2026-10-27">Martes 27 de octubre</option>
                                     <option value="2026-10-28">Miércoles 28 de octubre</option>
@@ -978,18 +978,234 @@
     <script>
         // BASE DE DATOS COMPLETA DE HOTELES Y GRUPOS
         const hotelesData = {
-            "casa-polanco": { 
-                nombre: "Casa Polanco", 
-                habitaciones: 19, 
-                logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_CasaPolanco.png",
-                logoScale: 1.0 
+            "casa-polanco": {
+                "nombre": "Casa Polanco",
+                "habitaciones": 19,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_CasaPolanco.png",
+                "logoScale": 1.0
+            },
+            "octavia-casa": {
+                "nombre": "Octavia Casa",
+                "habitaciones": 8,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OctaviaCasa.png",
+                "logoScale": 1.0
+            },
+            "the-alest": {
+                "nombre": "The Alest",
+                "habitaciones": 19,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Thealest.png",
+                "logoScale": 1.0
+            },
+            "uma-casa": {
+                "nombre": "Uma Casa",
+                "habitaciones": 9,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Uma.png",
+                "logoScale": 1.0
+            },
+            "wild-oscar": {
+                "nombre": "The Wild Oscar",
+                "habitaciones": 9,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_wildoscar.png",
+                "logoScale": 1.0
+            },
+            "orchid-house": {
+                "nombre": "Orchid House",
+                "habitaciones": 13,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OH.png",
+                "logoScale": 1.0
+            },
+            "kimpton-virgilio": {
+                "nombre": "Kimpton Virgilio",
+                "habitaciones": 48,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Kimpton.png",
+                "logoScale": 1.0
+            },
+            "kimpton-castelar": {
+                "nombre": "Kimpton El Castelar",
+                "habitaciones": 34,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Kimpton.png",
+                "logoScale": 1.0
+            },
+            "casa-levora": {
+                "nombre": "Casa Lévora",
+                "habitaciones": 9,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Levora.png",
+                "logoScale": 1.0
+            },
+            "casa-cuenca": {
+                "nombre": "Casa Cuenca",
+                "habitaciones": 10,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Cuenca.png",
+                "logoScale": 1.0
+            },
+            "el-alfonsa": {
+                "nombre": "El Alfonsa",
+                "habitaciones": 13,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Alfonsa.png",
+                "logoScale": 1.0
+            },
+            "casa-luciana": {
+                "nombre": "Casa Luciana",
+                "habitaciones": 8,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Luciana.png",
+                "logoScale": 1.0
+            },
+            "the-amsterdam": {
+                "nombre": "The Amsterdam",
+                "habitaciones": 14,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_The%20Amsterdam.png",
+                "logoScale": 1.0
+            },
+            "casa-mali": {
+                "nombre": "Casa Malí",
+                "habitaciones": 20,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Mali.png",
+                "logoScale": 1.0
+            },
+            "lulu-condesa": {
+                "nombre": "Lulú Condesa",
+                "habitaciones": 16,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_lulu.png",
+                "logoScale": 1.0
+            },
+            "maison-du-comte": {
+                "nombre": "Maison du Comte",
+                "habitaciones": 6,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo-MDC.png",
+                "logoScale": 1.0
+            },
+            "el-cortes": {
+                "nombre": "El Cortés",
+                "habitaciones": 15,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_El%20Cortes.png",
+                "logoScale": 1.0
+            },
+            "casa-talavera": {
+                "nombre": "Casa Talavera",
+                "habitaciones": 13,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Talavera.png",
+                "logoScale": 1.0
+            },
+            "nima": {
+                "nombre": "Nima Local House",
+                "habitaciones": 4,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Nima.png",
+                "logoScale": 1.0
+            },
+            "brick": {
+                "nombre": "Brick",
+                "habitaciones": 17,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Brick.png",
+                "logoScale": 1.0
+            },
+            "casa-margarita": {
+                "nombre": "Casa Margarita",
+                "habitaciones": 4,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Margarita.png",
+                "logoScale": 1.0
+            },
+            "casa-tenue": {
+                "nombre": "Casa Tenue",
+                "habitaciones": 8,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_casa-tenue.png",
+                "logoScale": 1.4
+            },
+        "las-alcobas": {
+                "nombre": "Las Alcobas",
+                "habitaciones": 35,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Alcobas.png",
+                "logoScale": 1.0
+            },
+        "casa-ofelia": {
+                "nombre": "Casa Ofelia Polanco",
+                "habitaciones": 23,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Ofelia.png",
+                "logoScale": 1.0
+        },
+        "lamartine": {
+                "nombre": "Lamartine",
+                "habitaciones": 10,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Lamartine.png",
+                "logoScale": 1.4
+        },
+            "pug-seal": {
+                "nombre": "Pug Seal",
+                "habitaciones": 46,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/logo_pug-seal.png",
+                "logoScale": 1.4
+        },
+        "casa-izel": {
+                "nombre": "Casa Izel",
+                "habitaciones": 25,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_CasaIzel.png",
+                "logoScale": 1.8
+        },
+         "campos-polanco": {
+                "nombre": "Campos Polanco",
+                "habitaciones": 12,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo-campos-polanco.png",
+                "logoScale": 1.8
+        },
+        "casa-izeba": {
+                "nombre": "Casa Izeba",
+                "habitaciones": 8,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_casa-izeba.png",
+                "logoScale": 1.5
+        },
+        "xoma": {
+                "nombre": "Xoma",
+                "habitaciones": 18,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Xoma.png",
+                "logoScale": 1.0
+        },
+        "hotel-habita": {
+                "nombre": "Hotel Habita",
+                "habitaciones": 36,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Hotel-Habita.png",
+                "logoScale": 1.9
+        },
+        "la-valise": {
+                "nombre": "La Valise",
+                "habitaciones": 8,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_la-valise.png",
+                "logoScale": 1.4
+        },
+            "colima-71": {
+                "nombre": "Colima 71",
+                "habitaciones": 16,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Colima71.png",
+                "logoScale": 1.0
+            },
+            "maison-celeste": {
+                "nombre": "Maison Celeste x Lezard",
+                "habitaciones": 13,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Maison%20Celeste.png",
+                "logoScale": 1.0
+            },
+            "roso-gh": {
+                "nombre": "Roso Guest House",
+                "habitaciones": 10,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Roso.png",
+                "logoScale": 1.0
+            },
+            "ignacia": {
+                "nombre": "Ignacia Guest House",
+                "habitaciones": 9,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Ignacia.png",
+                "logoScale": 1.0
+            },
+            "hoteldama": {
+                "nombre": "Hotel Dama",
+                "habitaciones": 17,
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Dama.png",
+                "logoScale": 1.0
             },
             "onto": {
                 nombre: "ONTO",
                 esGrupo: true,
                 fullWidthBubbles: true,
                 logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_onto.png",
-                logoScale: 1.4, // CAMPO PARA MODIFICAR EL TAMAÑO DEL LOGO PRINCIPAL DE ONTO
+                logoScale: 1.4,
                 propiedades: [
                     { id: "onto-ao", name: "Álvaro Obregón", rooms: 59, type: "text", image: "https://raw.githubusercontent.com/feraz-studio/57-71/main/alvaro-obregon.webp" },
                     { id: "onto-tonala", name: "Tonalá", rooms: 44, type: "text", image: "https://raw.githubusercontent.com/feraz-studio/57-71/main/tonala.webp" },
