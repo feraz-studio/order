@@ -1113,8 +1113,8 @@
         "las-alcobas": {
                 "nombre": "Las Alcobas",
                 "habitaciones": 35,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_las-alcobas",
-                "logoScale": 1.0
+                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_las-alcobas.png",
+                "logoScale": 1.7
             },
         "casa-ofelia": {
                 "nombre": "Casa Ofelia Polanco",
@@ -1126,7 +1126,7 @@
                 "nombre": "Lamartine",
                 "habitaciones": 10,
                 "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/logo_lamartine1.png",
-                "logoScale": 1.4
+                "logoScale": 1.5
         },
             "pug-seal": {
                 "nombre": "Pug Seal",
@@ -1156,7 +1156,7 @@
                 "nombre": "Xoma",
                 "habitaciones": 18,
                 "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/logo_xoma1.png",
-                "logoScale": 1.0
+                "logoScale": 1.3
         },
         "hotel-habita": {
                 "nombre": "Hotel Habita",
@@ -1260,7 +1260,7 @@
         // INICIALIZACIÓN
         document.addEventListener("DOMContentLoaded", function() {
             const urlParams = new URLSearchParams(window.location.search);
-            const hotelSlug = urlParams.get('hotel') || "onto";
+            const hotelSlug = urlParams.get('hotel') || "lamartine";
 
             if (hotelSlug && hotelesData[hotelSlug]) {
                 const hotelInfo = hotelesData[hotelSlug];
