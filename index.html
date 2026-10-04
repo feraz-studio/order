@@ -1895,13 +1895,17 @@
                 submitActionBtn.innerText = "ENVIANDO...";
 
                 try {
-                    // FIX: Eliminado 'mode: no-cors' que rompía la estructura JSON hacia Make
+                    // El formato de formulario evita el preflight CORS.
+                    // Make recibe los campos directamente con sus nombres originales.
+                    const formBody = new URLSearchParams();
+                    Object.entries(payload).forEach(([key, value]) => {
+                        formBody.append(key, String(value));
+                    });
+
                     await fetch(webhookUrl, {
                         method: 'POST',
-                        headers: { 
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(payload)
+                        mode: 'no-cors',
+                        body: formBody
                     });
                 } catch (err) {
                     console.log('Fallo el fetch al webhook:', err);
