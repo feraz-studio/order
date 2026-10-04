@@ -1174,7 +1174,7 @@
 
         document.addEventListener("DOMContentLoaded", function() {
             const urlParams = new URLSearchParams(window.location.search);
-            const hotelSlug = urlParams.get('hotel') || "vida-lenta";
+            const hotelSlug = urlParams.get('hotel') || "";
 
             if (hotelSlug && hotelesData[hotelSlug]) {
                 const hotelInfo = hotelesData[hotelSlug];
