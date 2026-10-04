@@ -350,22 +350,22 @@
 
         .hotel-brand-slot {
             text-align: center;
-            padding: 20px 0;
-            min-height: 70px;
+            padding: 0;            
+            margin-top: 36px;      
+            margin-bottom: 16px;   
+            min-height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-.hotel-brand-slot {
-            text-align: center;
-            padding: 0;           /* Quitamos los rellenos automáticos */
-            margin-top: 36px;      /* <--- Aquí le das el espacio exacto que quieras arriba */
-            margin-bottom: 16px;  /* Espacio hacia abajo antes del título */
-            min-height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* FIX: Asegurar límites estrictos para la imagen del logo en el slot */
+        .hotel-brand-slot img {
+            max-width: 140px;
+            height: auto;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
         }
 
         .section-title {
@@ -1042,7 +1042,7 @@
                 </div>
 
                 <div class="hotel-brand-slot">
-                    <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/Feraz_Off%20white.svg" alt="Hotel Partner">
+                    <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/Feraz_Off%20white.svg" alt="Feraz Partner">
                 </div>
 
                 <div class="section-title">Configuración de Pedido</div>
@@ -1148,7 +1148,7 @@
                             <div class="bar-info" id="barInfo">
                                 <span id="barTotal">$0.00 MXN + IVA</span>
                             </div>
-                            <button class="action-btn" id="submitActionBtn" onclick="handleActionClick(event)" disabled>COTIZAR</button>
+                            <button type="button" class="action-btn" id="submitActionBtn" onclick="handleActionClick(event)" disabled>COTIZAR</button>
                         </div>
 
                         <!-- El aviso de privacidad debajo de la barra -->
@@ -1289,7 +1289,6 @@
         let activeHotelData = null;
         let sliderLoop = null;
 
-        // Script de inicialización de la Animación 3D Three.js adaptada al recuadro horizontal (240x50px)
         let scene, camera, renderer, bonbonGroup;
         let rotationSpeed = 0.012;
 
@@ -1300,7 +1299,7 @@
             scene = new THREE.Scene();
 
             camera = new THREE.PerspectiveCamera(30, 240 / 50, 0.1, 1000);
-            camera.position.set(0, 0, 48); // Alejado para abarcar los anillos separados en horizontal
+            camera.position.set(0, 0, 48);
             camera.lookAt(0, 0, 0);
 
             renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -1390,7 +1389,6 @@
             bonbonGroup.add(new THREE.Points(blueGeo, pMaterial));
             bonbonGroup.add(new THREE.Points(redGeo, pMaterial));
 
-            // Acostado horizontalmente y centrado en el recuadro ancho
             bonbonGroup.rotation.z = Math.PI / 2;
             bonbonGroup.position.x = 0;
             bonbonGroup.position.y = 0;
@@ -1412,18 +1410,19 @@
             initBonbonAnimation();
 
             const urlParams = new URLSearchParams(window.location.search);
-            const hotelSlug = urlParams.get('hotel') || "vida-lenta";
+            const hotelSlug = urlParams.get('hotel');
+            const logoSlot = document.querySelector('.hotel-brand-slot img');
 
             if (hotelSlug && hotelesData[hotelSlug]) {
                 const hotelInfo = hotelesData[hotelSlug];
                 activeHotelData = hotelInfo;
 
-                const logoSlot = document.querySelector('.hotel-brand-slot img');
                 if (logoSlot) {
                     logoSlot.src = hotelInfo.logo;
                     logoSlot.alt = hotelInfo.nombre;
                     const scale = hotelInfo.logoScale || 1.0;
                     logoSlot.style.height = `${28 * scale}px`;
+                    logoSlot.style.width = 'auto';
                 }
 
                 if (hotelInfo.esGrupo) {
@@ -1464,9 +1463,20 @@
                     roomsInput.value = hotelInfo.habitaciones;
                     startSliderLoop();
                 }
-
-                calculateOrder();
+            } else {
+                // FIX: Fallback seguro para el slug base (cuando no hay parámetro ?hotel=)
+                if (logoSlot) {
+                    logoSlot.src = "https://raw.githubusercontent.com/feraz-studio/57-71/main/Feraz_Forest.svg";
+                    logoSlot.alt = "Feraz";
+                    logoSlot.style.height = "18px";
+                    logoSlot.style.width = "auto";
+                }
+                isGroupMode = false;
+                groupBubblesWrapper.style.display = 'none';
+                startSliderLoop();
             }
+
+            calculateOrder();
         });
 
         function selectGroupProperty(propId) {
@@ -1581,11 +1591,9 @@
                 kitPriceDisplay.innerHTML = `$0.00 <span class="unit-label">/ kit.</span>`;
             } else if (grandTotalKits >= 20) {
                 minError.style.display = 'none';
+                submitActionBtn.disabled = false;
                 
-                if (!isDateSelected) {
-                    submitActionBtn.disabled = true;
-                } else {
-                    submitActionBtn.disabled = false;
+                if (isDateSelected) {
                     dateError.style.display = 'none';
                 }
                 
