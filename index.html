@@ -1268,7 +1268,7 @@
         // INICIALIZACIÓN
         document.addEventListener("DOMContentLoaded", function() {
             const urlParams = new URLSearchParams(window.location.search);
-            const hotelSlug = urlParams.get('hotel') || "onto";
+            const hotelSlug = urlParams.get('hotel') || "";
 
             if (hotelSlug && hotelesData[hotelSlug]) {
                 const hotelInfo = hotelesData[hotelSlug];
