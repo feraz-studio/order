@@ -1787,8 +1787,9 @@
         const clientEmail = document.getElementById('clientEmail');
         let isDrawerOpen = false;
 
-        function handleActionClick(event) {
+async function handleActionClick(event) {
             event.preventDefault();
+            event.stopPropagation();
             
             if (!deliveryDate.value) {
                 dateError.style.display = 'block';
@@ -1857,12 +1858,26 @@
                 };
 
                 const webhookUrl = 'https://hook.us2.make.com/d8w6clcapg4lhvpy32cvvxg3hrq3ksi7';
-                fetch(webhookUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                }).catch(err => console.log('Webhook dispatched'));
 
+                // Deshabilitar el botón temporalmente para evitar doble clic mientras viaja el dato
+                submitActionBtn.disabled = true;
+                submitActionBtn.innerText = "ENVIANDO...";
+
+                try {
+                    await fetch(webhookUrl, {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(payload),
+                        mode: 'no-cors' // <-- Esto evita bloqueos de seguridad del navegador hacia Make
+                    });
+                } catch (err) {
+                    console.log('Webhook dispatched with no-cors or caught error:', err);
+                }
+
+                // Ejecutamos la transición visual de éxito
                 submitOrder();
             }
         }
