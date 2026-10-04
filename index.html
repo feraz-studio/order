@@ -110,9 +110,9 @@
             background-color: #000000 !important;
         }
         body.confirmed .hero-fold {
-    height: 620px !important; /* Puedes ajustar este valor a 340px o 400px según prefieras */
-    border-radius: 0 0 24px 24px;
-}
+            height: 620px !important; 
+            border-radius: 0 0 24px 24px;
+        }
 
         .page-container {
             width: 100%;
@@ -232,7 +232,7 @@
             -webkit-backdrop-filter: blur(25px);
             border-radius: 36px 36px 28px 28px;
             border: 1px solid var(--border-color);
-            padding: 24px 24px 40px 24px;
+            padding: 24px 24px 5px 24px;
             box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.08);
             transition: background 0.6s ease, border-color 0.6s ease, backdrop-filter 0.6s ease;
         }
@@ -833,6 +833,69 @@
             cursor: not-allowed;
         }
 
+        /* Aviso de privacidad condicional (aparece con el resumen) y mucho más clarito */
+.privacy-notice {
+    font-family: 'HK Grotesk', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    color: rgba(26, 26, 26, 0.55);
+    text-align: center;
+    line-height: 1.4;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease, margin 0.5s ease;
+    margin-top: 0;
+}
+
+.calculation-summary.visible ~ .action-bar + .privacy-notice,
+.privacy-notice.visible {
+    max-height: 50px;
+    opacity: 1;
+    margin-top: 14px;
+}
+
+.privacy-notice a {
+    color: rgba(26, 26, 26, 0.7);
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+        /* Pie de página fuera del contenedor principal, de color blanco y tipografía limpia */
+        .site-footer {
+            margin-top: 36px;
+            padding: 0 12px;
+            text-align: left;
+            font-family: 'HK Grotesk', sans-serif;
+            color: #FFFFFF;
+        }
+
+        .site-footer p {
+            font-size: 11px;
+            color: #FFFFFF;
+            margin-bottom: 2px;
+            line-height: 1.4;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        .site-footer .footer-brand {
+            font-weight: 600;
+            color: #FFFFFF;
+            margin-bottom: 2px;
+            opacity: 1;
+        }
+
+        .site-footer a.footer-link {
+            display: inline-block;
+            margin-top: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #FFFFFF;
+            text-decoration: underline;
+            opacity: 0.9;
+        }
+
         .group-bubbles-wrapper {
             display: none;
             overflow-x: auto;
@@ -893,8 +956,8 @@
             filter: brightness(0) invert(1) opacity(1);
         }
         body.confirmed .hero-content {
-    display: none !important;
-}
+            display: none !important;
+        }
     </style>
 </head>
 <body>
@@ -1017,7 +1080,7 @@
                             <div class="delivery-note">El pedido se entregará directamente en las instalaciones de su propiedad en la fecha seleccionada previo al horario de check-in. Si requiere otra ubicación, por favor comuníquese con nosotros para coordinarlo.</div>
                         </div>
 
-                        <div class="calculation-summary" id="calculationSummary">
+<div class="calculation-summary" id="calculationSummary">
                             <div class="summary-title">RESUMEN</div>
                             
                             <div id="summaryBreakdownContainer"></div>
@@ -1026,6 +1089,32 @@
                                 <span>TOTAL</span>
                                 <span id="totalDisplay">$0.00 MXN + IVA</span>
                             </div>
+                        </div>
+
+                        <div class="checkout-drawer" id="checkoutDrawer">
+                            <div class="editorial-row" style="margin-bottom: 12px;">
+                                <div class="editorial-left">
+                                    <input type="text" id="clientName" placeholder="Nombre">
+                                </div>
+                            </div>
+                            <div class="editorial-row">
+                                <div class="editorial-left">
+                                    <input type="email" id="clientEmail" placeholder="Correo electrónico">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- La barra de acción -->
+                        <div class="action-bar" id="actionBar">
+                            <div class="bar-info" id="barInfo">
+                                <span id="barTotal">$0.00 MXN + IVA</span>
+                            </div>
+                            <button class="action-btn" id="submitActionBtn" onclick="handleActionClick(event)" disabled>REALIZAR PEDIDO</button>
+                        </div>
+
+                        <!-- El aviso de privacidad ahora va debajo de la barra -->
+                        <div class="privacy-notice" id="privacyNotice">
+                            Protegemos sus datos. Puede consultar nuestro <a href="https://www.order.feraz.studio/privacy" target="_blank">aviso de privacidad</a>.
                         </div>
 
                         <div class="checkout-drawer" id="checkoutDrawer">
@@ -1060,7 +1149,8 @@
                 </div>
 
                 <div class="success-footer">
-<p style="margin-bottom: 32px;">Si tiene alguna pregunta, por favor no dude en contactarnos.<br><br></p>                    <p class="author-name">Fernando Quezada</p>
+                    <p style="margin-bottom: 32px;">Si tiene alguna pregunta, por favor no dude en contactarnos.<br><br></p>                
+                    <p class="author-name">Fernando Quezada</p>
                     <p class="author-title">Founder & Creative Director</p>
                     <div class="success-icons">
                         <a href="https://wa.me/525549400957" target="_blank" aria-label="WhatsApp">
@@ -1073,6 +1163,14 @@
                 </div>
             </div>
         </div>
+
+        <!-- Pie de página institucional fuera del contenedor principal -->
+        <footer class="site-footer">
+            <p class="footer-brand">Feraz | Ciudad de México</p>
+            <p>Estudio Culinario & Laboratorio de Experiencias</p>
+            <p style="margin-top: 10px;">© 2026 FERAZ STUDIO. Todos los derechos reservados.</p>
+            <a href="https://www.feraz.studio" class="footer-link" target="_blank">Studio Website</a>
+        </footer>
     </div>
 
     <script>
@@ -1344,7 +1442,6 @@
             } else if (grandTotalKits >= 20) {
                 minError.style.display = 'none';
                 
-                // Valida que exista fecha seleccionada para habilitar el botón
                 if (!isDateSelected) {
                     submitActionBtn.disabled = true;
                 } else {
@@ -1497,32 +1594,30 @@
             totalDisplay.innerText = formattedTotal;
             barTotal.innerText = formattedTotal;
         }
+
         (function() {
-    const dot = document.getElementById('cursor-feraz-bocci');
+            const dot = document.getElementById('cursor-feraz-bocci');
 
-    if (window.matchMedia("(pointer: fine)").matches) {
-        window.addEventListener('mousemove', (e) => {
-            // Centrado (24px / 2 = 12)
-            dot.style.transform = `translate3d(${e.clientX - 12}px, ${e.clientY - 12}px, 0)`;
-        });
+            if (window.matchMedia("(pointer: fine)").matches) {
+                window.addEventListener('mousemove', (e) => {
+                    dot.style.transform = `translate3d(${e.clientX - 12}px, ${e.clientY - 12}px, 0)`;
+                });
 
-        // Función para detectar elementos interactivos
-        const applyHover = () => {
-            const targets = document.querySelectorAll('a, button, .button, .icon, input, [role="button"]');
-            targets.forEach(el => {
-                el.addEventListener('mouseenter', () => dot.classList.add('is-hovering'));
-                el.addEventListener('mouseleave', () => dot.classList.remove('is-hovering'));
-            });
-        };
+                const applyHover = () => {
+                    const targets = document.querySelectorAll('a, button, .button, .icon, input, [role="button"]');
+                    targets.forEach(el => {
+                        el.addEventListener('mouseenter', () => dot.classList.add('is-hovering'));
+                        el.addEventListener('mouseleave', () => dot.classList.remove('is-hovering'));
+                    });
+                };
 
-        // Ejecutar en carga y cambios de sección
-        window.addEventListener('load', applyHover);
-        window.addEventListener('hashchange', () => setTimeout(applyHover, 100));
-        applyHover(); // Ejecución inmediata
-    } else {
-        if (dot) dot.remove();
-    }
-})();
+                window.addEventListener('load', applyHover);
+                window.addEventListener('hashchange', () => setTimeout(applyHover, 100));
+                applyHover();
+            } else {
+                if (dot) dot.remove();
+            }
+        })();
 
         function startSliderLoop() {
             if (sliderLoop) clearInterval(sliderLoop);
@@ -1546,7 +1641,6 @@
         function handleActionClick(event) {
             event.preventDefault();
             
-            // Validación explícita de la fecha con mensaje abajo
             if (!deliveryDate.value) {
                 dateError.style.display = 'block';
                 deliveryDate.focus();
