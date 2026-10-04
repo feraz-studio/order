@@ -3,6 +3,8 @@
 <head>
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/feraz-studio/57-71/main/Favicon%203.png">
+    <!-- Three.js para la animación 3D -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
 /* 1. Eliminamos el cursor real en absolutamente todo */
 @media (pointer: fine) {
@@ -271,6 +273,30 @@
             text-align: justify;
         }
 
+        /* Divisor 3D rectangular horizontal adaptado al recuadro */
+        .bonbon-divider-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 26px 0 26px 0;
+        }
+        
+        .bonbon-divider-canvas {
+            width: 240px;
+            height: 50px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .bonbon-divider-canvas canvas {
+            width: 240px !important;
+            height: 50px !important;
+            display: block;
+        }
+
         .amenity-details {
             background: rgba(255, 255, 255, 0.35);
             border-radius: 20px;
@@ -331,13 +357,15 @@
             justify-content: center;
         }
 
-        .hotel-brand-slot img {
-            height: 28px;
-            max-width: 80%;
-            width: auto;
-            object-fit: contain;
-            filter: brightness(0);
-            transition: all 0.3s ease;
+.hotel-brand-slot {
+            text-align: center;
+            padding: 0;           /* Quitamos los rellenos automáticos */
+            margin-top: 36px;      /* <--- Aquí le das el espacio exacto que quieras arriba */
+            margin-bottom: 16px;  /* Espacio hacia abajo antes del título */
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .section-title {
@@ -833,35 +861,33 @@
             cursor: not-allowed;
         }
 
-        /* Aviso de privacidad condicional (aparece con el resumen) y mucho más clarito */
-.privacy-notice {
-    font-family: 'HK Grotesk', sans-serif;
-    font-weight: 500;
-    font-size: 11px;
-    color: rgba(26, 26, 26, 0.55);
-    text-align: center;
-    line-height: 1.4;
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: max-height 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease, margin 0.5s ease;
-    margin-top: 0;
-}
+        .privacy-notice {
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 500;
+            font-size: 11px;
+            color: rgba(26, 26, 26, 0.55);
+            text-align: center;
+            line-height: 1.4;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease, margin 0.5s ease;
+            margin-top: 0;
+        }
 
-.calculation-summary.visible ~ .action-bar + .privacy-notice,
-.privacy-notice.visible {
-    max-height: 50px;
-    opacity: 1;
-    margin-top: 14px;
-}
+        .calculation-summary.visible ~ .action-bar + .privacy-notice,
+        .privacy-notice.visible {
+            max-height: 50px;
+            opacity: 1;
+            margin-top: 14px;
+        }
 
-.privacy-notice a {
-    color: rgba(26, 26, 26, 0.7);
-    text-decoration: underline;
-    font-weight: 600;
-}
+        .privacy-notice a {
+            color: rgba(26, 26, 26, 0.7);
+            text-decoration: underline;
+            font-weight: 600;
+        }
 
-        /* Pie de página fuera del contenedor principal, de color blanco y tipografía limpia */
         .site-footer {
             margin-top: 36px;
             padding: 0 12px;
@@ -978,39 +1004,34 @@
             <div class="card-handle"></div>
 
             <div id="orderContentWrapper">
-      <div class="info-section">
+                <div class="info-section">
                     <div class="info-title">UN MOMENTO ÚNICO EN LA INDUSTRIA</div>
                     <div class="info-body" style="margin-bottom: 12px;">
                         Nuestra colección fue concebida para elevar la estancia de sus huéspedes durante la semana del GP de la Ciudad de México. <br><br> Los sabores resguardan la identidad de ingredientes mexicanos emblemáticos, encapsulando en cada pieza la dualidad y la personalidad que inmortalizó a los hermanos Rodríguez en el circuito.
                     </div>
-                    <div class="info-body">
-                        Creamos esta herramienta digital para agilizar la visualización y el proceso de adquisición. Cada detalle ha sido pensado para asegurar que su pedido sea entregado con absoluta precisión en las piezas, cantidades y fechas de su preferencia.
+                    <div class="info-body" style="margin-bottom: 0;">
+                        Creamos esta herramienta digital para facilitar su proceso de compra. Cada detalle ha sido pensado para asegurar que su pedido sea entregado con absoluta precisión en las piezas, cantidades y fechas de su preferencia.
                     </div>
+                </div>
 
-<div class="amenity-details">
+                <!-- Divisor 3D rectangular horizontal -->
+                <div class="bonbon-divider-wrapper">
+                    <div class="bonbon-divider-canvas" id="canvas-container"></div>
+                </div>
+
+                <div class="info-section" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0;">
+                    <div class="amenity-details">
                         <div class="info-title" style="font-size: 13px; margin-bottom: 12px;">Componentes por Kit</div>
                         <ul>
                             <li>1 Bombón Pedro (Vainilla de Papantla y caramelo mascabado).</li>
                             <li>1 Bombón Ricardo (Naranja, jengibre y pimienta rosa).</li>
                             <li>Tarjeta editorial de cata y narrativa con código QR.</li>
                             <li>Manuales de montaje y cuidado para el equipo operativo.</li>
-                            <li>   Página web personalizada con la identidad de su hotel. </li>
                         </ul>
 
                         <div style="font-family: 'HK Grotesk', sans-serif; font-weight: 500; font-size: 13px; color: var(--text-secondary); margin-bottom: 14px; padding-left: 14px;">
-                         Puede ver el mockupdel sitio web <a href="https://57-71.feraz.studio" target="_blank" style="color: var(--text-primary); text-decoration: underline; font-weight: 600;">aquí</a>.
+                            Página web personalizada con la identidad de su hotel. Puede ver el mockup del sitio web <a href="https://57-71.feraz.studio" target="_blank" style="color: var(--text-primary); text-decoration: underline; font-weight: 600;">aquí</a>.
                         </div>
-
-                        <div class="recommendation-tag">
-                            <h4 style="margin-bottom: 4px;">Sugerencia de consumo</h4>
-                            <strong>Check-in Amenity:</strong> 1 kit / reservación.<br>
-                            <strong>Turndown Service:</strong> 1 kit / noche.
-                        </div>
-                    </div>
-
-                        <ul style="margin-bottom: 0;">
-                            <li></li>
-                        </ul>
 
                         <div class="recommendation-tag">
                             <h4 style="margin-bottom: 4px;">Sugerencia de consumo</h4>
@@ -1098,7 +1119,7 @@
                             <div class="delivery-note">El pedido se entregará directamente en las instalaciones de su propiedad en la fecha seleccionada previo al horario de check-in. Si requiere otra ubicación, por favor comuníquese con nosotros para coordinarlo.</div>
                         </div>
 
-<div class="calculation-summary" id="calculationSummary">
+                        <div class="calculation-summary" id="calculationSummary">
                             <div class="summary-title">RESUMEN</div>
                             
                             <div id="summaryBreakdownContainer"></div>
@@ -1127,32 +1148,12 @@
                             <div class="bar-info" id="barInfo">
                                 <span id="barTotal">$0.00 MXN + IVA</span>
                             </div>
-                            <button class="action-btn" id="submitActionBtn" onclick="handleActionClick(event)" disabled>REALIZAR PEDIDO</button>
+                            <button class="action-btn" id="submitActionBtn" onclick="handleActionClick(event)" disabled>COTIZAR</button>
                         </div>
 
-                        <!-- El aviso de privacidad ahora va debajo de la barra -->
+                        <!-- El aviso de privacidad debajo de la barra -->
                         <div class="privacy-notice" id="privacyNotice">
                             Protegemos sus datos. Puede consultar nuestro <a href="https://www.order.feraz.studio/privacy" target="_blank">aviso de privacidad</a>.
-                        </div>
-
-                        <div class="checkout-drawer" id="checkoutDrawer">
-                            <div class="editorial-row" style="margin-bottom: 12px;">
-                                <div class="editorial-left">
-                                    <input type="text" id="clientName" placeholder="Nombre">
-                                </div>
-                            </div>
-                            <div class="editorial-row">
-                                <div class="editorial-left">
-                                    <input type="email" id="clientEmail" placeholder="Correo electrónico">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="action-bar" id="actionBar">
-                            <div class="bar-info" id="barInfo">
-                                <span id="barTotal">$0.00 MXN + IVA</span>
-                            </div>
-                            <button class="action-btn" id="submitActionBtn" onclick="handleActionClick(event)" disabled>REALIZAR PEDIDO</button>
                         </div>
                     </form>
                 </div>
@@ -1288,9 +1289,130 @@
         let activeHotelData = null;
         let sliderLoop = null;
 
+        // Script de inicialización de la Animación 3D Three.js adaptada al recuadro horizontal (240x50px)
+        let scene, camera, renderer, bonbonGroup;
+        let rotationSpeed = 0.012;
+
+        function initBonbonAnimation() {
+            const container = document.getElementById('canvas-container');
+            if(!container) return;
+            
+            scene = new THREE.Scene();
+
+            camera = new THREE.PerspectiveCamera(30, 240 / 50, 0.1, 1000);
+            camera.position.set(0, 0, 48); // Alejado para abarcar los anillos separados en horizontal
+            camera.lookAt(0, 0, 0);
+
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(240, 50);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setClearColor(0x000000, 0); 
+            container.appendChild(renderer.domElement);
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+            scene.add(ambientLight);
+
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1.2);
+            directionalLight.position.set(5, 10, 7);
+            scene.add(directionalLight);
+
+            createBonbonPointCloud();
+            animateAnimation();
+        }
+
+        function createBonbonPointCloud() {
+            bonbonGroup = new THREE.Group();
+            const particleCountPerLayer = 15; 
+            const layers = 27;
+            const maxHeight = 30.4;
+            const maxRadius = 13.4;
+
+            const blueColor = new THREE.Color('#78ACD0');
+            const redColor = new THREE.Color('#FF0000');
+
+            const bluePositions = [];
+            const redPositions = [];
+            const blueColors = [];
+            const redColors = [];
+
+            function getRadiusAtHeight(h, H) {
+                const normalizedH = h / H;
+                if (normalizedH < 0.65) {
+                    return maxRadius * (1 - normalizedH * 0.05);
+                } else {
+                    const domeProgress = (normalizedH - 0.65) / 0.35;
+                    return maxRadius * 0.95 * Math.sin(Math.acos(domeProgress * 0.95));
+                }
+            }
+
+            for (let i = 0; i < layers; i++) {
+                const v = i / (layers - 1); 
+                const h = v * maxHeight;
+                const radius = getRadiusAtHeight(h, maxHeight);
+
+                if (isNaN(radius) || radius < 0) continue;
+
+                const currentCount = Math.max(5, Math.floor(particleCountPerLayer * (radius / maxRadius + 0.4)));
+
+                for (let j = 0; j < currentCount; j++) {
+                    const theta = (j / currentCount) * Math.PI * 2;
+                    const x = radius * Math.cos(theta);
+                    const z = radius * Math.sin(theta);
+                    const y = h;
+
+                    const isBlue = (theta >= 0 && theta < Math.PI) || (theta >= Math.PI * 1.99);
+
+                    if (isBlue) {
+                        bluePositions.push(x, y, z);
+                        blueColors.push(blueColor.r, blueColor.g, blueColor.b);
+                    } else {
+                        redPositions.push(x, y, z);
+                        redColors.push(redColor.r, redColor.g, redColor.b);
+                    }
+                }
+            }
+
+            const blueGeo = new THREE.BufferGeometry();
+            blueGeo.setAttribute('position', new THREE.Float32BufferAttribute(bluePositions, 3));
+            blueGeo.setAttribute('color', new THREE.Float32BufferAttribute(blueColors, 3));
+
+            const redGeo = new THREE.BufferGeometry();
+            redGeo.setAttribute('position', new THREE.Float32BufferAttribute(redPositions, 3));
+            redGeo.setAttribute('color', new THREE.Float32BufferAttribute(redColors, 3));
+
+            const pMaterial = new THREE.PointsMaterial({
+                size: 0.08,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.95
+            });
+
+            bonbonGroup.add(new THREE.Points(blueGeo, pMaterial));
+            bonbonGroup.add(new THREE.Points(redGeo, pMaterial));
+
+            // Acostado horizontalmente y centrado en el recuadro ancho
+            bonbonGroup.rotation.z = Math.PI / 2;
+            bonbonGroup.position.x = 0;
+            bonbonGroup.position.y = 0;
+
+            scene.add(bonbonGroup);
+        }
+
+        function animateAnimation() {
+            requestAnimationFrame(animateAnimation);
+            if (bonbonGroup) {
+                bonbonGroup.rotation.y += rotationSpeed;
+            }
+            if(renderer && scene && camera) {
+                renderer.render(scene, camera);
+            }
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
+            initBonbonAnimation();
+
             const urlParams = new URLSearchParams(window.location.search);
-            const hotelSlug = urlParams.get('hotel') || "";
+            const hotelSlug = urlParams.get('hotel') || "vida-lenta";
 
             if (hotelSlug && hotelesData[hotelSlug]) {
                 const hotelInfo = hotelesData[hotelSlug];
