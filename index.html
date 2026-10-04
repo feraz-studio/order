@@ -59,7 +59,7 @@
     <title>Feraz — Colección 57–71 | Configure su pedido</title>
     
     <style>
-        /* FIX: Fuentes rutadas mediante jsDelivr CDN para forzar CORS y MIME types correctos en Windows */
+        /* Fuentes rutadas mediante jsDelivr CDN para forzar CORS y MIME types correctos en Windows */
         @font-face {
             font-family: 'HK Grotesk';
             src: url('https://cdn.jsdelivr.net/gh/feraz-studio/57-71@main/HKGrotesk-Medium.otf') format('opentype');
@@ -961,14 +961,14 @@
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-            user-select: none; /* Previene selección de texto al arrastrar */
+            user-select: none;
         }
 
         .property-bubble img {
             filter: brightness(0);
             opacity: 0.6;
             transition: all 0.3s ease;
-            pointer-events: none; /* Asegura un arrastre limpio sin enganchar la imagen */
+            pointer-events: none;
         }
 
         .property-bubble.active {
@@ -1289,6 +1289,7 @@
         let groupOrderData = {};
         let activeSelectedPropId = null;
         let activeHotelData = null;
+        let currentHotelSlug = "individual";
         let sliderLoop = null;
 
         let scene, camera, renderer, bonbonGroup;
@@ -1416,6 +1417,7 @@
             const logoSlot = document.querySelector('.hotel-brand-slot img');
 
             if (hotelSlug && hotelesData[hotelSlug]) {
+                currentHotelSlug = hotelSlug;
                 const hotelInfo = hotelesData[hotelSlug];
                 activeHotelData = hotelInfo;
 
@@ -1438,7 +1440,7 @@
                     }
                     
                     hotelInfo.propiedades.forEach((p) => {
-                        groupOrderData[p.id] = { kits: "", rooms: p.rooms, vajilla: "", name: p.name };
+                        groupOrderData[p.id] = { kits: "", rooms: p.rooms, vajilla: "", name: p.name, slug: p.id };
 
                         const bubble = document.createElement('div');
                         bubble.className = 'property-bubble';
@@ -1459,7 +1461,6 @@
                         selectGroupProperty(hotelInfo.propiedades[0].id);
                     }
                     
-                    // Inicializar funcionalidad de scroll por arrastre
                     initDragToScroll(groupBubblesWrapper);
 
                 } else {
@@ -1469,6 +1470,7 @@
                     startSliderLoop();
                 }
             } else {
+                currentHotelSlug = hotelSlug ? hotelSlug : "individual";
                 if (logoSlot) {
                     logoSlot.src = "https://raw.githubusercontent.com/feraz-studio/57-71/main/Feraz_Forest.svg";
                     logoSlot.alt = "Feraz";
@@ -1483,7 +1485,6 @@
             calculateOrder();
         });
 
-        // Script para permitir scroll horizontal nativo arrastrando el mouse
         function initDragToScroll(slider) {
             let isDown = false;
             let startX;
@@ -1507,7 +1508,7 @@
                 if (!isDown) return;
                 e.preventDefault();
                 const x = e.pageX - slider.offsetLeft;
-                const walk = (x - startX) * 2; // Ajustar sensibilidad de arrastre
+                const walk = (x - startX) * 2;
                 slider.scrollLeft = scrollLeft - walk;
             });
         }
@@ -1862,7 +1863,7 @@
                             if (k > 0) parts.push(`${k} kits`);
                             if (v > 0) parts.push(`${v} vajillas`);
                             
-                            desgloseStr += `${data.name}: ${parts.join(', ')}. | `;
+                            desgloseStr += `${data.name} (${id}): ${parts.join(', ')}. | `;
                             totalRoomsFinal += data.rooms;
                             totalKitsFinal += k;
                         }
@@ -1878,7 +1879,9 @@
                     desgloseStr = parts.join(', ');
                 }
 
+                // PAYLOAD ACTUALIZADO CON EL SLUG INCLUIDO
                 const payload = {
+                    slug: currentHotelSlug,
                     nombre: nameVal,
                     email: emailVal,
                     hotel: activeHotelData ? activeHotelData.nombre : "Individual",
@@ -1894,18 +1897,17 @@
                 submitActionBtn.disabled = true;
                 submitActionBtn.innerText = "ENVIANDO...";
 
-                // Mismo método JSON usado por el formulario que ya funciona con Make.
-                fetch(webhookUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(payload)
-                }).then(() => {
-                    console.log('Datos enviados al webhook de Make');
-                }).catch(err => {
-                    console.error('Error al enviar al webhook de Make:', err);
-                });
+                try {
+                    await fetch(webhookUrl, {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    });
+                } catch (err) {
+                    console.log('Fallo el fetch al webhook:', err);
+                }
 
                 submitOrder();
             }
