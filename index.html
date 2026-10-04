@@ -1194,8 +1194,6 @@
         </footer>
     </div>
 
-    <iframe name="makeWebhookFrame" id="makeWebhookFrame" title="Envío de cotización" style="display:none" aria-hidden="true"></iframe>
-
     <script>
         const hotelesData = {
             "casa-polanco": { "nombre": "Casa Polanco", "habitaciones": 19, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_CasaPolanco.png", "logoScale": 1.0 },
@@ -1896,24 +1894,18 @@
                 submitActionBtn.disabled = true;
                 submitActionBtn.innerText = "ENVIANDO...";
 
-                // Envío nativo por formulario a un iframe oculto: evita CORS y conserva la página visible.
-                const webhookForm = document.createElement('form');
-                webhookForm.method = 'POST';
-                webhookForm.action = webhookUrl;
-                webhookForm.target = 'makeWebhookFrame';
-                webhookForm.style.display = 'none';
-
-                Object.entries(payload).forEach(([key, value]) => {
-                    const input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = key;
-                    input.value = String(value);
-                    webhookForm.appendChild(input);
+                // Mismo método JSON usado por el formulario que ya funciona con Make.
+                fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                }).then(() => {
+                    console.log('Datos enviados al webhook de Make');
+                }).catch(err => {
+                    console.error('Error al enviar al webhook de Make:', err);
                 });
-
-                document.body.appendChild(webhookForm);
-                webhookForm.submit();
-                window.setTimeout(() => webhookForm.remove(), 10000);
 
                 submitOrder();
             }
