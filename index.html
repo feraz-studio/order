@@ -361,17 +361,17 @@
             white-space: nowrap;
         }
 
-        .editorial-row input, .editorial-row select {
-            width: 100%;
-            background: transparent;
-            border: none;
-            outline: none;
-            font-family: 'HK Grotesk', sans-serif;
-            font-weight: 600;
-            font-size: 15px;
-            color: var(--text-primary);
-            padding: 4px 0;
-        }
+.editorial-row input, .editorial-row select {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: 'HK Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 16px; /* Configurado a 16px para evitar el zoom automático en iOS */
+    color: var(--text-primary);
+    padding: 4px 0;
+}
 
         .editorial-row input::placeholder {
             color: #999;
@@ -690,28 +690,29 @@
             justify-content: center;
         }
 
-        .bar-info span {
-            font-family: 'HK Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 15px;
-            color: #FFFFFF;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-            line-height: 1.2;
-        }
+.bar-info span {
+    font-family: 'HK Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 13.5px; /* Ligeramente más estilizado para montos largos */
+    color: #FFFFFF;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    line-height: 1.2;
+}
 
-        .action-btn {
-            background-color: #FFFFFF;
-            color: #1A1A1A;
-            border: 1px solid transparent;
-            padding: 12px 24px;
-            border-radius: 40px;
-            font-family: 'HK Grotesk', sans-serif;
-            font-weight: 700;
-            font-size: 13px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
+.action-btn {
+    background-color: #FFFFFF;
+    color: #1A1A1A;
+    border: 1px solid transparent;
+    padding: 9px 16px; /* Reducido un 20% en altura y laterales */
+    border-radius: 40px;
+    font-family: 'HK Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 11.5px; /* Tamaño de fuente ajustado */
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap; /* Evita saltos de línea en el botón */
+}
 
         .action-btn.outline {
             background-color: #FFFFFF !important;
@@ -1209,7 +1210,7 @@
                 nombre: "ONTO",
                 esGrupo: true,
                 fullWidthBubbles: true,
-                logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_ONTO.png",
+                logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_onto.png",
                 logoScale: 1.4,
                 propiedades: [
                     { id: "onto-ao", name: "Álvaro Obregón", rooms: 59, type: "text", image: "https://raw.githubusercontent.com/feraz-studio/57-71/main/alvaro-obregon.webp" },
@@ -1267,7 +1268,7 @@
         // INICIALIZACIÓN
         document.addEventListener("DOMContentLoaded", function() {
             const urlParams = new URLSearchParams(window.location.search);
-            const hotelSlug = urlParams.get('hotel') || "vida-lenta";
+            const hotelSlug = urlParams.get('hotel') || "onto";
 
             if (hotelSlug && hotelesData[hotelSlug]) {
                 const hotelInfo = hotelesData[hotelSlug];
@@ -1680,19 +1681,22 @@
             }
         }
 
-        function submitOrder() {
-            document.getElementById('orderContentWrapper').style.display = 'none';
-            document.getElementById('success-state').style.display = 'block';
-            document.body.classList.add('confirmed');
-            
-            const heroFold = document.getElementById('heroFold');
-            heroFold.style.backgroundImage = "url('https://raw.githubusercontent.com/feraz-studio/57-71/main/Hrod_2.webp')";
-            
-            const contentCard = document.getElementById('contentCard');
-            contentCard.style.background = 'rgba(20, 20, 20, 0.75)';
-            contentCard.style.borderColor = 'rgba(255, 255, 255, 0.15)';
-            contentCard.style.color = '#FFFFFF';
-        }
+function submitOrder() {
+    document.getElementById('orderContentWrapper').style.display = 'none';
+    document.getElementById('success-state').style.display = 'block';
+    document.body.classList.add('confirmed');
+    
+    // Scroll suave hasta la parte superior de la página
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    const heroFold = document.getElementById('heroFold');
+    heroFold.style.backgroundImage = "url('https://raw.githubusercontent.com/feraz-studio/57-71/main/Hrod_2.webp')";
+    
+    const contentCard = document.getElementById('contentCard');
+    contentCard.style.background = 'rgba(20, 20, 20, 0.75)';
+    contentCard.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+    contentCard.style.color = '#FFFFFF';
+}
 
         // NAV SCROLL
         const topNav = document.getElementById('topNav');
