@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Feraz - Aviso de Privacidad</title>
+<link rel="icon" type="image/png" href="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/01_Isotipo%20Web.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    @font-face {
+        font-family: 'HK Grotesk';
+        src: url('https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/HKGrotesk-Regular.woff2') format('woff2');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+    }
+    @font-face {
+        font-family: 'HK Grotesk';
+        src: url('https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/HKGrotesk-Bold.woff2') format('woff2');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background-color: #FAF9F6;
+        color: #000000;
+        font-family: 'HK Grotesk', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow-x: hidden;
+    }
+
+    /* Canvas para la esfera de puntos rotando en el header */
+    #orbs-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 180px;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .privacy-wrapper {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 60px 24px 80px 24px;
+        flex: 1;
+    }
+
+    .privacy-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 50px;
+        border-bottom: 1px solid #E5E5E5;
+        padding-bottom: 20px;
+    }
+
+    .privacy-logo {
+        width: 70px;
+        height: auto;
+        filter: brightness(0);
+    }
+
+    .back-link {
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #000000;
+        text-decoration: none;
+        border-bottom: 1px solid #000000;
+        padding-bottom: 2px;
+    }
+
+    h1 {
+        font-size: 20px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 30px;
+    }
+
+    h2 {
+        font-size: 15px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-top: 35px;
+        margin-bottom: 15px;
+        color: #111111;
+    }
+
+    p, li {
+        font-size: 14px;
+        line-height: 1.7;
+        color: #333333;
+        margin-bottom: 20px;
+    }
+
+    ul {
+        margin-left: 20px;
+        margin-bottom: 20px;
+    }
+
+    .footer-minimal {
+        border-top: 1px solid #E5E5E5;
+        padding-top: 30px;
+        margin-top: 50px;
+        font-size: 12px;
+        color: #666666;
+    }
+</style>
+</head>
+<body>
+
+    <!-- Canvas centrado en la parte superior -->
+    <canvas id="orbs-canvas"></canvas>
+
+    <div class="privacy-wrapper">
+        <header class="privacy-header">
+            <a href="https://atelier.feraz.studio">
+                <img src="https://raw.githubusercontent.com/feraz-studio/feraz-assets/main/Feraz_Off%20white.svg" alt="Feraz" class="privacy-logo">
+            </a>
+<a href="https://atelier.feraz.studio" onclick="if(sessionStorage.getItem('feraz_last_page')) { window.location.href = sessionStorage.getItem('feraz_last_page'); return false; }" class="back-link">Volver</a>        </header>
+
+        <main>
+            <h1>Aviso de Privacidad</h1>
+            
+            <p>En cumplimiento con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares y su reglamento, <strong>Feraz Studio</strong> (operando en Ciudad de México), pone a su disposición el presente Aviso de Privacidad.</p>
+
+            <h2>1. Identidad del Responsable</h2>
+            <p>Feraz Studio es responsable del tratamiento y protección de los datos personales que nos proporcione a través de nuestros canales digitales y formularios de contacto.</p>
+
+            <h2>2. Datos Personales que se Recaban</h2>
+            <p>Para llevar a cabo las finalidades descritas en el presente aviso, recabaremos los siguientes datos personales:</p>
+            <ul>
+                <li>Nombre y apellido.</li>
+                <li>Correo electrónico de contacto.</li>
+                <li>Información relacionada con la propiedad, hotel o requerimientos de hospitalidad (número de habitaciones y selección de servicios).</li>
+            </ul>
+
+            <h2>3. Finalidades del Tratamiento de Datos</h2>
+            <p>Los datos personales que recopilamos serán utilizados para las siguientes finalidades esenciales:</p>
+            <ul>
+                <li>Atender solicitudes de cotización y servicios de diseño culinario.</li>
+                <li>Coordinar experiencias, entregas y tastings sensoriales en su propiedad.</li>
+                <li>Mantener una comunicación directa y eficiente relacionada con nuestras propuestas de hospitalidad.</li>
+            </ul>
+
+            <h2>4. Derechos ARCO</h2>
+            <p>Usted tiene derecho a Conocer qué datos personales tenemos de usted, para qué los utilizamos y las condiciones del uso que les damos (Acceso). Asimismo, es su derecho solicitar la corrección de su información personal en caso de que esté desactualizada, sea inexacta o incompleta (Rectificación); que la eliminemos de nuestros registros o bases de datos cuando considere que la misma no está siendo utilizada adecuadamente (Cancelación); así como oponerse al uso de sus datos personales para fines específicos (Oposición).</p>
+            <p>Para el ejercicio de cualquiera de los derechos ARCO, puede enviar una solicitud clara y directa al correo electrónico: <a href="mailto:info@feraz.studio" style="color: #000; text-decoration: underline;">info@feraz.studio</a>.</p>
+
+            <h2>5. Modificaciones al Aviso de Privacidad</h2>
+            <p>El presente aviso de privacidad puede sufrir modificaciones, cambios o actualizaciones derivadas de nuevos requerimientos legales o de nuestras propias necesidades operativas. Cualquier modificación estará disponible de forma pública en esta misma ruta.</p>
+
+            <div class="footer-minimal">
+                <p>© Feraz Hospitality Design Studio. Ciudad de México.</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Script de la esfera 3D de puntos rotando -->
+    <script>
+        const canvas = document.getElementById('orbs-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = 180;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        // Generar puntos de una malla esférica
+        let points = [];
+        const lats = 16;
+        const lons = 28;
+        const radius = 25;
+
+        for (let i = 0; i <= lats; i++) {
+            let lat = (i / lats) * Math.PI - Math.PI / 2;
+            for (let j = 0; j <= lons; j++) {
+                let lon = (j / lons) * Math.PI * 2;
+                let x = radius * Math.cos(lat) * Math.cos(lon);
+                let y = radius * Math.sin(lat);
+                let z = radius * Math.cos(lat) * Math.sin(lon);
+                points.push({x, y, z});
+            }
+        }
+
+        let angleX = 0;
+        let angleY = 0;
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            angleX += 0.01;
+            angleY += 0.015;
+
+            const cx = width / 2;
+            const cy = 60; // Centrado verticalmente en el header
+
+            points.forEach(p => {
+                // Rotación en eje Y
+                let x1 = p.x * Math.cos(angleY) - p.z * Math.sin(angleY);
+                let z1 = p.z * Math.cos(angleY) + p.x * Math.sin(angleY);
+
+                // Rotación en eje X
+                let y2 = p.y * Math.cos(angleX) - z1 * Math.sin(angleX);
+                let z2 = z1 * Math.cos(angleX) + p.y * Math.sin(angleX);
+
+                // Perspectiva 3D
+                let perspective = 300 / (300 + z2);
+                let projX = x1 * perspective + cx;
+                let projY = y2 * perspective + cy;
+
+                // Tamaño y opacidad según profundidad (Z) para dar volumen
+                let size = (z2 + radius) / (radius * 2) * .5 + 0.4;
+                let alpha = (z2 + radius) / (radius * 2) * 0.2 + 0.07;
+
+                ctx.fillStyle = `rgba(110, 110, 110, ${alpha})`;
+                ctx.beginPath();
+                ctx.arc(projX, projY, size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
