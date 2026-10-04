@@ -20,7 +20,8 @@
     background-color: transparent;
     border: 1.2px solid white;
     position: fixed;
-    pointer-events: none !important; /* Asegura que el mouse atraviese el círculo y golpee el enlace */    z-index: 2147483647 !important;
+    pointer-events: none !important;
+    z-index: 2147483647 !important;
     border-radius: 50%;
     mix-blend-mode: difference;
     top: 0;
@@ -58,21 +59,22 @@
     <title>Feraz — Colección 57–71 | Configure su pedido</title>
     
     <style>
+        /* FIX: Fuentes rutadas mediante jsDelivr CDN para forzar CORS y MIME types correctos en Windows */
         @font-face {
             font-family: 'HK Grotesk';
-            src: url('https://raw.githubusercontent.com/feraz-studio/57-71/main/HKGrotesk-Medium.otf') format('opentype');
+            src: url('https://cdn.jsdelivr.net/gh/feraz-studio/57-71@main/HKGrotesk-Medium.otf') format('opentype');
             font-weight: 500;
             font-style: normal;
         }
         @font-face {
             font-family: 'HK Grotesk';
-            src: url('https://raw.githubusercontent.com/feraz-studio/57-71/main/HKGrotesk-SemiBold.otf') format('opentype');
+            src: url('https://cdn.jsdelivr.net/gh/feraz-studio/57-71@main/HKGrotesk-SemiBold.otf') format('opentype');
             font-weight: 600;
             font-style: normal;
         }
         @font-face {
             font-family: 'HK Grotesk';
-            src: url('https://raw.githubusercontent.com/feraz-studio/57-71/main/HKGrotesk-Bold.otf') format('opentype');
+            src: url('https://cdn.jsdelivr.net/gh/feraz-studio/57-71@main/HKGrotesk-Bold.otf') format('opentype');
             font-weight: 700;
             font-style: normal;
         }
@@ -272,7 +274,6 @@
             text-align: justify;
         }
 
-        /* Divisor 3D rectangular horizontal adaptado al recuadro */
         .bonbon-divider-wrapper {
             width: 100%;
             display: flex;
@@ -358,7 +359,6 @@
             justify-content: center;
         }
 
-        /* FIX: Asegurar límites estrictos para la imagen del logo en el slot */
         .hotel-brand-slot img {
             max-width: 140px;
             height: auto;
@@ -961,12 +961,14 @@
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            user-select: none; /* Previene selección de texto al arrastrar */
         }
 
         .property-bubble img {
             filter: brightness(0);
             opacity: 0.6;
             transition: all 0.3s ease;
+            pointer-events: none; /* Asegura un arrastre limpio sin enganchar la imagen */
         }
 
         .property-bubble.active {
@@ -1026,8 +1028,7 @@
                             <li>1 Bombón Ricardo (Naranja, jengibre y pimienta rosa).</li>
                             <li>Tarjeta editorial de cata y narrativa con código QR.</li>
                             <li>Manuales de montaje y cuidado para el equipo operativo.</li>
-                            <li>Página web personalizada con la identidad de su hotel. 
-</li>
+                            <li>Página web personalizada con la identidad de su hotel. </li>
                         </ul>
 
                         <div style="font-family: 'HK Grotesk', sans-serif; font-weight: 500; font-size: 13px; color: var(--text-secondary); margin-bottom: 14px; padding-left: 14px;">
@@ -1153,8 +1154,8 @@
                         </div>
 
                         <!-- El aviso de privacidad debajo de la barra -->
-                        <div class="privacy-notice" id="privacyNotice">
-                            Protegemos sus datos. Puede consultar nuestro <a href="https://www.order.feraz.studio/privacy/" target="_blank">aviso de privacidad</a>.
+                        <div class="privacy-notice" id="privacyNotice" style="position: relative; z-index: 30;">
+                            Protegemos sus datos. Puede consultar nuestro <a href="https://atelier.feraz.studio/privacy/" target="_blank" style="position: relative; z-index: 40; pointer-events: auto !important;">aviso de privacidad</a>.
                         </div>
                     </form>
                 </div>
@@ -1457,6 +1458,9 @@
                     if (hotelInfo.propiedades.length > 0) {
                         selectGroupProperty(hotelInfo.propiedades[0].id);
                     }
+                    
+                    // Inicializar funcionalidad de scroll por arrastre
+                    initDragToScroll(groupBubblesWrapper);
 
                 } else {
                     isGroupMode = false;
@@ -1465,7 +1469,6 @@
                     startSliderLoop();
                 }
             } else {
-                // FIX: Fallback seguro para el slug base (cuando no hay parámetro ?hotel=)
                 if (logoSlot) {
                     logoSlot.src = "https://raw.githubusercontent.com/feraz-studio/57-71/main/Feraz_Forest.svg";
                     logoSlot.alt = "Feraz";
@@ -1479,6 +1482,35 @@
 
             calculateOrder();
         });
+
+        // Script para permitir scroll horizontal nativo arrastrando el mouse
+        function initDragToScroll(slider) {
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            slider.addEventListener('mousedown', (e) => {
+                isDown = true;
+                slider.style.cursor = 'grabbing';
+                startX = e.pageX - slider.offsetLeft;
+                scrollLeft = slider.scrollLeft;
+            });
+            slider.addEventListener('mouseleave', () => {
+                isDown = false;
+                slider.style.cursor = 'pointer';
+            });
+            slider.addEventListener('mouseup', () => {
+                isDown = false;
+                slider.style.cursor = 'pointer';
+            });
+            slider.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - slider.offsetLeft;
+                const walk = (x - startX) * 2; // Ajustar sensibilidad de arrastre
+                slider.scrollLeft = scrollLeft - walk;
+            });
+        }
 
         function selectGroupProperty(propId) {
             if(!isGroupMode || !activeHotelData) return;
@@ -1787,7 +1819,7 @@
         const clientEmail = document.getElementById('clientEmail');
         let isDrawerOpen = false;
 
-async function handleActionClick(event) {
+        async function handleActionClick(event) {
             event.preventDefault();
             event.stopPropagation();
             
@@ -1859,25 +1891,22 @@ async function handleActionClick(event) {
 
                 const webhookUrl = 'https://hook.us2.make.com/d8w6clcapg4lhvpy32cvvxg3hrq3ksi7';
 
-                // Deshabilitar el botón temporalmente para evitar doble clic mientras viaja el dato
                 submitActionBtn.disabled = true;
                 submitActionBtn.innerText = "ENVIANDO...";
 
                 try {
+                    // FIX: Eliminado 'mode: no-cors' que rompía la estructura JSON hacia Make
                     await fetch(webhookUrl, {
                         method: 'POST',
                         headers: { 
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json'
+                            'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify(payload),
-                        mode: 'no-cors' // <-- Esto evita bloqueos de seguridad del navegador hacia Make
+                        body: JSON.stringify(payload)
                     });
                 } catch (err) {
-                    console.log('Webhook dispatched with no-cors or caught error:', err);
+                    console.log('Fallo el fetch al webhook:', err);
                 }
 
-                // Ejecutamos la transición visual de éxito
                 submitOrder();
             }
         }
