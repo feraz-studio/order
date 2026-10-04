@@ -30,6 +30,7 @@
             --text-secondary: #555555;
             --border-color: rgba(255, 255, 255, 0.6);
             --error: #B83B3B;
+            --navy-blue: #1B365D;
         }
 
         * {
@@ -216,18 +217,20 @@
 
         .hotel-brand-slot {
             text-align: center;
-            padding: 16px 0;
-            min-height: 60px;
+            padding: 20px 0;
+            min-height: 70px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .hotel-brand-slot img {
-            height: 20px;
+            height: 28px;
+            max-width: 80%;
             width: auto;
             object-fit: contain;
-            filter: brightness(0.2);
+            filter: brightness(0);
+            transition: all 0.3s ease;
         }
 
         .section-title {
@@ -240,87 +243,74 @@
             text-align: center;
         }
 
-.editorial-product-section {
-    position: relative; /* Contenedor de referencia para la píldora */
-}
+        .editorial-product-section {
+            position: relative;
+        }
 
-.tier-pill-wrapper {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    z-index: 20;
-    margin: 0;
-    display: flex;
-    justify-content: flex-end;
-}
-/* Contenedor del slider: altura automática basada en la proporción real de la foto */
-.product-image-slider {
-    position: relative;
-    width: 100%;
-    height: 200px; /* <--- Modifica este valor para cambiar la altura del contenedor (ej. 240px, 320px) */
-      margin-top: 24px;
-    margin-bottom: 24px;
-    border-radius: 28px; /* Esquinas redondeadas al ~25% */
-    overflow: hidden;    /* Mantiene las esquinas limpias */
-    background: #0A0A0A; /* Fondo de respaldo mientras cargan las fotos */
-}
+        .tier-pill-wrapper {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 20;
+            margin: 0;
+            display: flex;
+            justify-content: flex-end;
+        }
 
-/* Ambas imágenes se adaptan perfectamente al contenedor sin deformarse */
-.slide-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;   /* Llena el contenedor de forma armónica */
-    opacity: 0;
-    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
+        .product-image-slider {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            margin-top: 24px;
+            margin-bottom: 20px;
+            border-radius: 28px;
+            overflow: hidden;
+            background: #0A0A0A;
+        }
 
-/* Imagen activa visible en el loop */
-.slide-img.active {
-    opacity: 1;
-}
+        .slide-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-.tier-pill {
-    background: rgba(255, 255, 255, 0.65);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    color: var(--text-primary);
-    font-family: 'HK Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 6px 16px;
-    border-radius: 30px;
-    opacity: 0;
-    transform: translateY(-8px);
-    transition: opacity 0.6s ease, transform 0.6s ease, background 0.4s ease, border-color 0.4s ease, color 0.4s ease;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
+        .slide-img.active {
+            opacity: 1;
+        }
 
-/* Estilo específico cuando la píldora adopta el modo Residence dorado */
-.tier-pill.residence-tier {
-    background: rgba(217, 175, 0, 0.9) !important;
-    border-color: rgba(217, 175, 0, 0.75) !important;
-    /* Cambia este tono por uno más oscuro o intenso (por ejemplo, un dorado quemado o bronce) */
-    color: #FFFFFF !important; 
-    font-weight: 800 !important;
-}
+        .tier-pill {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            color: var(--text-primary);
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 30px;
+            opacity: 0;
+            transform: translateY(-8px);
+            transition: opacity 0.6s ease, transform 0.6s ease, background 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .tier-pill.residence-tier {
+            background: rgba(217, 175, 0, 0.9) !important;
+            border-color: rgba(217, 175, 0, 0.75) !important;
+            color: #FFFFFF !important; 
+            font-weight: 800 !important;
+        }
 
         .tier-pill.visible {
             opacity: 1;
             transform: translateY(0);
-        }
-
-        .product-image {
-            width: 100%;
-            height: auto;
-            display: block;
-            margin-bottom: 24px;
-            object-fit: contain;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.05));
         }
 
         .dynamic-field-wrapper {
@@ -489,14 +479,39 @@
             margin-bottom: 16px;
         }
 
+        .property-summary-block {
+            margin-bottom: 16px;
+        }
+
+        .property-subtitle {
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
         .summary-line {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
+            align-items: center;
+            margin-bottom: 6px;
             font-family: 'HK Grotesk', sans-serif;
             font-weight: 500;
-            font-size: 14px;
+            font-size: 13.5px;
             color: var(--text-secondary);
+        }
+
+        .navy-included-tag {
+            color: var(--navy-blue);
+            font-weight: 700;
+            font-size: 10.5px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-left: 8px;
+            display: inline-block;
         }
 
         .summary-line.total {
@@ -528,7 +543,6 @@
             margin-top: 24px;
         }
         
-        /* ESTILOS DE LA VENTANA DE CONFIRMACIÓN (Frosted Glass sobre negro) */
         #success-state {
             display: none;
             text-align: center;
@@ -568,12 +582,6 @@
             width: auto;
             object-fit: contain;
             filter: brightness(1);
-        }
-
-        .success-divider {
-            width: 24px;
-            height: 1px;
-            background: rgba(255, 255, 255, 0.2);
         }
 
         .success-footer {
@@ -632,7 +640,6 @@
             stroke-linejoin: round;
         }
 
-        /* Barra flotante original intacta */
         .action-bar {
             position: fixed;
             bottom: 20px;
@@ -644,7 +651,7 @@
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
             color: #FFFFFF;
-            padding: 10px 12px 10px 20px;
+            padding: 10px 16px;
             border-radius: 50px;
             display: flex;
             align-items: center;
@@ -717,12 +724,71 @@
             border-color: transparent;
             cursor: not-allowed;
         }
+
+        .group-bubbles-wrapper {
+            display: none;
+            overflow-x: auto;
+            gap: 10px;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+            scrollbar-width: none;
+        }
+        .group-bubbles-wrapper::-webkit-scrollbar { display: none; }
+
+        .group-bubbles-wrapper.full-width {
+            display: flex;
+            overflow-x: visible;
+            width: 100%;
+        }
+
+        .group-bubbles-wrapper.full-width .property-bubble {
+            flex: 1;
+            text-align: center;
+            padding: 8px 10px;
+        }
+
+        .property-bubble {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 42px;
+            padding: 8px 18px;
+            border-radius: 30px;
+            border: 1.5px solid #D0D0D0;
+            background: transparent;
+            color: #888888;
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .property-bubble img {
+            filter: brightness(0);
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        .property-bubble.active {
+            border: 1.5px solid #000000;
+            background: linear-gradient(135deg, #2b2b2b 0%, #111111 50%, #222222 100%);
+            color: #FFFFFF;
+            box-shadow: inset 0 2px 4px rgba(255,255,255,0.15), 0 4px 12px rgba(0,0,0,0.2);
+            transform: translateY(-2px);
+        }
+
+        .property-bubble.active img {
+            filter: brightness(0) invert(1) opacity(1);
+        }
     </style>
 </head>
 <body>
 
     <div class="page-container">
-        <!-- Header minimalista sin sección de contacto -->
+        <!-- Header minimalista -->
         <nav class="top-nav" id="topNav">
             <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/Feraz_Off%20white.svg" alt="Feraz" class="feraz-logo">
         </nav>
@@ -732,7 +798,7 @@
         <div class="content-card" id="contentCard">
             <div class="card-handle"></div>
 
-            <!-- CONTENEDOR DE PEDIDO (Se oculta por completo al enviar) -->
+            <!-- CONTENEDOR DE PEDIDO -->
             <div id="orderContentWrapper">
                 <div class="info-section">
                     <div class="info-title">57-71 Hospitality Collection</div>
@@ -762,48 +828,56 @@
                     <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/Feraz_Off%20white.svg" alt="Hotel Partner">
                 </div>
 
-<div class="section-title">Configuración de Pedido</div>
+                <div class="section-title">Configuración de Pedido</div>
 
                 <div class="editorial-product-section expanded" id="productSection">
                     <form id="orderForm">
                         
-                        <!-- Píldora colocada de manera fluida antes del slider -->
+                        <!-- Píldora de Tier -->
                         <div class="tier-pill-wrapper">
                             <span class="tier-pill" id="tierPill">SUITE</span>
                         </div>
 
+                        <!-- Slider de imágenes principal -->
                         <div class="product-image-slider">
-                            <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/pedro1.webp" alt="Kit Pedro" class="slide-img active">
-                            <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/ricardo2.webp" alt="Kit Ricardo" class="slide-img">
+                            <img id="mainImage" src="https://raw.githubusercontent.com/feraz-studio/57-71/main/pedro1.webp" alt="Kit Pedro" class="slide-img active">
+                            <img id="altImage" src="https://raw.githubusercontent.com/feraz-studio/57-71/main/ricardo2.webp" alt="Kit Ricardo" class="slide-img">
                         </div>
+                        
+                        <!-- Carrusel de Burbujas (solo para grupos) -->
+                        <div id="groupBubblesWrapper" class="group-bubbles-wrapper"></div>
 
-                        <!-- Fila Kits -->
-                        <div class="editorial-row">
-                            <div class="editorial-left">
-                                <input type="number" id="kitsCount" placeholder="No. de Kits" min="1" step="1">
-                            </div>
-                            <div class="editorial-right">
-                                <span class="price-display" id="kitPriceDisplay">$0.00 <span class="unit-label">/ kit.</span></span>
-                            </div>
-                        </div>
-                        <div id="minError" class="error-message">El monto mínimo de producción es de 20 kits.</div>
-
-                        <!-- Fila Habitaciones (Dinámica con fundido) -->
-                        <div class="dynamic-field-wrapper" id="roomsWrapper">
-                            <div class="editorial-row" style="margin-bottom: 0;">
+                        <!-- Formulario de Configuración (visible siempre) -->
+                        <div id="formFieldsWrapper">
+                            <!-- Fila Kits -->
+                            <div class="editorial-row">
                                 <div class="editorial-left">
-                                    <input type="number" id="roomsCount" value="" placeholder="No. de Habitaciones" min="1" step="1">
+                                    <input type="number" id="kitsCount" placeholder="No. de Kits" min="1" step="1">
                                 </div>
                                 <div class="editorial-right">
-                                    <span class="price-display" style="font-size: 12px; color:#888;">habitaciones</span>
+                                    <span class="price-display" id="kitPriceDisplay">$0.00 <span class="unit-label">/ kit.</span></span>
+                                </div>
+                            </div>
+
+                            <!-- Fila Habitaciones -->
+                            <div class="dynamic-field-wrapper" id="roomsWrapper">
+                                <div class="editorial-row" style="margin-bottom: 0;">
+                                    <div class="editorial-left">
+                                        <input type="number" id="roomsCount" value="" placeholder="No. de Habitaciones" min="1" step="1">
+                                    </div>
+                                    <div class="editorial-right">
+                                        <span class="price-display" style="font-size: 12px; color:#888;">habitaciones</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                        <div id="minError" class="error-message">El monto mínimo de producción es de 20 kits.</div>
 
                         <!-- Nota de modalidad Residence -->
                         <div class="residence-note" id="residenceNote"></div>
 
-                        <!-- Fila Vajilla (Dinámica con fundido) -->
+                        <!-- Fila Vajilla -->
                         <div class="dynamic-field-wrapper active" id="vajillaWrapper">
                             <div class="editorial-row" style="margin-bottom: 0;" id="vajillaRow">
                                 <div class="editorial-left">
@@ -831,7 +905,7 @@
                             </div>
                         </div>
                         
-                        <!-- Nota de fecha con fundido descendente suave -->
+                        <!-- Nota de fecha -->
                         <div class="delivery-note-wrapper" id="deliveryNoteWrapper">
                             <div class="delivery-note">El pedido se entregará directamente en las instalaciones de su propiedad en la fecha seleccionada previo al horario de check-in. Si requiere otra ubicación, por favor comuníquese con nosotros para coordinarlo.</div>
                         </div>
@@ -840,21 +914,16 @@
                         <div class="calculation-summary">
                             <div class="summary-title">RESUMEN</div>
                             
-                            <div class="summary-line">
-                                <span id="summaryKitLabel">Kit 57-71 (0 pzas.)</span>
-                                <span id="summaryUnitPrice">$0.00</span>
-                            </div>
-                            <div class="summary-line" id="summaryTablewareRow">
-                                <span id="summaryTablewareLabel">Vajilla (0 pzas.)</span>
-                                <span id="summaryTablewarePrice">$0.00</span>
-                            </div>
+                            <!-- Desglose por hotel/propiedad -->
+                            <div id="summaryBreakdownContainer"></div>
+
                             <div class="summary-line total">
                                 <span>TOTAL</span>
                                 <span id="totalDisplay">$0.00 MXN + IVA</span>
                             </div>
                         </div>
 
-                        <!-- Cajón Desplegable (Nombre y Correo para Webhook) -->
+                        <!-- Cajón Desplegable -->
                         <div class="checkout-drawer" id="checkoutDrawer">
                             <div class="editorial-row" style="margin-bottom: 12px;">
                                 <div class="editorial-left">
@@ -873,13 +942,12 @@
                 </div>
             </div>
 
-            <!-- VENTANA DE CONFIRMACIÓN (Frosted Glass y centrada) -->
+            <!-- VENTANA DE CONFIRMACIÓN -->
             <div id="success-state">
                 <h2>PEDIDO RECIBIDO</h2>
                 <p>Hemos registrado su orden.<br><br>En breve recibirá su cotización formal y los siguientes pasos a seguir para garantizar la mejor experiencia para sus huéspedes.<br><br>Gracias por confiar en nosotros.</p>
                 
                 <div class="success-logos">
-
                     <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/Logo%20Hospit.png" alt="Logo Hospit" style="height: 44px;">
                 </div>
 
@@ -888,11 +956,9 @@
                     <p class="author-name">Fernando Quezada</p>
                     <p class="author-title">Founder & Creative Director</p>
                     <div class="success-icons">
-                        <!-- Ícono WhatsApp Outline -->
                         <a href="https://wa.me/525549400957" target="_blank" aria-label="WhatsApp">
                             <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
                         </a>
-                        <!-- Ícono Correo Outline -->
                         <a href="mailto:fernando@feraz.studio" aria-label="Correo">
                             <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                         </a>
@@ -910,223 +976,43 @@
     </div>
 
     <script>
+        // BASE DE DATOS COMPLETA DE HOTELES Y GRUPOS
         const hotelesData = {
-    "casa-polanco": {
-        nombre: "Casa Polanco",
-        habitaciones: 19,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_CasaPolanco.png"
-    },
-    "octavia-casa": {
-        nombre: "Octavia Casa",
-        habitaciones: 8,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OctaviaCasa.png"
-    },
-    "the-alest": {
-        nombre: "The Alest",
-        habitaciones: 19,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Thealest.png"
-    },
-    "uma-casa": {
-        nombre: "Uma Casa",
-        habitaciones: 9,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Uma.png"
-    },
-    "wild-oscar": {
-        nombre: "The Wild Oscar",
-        habitaciones: 9,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_wildoscar.png"
-    },
-    "orchid-house": {
-        nombre: "Orchid House",
-        habitaciones: 13,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OH.png"
-    },
-    "kimpton-virgilio": {
-        nombre: "Kimpton Virgilio",
-        habitaciones: 48,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Kimpton.png"
-    },
-    "kimpton-castelar": {
-        nombre: "Kimpton El Castelar",
-        habitaciones: 34,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Kimpton.png"
-    },
-    "casa-levora": {
-        nombre: "Casa Lévora",
-        habitaciones: 9,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Levora.png"
-    },
-    "casa-cuenca": {
-        nombre: "Casa Cuenca",
-        habitaciones: 10,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Cuenca.png"
-    },
-    "el-alfonsa": {
-        nombre: "El Alfonsa",
-        habitaciones: 13,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Alfonsa.png"
-    },
-    "casa-luciana": {
-        nombre: "Casa Luciana",
-        habitaciones: 8,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Luciana.png"
-    },
-    "the-amsterdam": {
-        nombre: "The Amsterdam",
-        habitaciones: 14,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_The%20Amsterdam.png"
-    },
-    "casa-mali": {
-        nombre: "Casa Malí",
-        habitaciones: 20,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Mali.png"
-    },
-    "lulu-condesa": {
-        nombre: "Lulú Condesa",
-        habitaciones: 16,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_lulu.png"
-    },
-    "maison-du-comte": {
-        nombre: "Maison du Comte",
-        habitaciones: 6,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo-MDC.png"
-    },
-    "el-cortes": {
-        nombre: "El Cortés",
-        habitaciones: 15,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_El%20Cortes.png"
-    },
-    "casa-talavera": {
-        nombre: "Casa Talavera",
-        habitaciones: 13,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Talavera.png"
-    },
-    "nima": {
-        nombre: "Nima Local House",
-        habitaciones: 4,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Nima.png"
-    },
-    "brick": {
-        nombre: "Brick",
-        habitaciones: 17,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Brick.png"
-    },
-    "casa-margarita": {
-        nombre: "Casa Margarita",
-        habitaciones: 4,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Margarita.png"
-    },
-    "onto": {
-        nombre: "ONTO",
-        habitaciones: 110,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_ONTO.png"
-    },
-    "casa-tenue": {
-        nombre: "Casa Tenue",
-        habitaciones: 8,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Tenue.png"
-    },
-    "colima-71": {
-        nombre: "Colima 71",
-        habitaciones: 16,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Colima71.png"
-    },
-    "maison-celeste": {
-        nombre: "Maison Celeste x Lezard",
-        habitaciones: 13,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Maison%20Celeste.png"
-    },
-    "roso-gh": {
-        nombre: "Roso Guest House",
-        habitaciones: 10,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Roso.png"
-    },
-    "ignacia": {
-        nombre: "Ignacia Guest House",
-        habitaciones: 9,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Ignacia.png"
-    },
-    "hoteldama": {
-        nombre: "Hotel Dama",
-        habitaciones: 17,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Dama.png"
-    },
-    "casona": {
-        nombre: "Casona",
-        habitaciones: 32,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casona.png"
-    },
-    "sara-y-julieta": {
-        nombre: "Sara y Julieta",
-        habitaciones: 23,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Sara%20y%20Julieta.png"
-    },
-    "las-alcobas": {
-        nombre: "Las Alcobas",
-        habitaciones: 35,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Alcobas.png"
-    },
-    "casa-ofelia": {
-        nombre: "Casa Ofelia Polanco",
-        habitaciones: 23,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Ofelia.png"
-    },
-    "hotel-habita": {
-        nombre: "Hotel Habita",
-        habitaciones: 36,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Hotel-Habita.png"
-    },
-    "lamartine": {
-        nombre: "Lamartine",
-        habitaciones: 10,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Lamartine.png"
-    },
-    "campos-polanco": {
-        nombre: "Campos Polanco",
-        habitaciones: 12,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo-campos-polanco.png"
-    },
-    "pug-seal": {
-        nombre: "Pug Seal",
-        habitaciones: 46,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/logo_pug-seal.png"
-    },
-    "casa-izel": {
-        nombre: "Casa Izel",
-        habitaciones: 25,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_CasaIzel.png"
-    },
-    "la-valise": {
-        nombre: "La Valise",
-        habitaciones: 8,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_la-valise.png"
-    },
-    "casa-izeba": {
-        nombre: "Casa Izeba",
-        habitaciones: 8,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_casa-izeba.png"
-    },
-    "hotel-parian": {
-        nombre: "Hotel Parián",
-        habitaciones: 19,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_hotel-parian.png"
-    },
-    "xoma": {
-        nombre: "Xoma",
-        habitaciones: 18,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Xoma.png"
-    },
-    "casa-bosques-pension": {
-        nombre: "Pensión",
-        habitaciones: 10,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Pension.png"
-    },
-    "hotel-oculto": {
-        nombre: "Hotel Oculto",
-        habitaciones: 21,
-        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_hotel-oculto.png"
-    }
-};
+            "casa-polanco": { 
+                nombre: "Casa Polanco", 
+                habitaciones: 19, 
+                logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_CasaPolanco.png",
+                logoScale: 1.0 
+            },
+            "onto": {
+                nombre: "ONTO",
+                esGrupo: true,
+                fullWidthBubbles: true,
+                logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_onto.png",
+                logoScale: 1.4, // CAMPO PARA MODIFICAR EL TAMAÑO DEL LOGO PRINCIPAL DE ONTO
+                propiedades: [
+                    { id: "onto-ao", name: "Álvaro Obregón", rooms: 59, type: "text", image: "https://raw.githubusercontent.com/feraz-studio/57-71/main/alvaro-obregon.webp" },
+                    { id: "onto-tonala", name: "Tonalá", rooms: 44, type: "text", image: "https://raw.githubusercontent.com/feraz-studio/57-71/main/tonala.webp" },
+                    { id: "onto-saavi", name: "SAAVI", rooms: 9, type: "text", image: "https://raw.githubusercontent.com/feraz-studio/57-71/main/saavi.webp" }
+                ]
+            },
+            "vida-lenta": {
+                nombre: "Vida Lenta Hospitality",
+                esGrupo: true,
+                fullWidthBubbles: false,
+                logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Vida-lenta.png",
+                logoScale: 1.0,
+                propiedades: [
+                    { id: "vl-parian", name: "Hotel Parián", rooms: 19, type: "logo", logoUrl: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_hotel-parian.png", logoScale: 1.4, image: "https://raw.githubusercontent.com/feraz-studio/57-71/main/parian.webp" },
+                    { id: "vl-dama", name: "Hotel Dama", rooms: 17, type: "logo", logoUrl: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Dama.png", logoScale: 1.4, image: "https://raw.githubusercontent.com/feraz-studio/57-71/main/dama.webp" },
+                    { id: "vl-oculto", name: "Hotel Oculto", rooms: 21, type: "logo", logoUrl: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_hotel-oculto.png", logoScale: 1.2, image: "https://raw.githubusercontent.com/feraz-studio/57-71/main/hotel-oculto.webp" },
+                    { id: "vl-pension", name: "Pensión", rooms: 10, type: "logo", logoUrl: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Pension.png", logoScale: 1.1, image: "https://raw.githubusercontent.com/feraz-studio/57-71/main/casa-bosques.webp" },
+                    { id: "vl-levora", name: "Casa Lévora", rooms: 9, type: "logo", logoUrl: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/logo_levora.png", logoScale: 1.2, image: "https://raw.githubusercontent.com/feraz-studio/57-71/main/levora.webp" }
+                ]
+            }
+        };
+
+        // ELEMENTOS DOM
         const kitsInput = document.getElementById('kitsCount');
         const roomsWrapper = document.getElementById('roomsWrapper');
         const roomsInput = document.getElementById('roomsCount');
@@ -1134,99 +1020,227 @@
         const vajillaInput = document.getElementById('vajillaCount');
         const residenceNote = document.getElementById('residenceNote');
         const minError = document.getElementById('minError');
-        
         const tierPill = document.getElementById('tierPill');
         const kitPriceDisplay = document.getElementById('kitPriceDisplay');
         const vajillaPriceDisplay = document.getElementById('vajillaPriceDisplay');
-        
-        const summaryKitLabel = document.getElementById('summaryKitLabel');
-        const summaryUnitPrice = document.getElementById('summaryUnitPrice');
-        const summaryTablewareRow = document.getElementById('summaryTablewareRow');
-        const summaryTablewareLabel = document.getElementById('summaryTablewareLabel');
-        const summaryTablewarePrice = document.getElementById('summaryTablewarePrice');
         const totalDisplay = document.getElementById('totalDisplay');
         const barTotal = document.getElementById('barTotal');
-        
         const submitActionBtn = document.getElementById('submitActionBtn');
-        const orderContentWrapper = document.getElementById('orderContentWrapper');
-        const successState = document.getElementById('success-state');
-        const actionBar = document.getElementById('actionBar');
-        const dockTarget = document.getElementById('dockTarget');
-        const checkoutDrawer = document.getElementById('checkoutDrawer');
-        const clientName = document.getElementById('clientName');
-        const clientEmail = document.getElementById('clientEmail');
         const deliveryDate = document.getElementById('deliveryDate');
         const deliveryNoteWrapper = document.getElementById('deliveryNoteWrapper');
-        const contentCard = document.getElementById('contentCard');
-        const heroFold = document.getElementById('heroFold');
         
-        let isDrawerOpen = false;
+        const summaryBreakdownContainer = document.getElementById('summaryBreakdownContainer');
+        const groupBubblesWrapper = document.getElementById('groupBubblesWrapper');
+        const mainImage = document.getElementById('mainImage');
+        const altImage = document.getElementById('altImage');
 
-        function toggleDeliveryNote() {
-            if (deliveryDate.value) {
-                deliveryNoteWrapper.classList.add('active');
-            } else {
-                deliveryNoteWrapper.classList.remove('active');
+        // ESTADO GLOBAL
+        let isGroupMode = false;
+        let groupOrderData = {};
+        let activeSelectedPropId = null;
+        let activeHotelData = null;
+        let sliderLoop = null;
+
+        // INICIALIZACIÓN
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const hotelSlug = urlParams.get('hotel') || "onto";
+
+            if (hotelSlug && hotelesData[hotelSlug]) {
+                const hotelInfo = hotelesData[hotelSlug];
+                activeHotelData = hotelInfo;
+
+                const logoSlot = document.querySelector('.hotel-brand-slot img');
+                if (logoSlot) {
+                    logoSlot.src = hotelInfo.logo;
+                    logoSlot.alt = hotelInfo.nombre;
+                    const scale = hotelInfo.logoScale || 1.0;
+                    logoSlot.style.height = `${28 * scale}px`;
+                }
+
+                if (hotelInfo.esGrupo) {
+                    isGroupMode = true;
+                    groupBubblesWrapper.style.display = 'flex';
+                    
+                    if (hotelInfo.fullWidthBubbles) {
+                        groupBubblesWrapper.classList.add('full-width');
+                    } else {
+                        groupBubblesWrapper.classList.remove('full-width');
+                    }
+                    
+                    hotelInfo.propiedades.forEach((p) => {
+                        groupOrderData[p.id] = { kits: "", rooms: p.rooms, vajilla: "", name: p.name };
+
+                        const bubble = document.createElement('div');
+                        bubble.className = 'property-bubble';
+                        bubble.dataset.id = p.id;
+
+                        if (p.type === "text") {
+                            bubble.innerText = p.name;
+                        } else if (p.type === "logo") {
+                            const scale = p.logoScale || 1.0;
+                            bubble.innerHTML = `<img src="${p.logoUrl}" alt="${p.name}" style="height:${20 * scale}px; width:auto; object-fit:contain;">`;
+                        }
+
+                        bubble.onclick = () => selectGroupProperty(p.id);
+                        groupBubblesWrapper.appendChild(bubble);
+                    });
+
+                    if (hotelInfo.propiedades.length > 0) {
+                        selectGroupProperty(hotelInfo.propiedades[0].id);
+                    }
+
+                } else {
+                    isGroupMode = false;
+                    groupBubblesWrapper.style.display = 'none';
+                    roomsInput.value = hotelInfo.habitaciones;
+                    startSliderLoop();
+                }
+
+                calculateOrder();
             }
+        });
+
+        // CAMBIO DE PROPIEDAD EN MODO GRUPO
+        function selectGroupProperty(propId) {
+            if(!isGroupMode || !activeHotelData) return;
+            activeSelectedPropId = propId;
+
+            const propObj = activeHotelData.propiedades.find(p => p.id === propId);
+            if(!propObj) return;
+
+            document.querySelectorAll('.property-bubble').forEach(b => {
+                if (b.dataset.id === propId) b.classList.add('active');
+                else b.classList.remove('active');
+            });
+
+            if (mainImage.src !== propObj.image) {
+                altImage.src = propObj.image;
+                altImage.classList.add('active');
+                mainImage.classList.remove('active');
+                
+                setTimeout(() => {
+                    mainImage.src = propObj.image;
+                    mainImage.classList.add('active');
+                    altImage.classList.remove('active');
+                }, 1200);
+            }
+
+            kitsInput.value = groupOrderData[propId].kits;
+            roomsInput.value = groupOrderData[propId].rooms;
+            vajillaInput.value = groupOrderData[propId].vajilla;
+
+            calculateOrder();
         }
 
-        function calculateOrder() {
-            const rawKits = kitsInput.value;
-            const kits = parseInt(rawKits) || 0;
-            const rooms = parseInt(roomsInput.value) || 0;
-            const vajillaPzas = parseInt(vajillaInput.value) || 0;
-            let unitPrice = 0;
+        // GUARDAR INPUTS Y RECALCULAR
+        function handleInputUpdate() {
+            if (isGroupMode && activeSelectedPropId) {
+                groupOrderData[activeSelectedPropId].kits = kitsInput.value;
+                groupOrderData[activeSelectedPropId].rooms = parseInt(roomsInput.value) || 0;
+                groupOrderData[activeSelectedPropId].vajilla = vajillaInput.value;
+            }
+            calculateOrder();
+        }
 
-            if (rawKits.length > 0) {
-                tierPill.classList.add('visible');
+        kitsInput.addEventListener('input', handleInputUpdate);
+        roomsInput.addEventListener('input', handleInputUpdate);
+        vajillaInput.addEventListener('input', handleInputUpdate);
+
+        function toggleDeliveryNote() {
+            if (deliveryDate.value) deliveryNoteWrapper.classList.add('active');
+            else deliveryNoteWrapper.classList.remove('active');
+        }
+
+        // CÁLCULO GENERAL Y DESGLOSE DE RESUMEN
+        function calculateOrder() {
+            let grandTotalKits = 0;
+            let grandTotalRooms = 0;
+            let grandTotalVajilla = 0;
+            let unitPrice = 0;
+            let activeProperties = [];
+
+            if (isGroupMode) {
+                for (const [id, data] of Object.entries(groupOrderData)) {
+                    let k = parseInt(data.kits) || 0;
+                    let v = parseInt(data.vajilla) || 0;
+                    grandTotalKits += k;
+                    grandTotalRooms += data.rooms;
+                    grandTotalVajilla += v;
+
+                    if (k > 0 || v > 0) {
+                        activeProperties.push({
+                            id,
+                            name: data.name,
+                            kits: k,
+                            rooms: data.rooms,
+                            vajilla: v
+                        });
+                    }
+                }
+
+                if (Object.values(groupOrderData).some(d => d.kits !== "")) {
+                    tierPill.classList.add('visible');
+                } else {
+                    tierPill.classList.remove('visible');
+                }
+
             } else {
-                tierPill.classList.remove('visible');
+                grandTotalKits = parseInt(kitsInput.value) || 0;
+                grandTotalRooms = parseInt(roomsInput.value) || 0;
+                grandTotalVajilla = parseInt(vajillaInput.value) || 0;
+
+                if (kitsInput.value.length > 0) tierPill.classList.add('visible');
+                else tierPill.classList.remove('visible');
             }
 
             let calculatedBases = 0;
 
-            if (kits > 0 && kits < 20) {
+            // REGLAS Y UMBRALES
+            if (grandTotalKits > 0 && grandTotalKits < 20) {
                 minError.style.display = 'block';
                 submitActionBtn.disabled = true;
                 kitPriceDisplay.innerHTML = `$0.00 <span class="unit-label">/ kit.</span>`;
-                summaryUnitPrice.innerText = '$0.00';
-            } else if (kits >= 20) {
+            } else if (grandTotalKits >= 20) {
                 minError.style.display = 'none';
                 submitActionBtn.disabled = false;
                 
-if (kits >= 100) {
-    unitPrice = 95;
-    if(tierPill.innerText !== 'RESIDENCE') {
-        tierPill.style.opacity = '0';
-        setTimeout(() => {
-            tierPill.innerText = 'RESIDENCE';
-            tierPill.classList.add('residence-tier'); // Agrega el tono dorado
-            tierPill.style.opacity = '1';
-        }, 300);
-    }
-    roomsWrapper.classList.add('active');
-    vajillaWrapper.classList.remove('active');
-    residenceNote.classList.add('active');
+                if (grandTotalKits >= 100) {
+                    unitPrice = 95;
+                    if (tierPill.innerText !== 'RESIDENCE') {
+                        tierPill.style.opacity = '0';
+                        setTimeout(() => {
+                            tierPill.innerText = 'RESIDENCE';
+                            tierPill.classList.add('residence-tier');
+                            tierPill.style.opacity = '1';
+                        }, 300);
+                    }
+                    roomsWrapper.classList.add('active');
+                    vajillaWrapper.classList.remove('active');
+                    residenceNote.classList.add('active');
 
-    calculatedBases = Math.ceil(rooms * 1.2);
-    residenceNote.innerText = `Su pedido aplica para la modalidad Residence, que incluye ${calculatedBases} bases de piedra laminada de cortesía.`;
-} else {
-    unitPrice = 105;
-    if(tierPill.innerText !== 'SUITE') {
-        tierPill.style.opacity = '0';
-        setTimeout(() => {
-            tierPill.innerText = 'SUITE';
-            tierPill.classList.remove('residence-tier'); // Regresa al tono normal para Suite
-            tierPill.style.opacity = '1';
-        }, 300);
-    }
-    roomsWrapper.classList.remove('active');
-    vajillaWrapper.classList.add('active');
-    residenceNote.classList.remove('active');
-}
+                    let effectiveRooms = isGroupMode 
+                        ? activeProperties.reduce((sum, p) => sum + p.rooms, 0) 
+                        : grandTotalRooms;
+
+                    calculatedBases = Math.ceil(effectiveRooms * 1.2);
+                    residenceNote.innerText = `Su pedido aplica para la modalidad Residence, que incluye ${calculatedBases} bases de piedra laminada de cortesía.`;
+                } else {
+                    unitPrice = 105;
+                    if (tierPill.innerText !== 'SUITE') {
+                        tierPill.style.opacity = '0';
+                        setTimeout(() => {
+                            tierPill.innerText = 'SUITE';
+                            tierPill.classList.remove('residence-tier');
+                            tierPill.style.opacity = '1';
+                        }, 300);
+                    }
+                    roomsWrapper.classList.remove('active');
+                    vajillaWrapper.classList.add('active');
+                    residenceNote.classList.remove('active');
+                }
                 
                 kitPriceDisplay.innerHTML = `$${unitPrice}.00 <span class="unit-label">/ kit.</span>`;
-                summaryUnitPrice.innerText = `$${(kits * unitPrice).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MXN`;
             } else {
                 minError.style.display = 'none';
                 submitActionBtn.disabled = true;
@@ -1236,33 +1250,127 @@ if (kits >= 100) {
                 residenceNote.classList.remove('active');
             }
 
-            summaryKitLabel.innerText = `Kit 57-71 (${kits} pzas.)`;
+            // RENDERIZAR DESGLOSE EN RESUMEN
+            summaryBreakdownContainer.innerHTML = '';
+            let productsSubtotal = 0;
 
-            let vajillaSubtotal = 0;
-            if (kits < 100) {
-                summaryTablewareRow.style.display = 'flex';
-                summaryTablewareLabel.innerText = `Vajilla (${vajillaPzas} pzas.)`;
-                vajillaSubtotal = vajillaPzas * 30;
-                vajillaPriceDisplay.innerHTML = `$30.00 <span class="unit-label">/ pza.</span>`;
-                summaryTablewarePrice.innerText = `$${vajillaSubtotal.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MXN`;
+            if (isGroupMode) {
+                if (activeProperties.length === 0) {
+                    summaryBreakdownContainer.innerHTML = `<div class="summary-line"><span>Kit 57-71 (0 pzas.)</span><span>$0.00</span></div>`;
+                } else {
+                    const isResidence = grandTotalKits >= 100;
+                    
+                    activeProperties.forEach(prop => {
+                        let blockHtml = `<div class="property-summary-block">`;
+                        blockHtml += `<div class="property-subtitle">${prop.name}</div>`;
+
+                        if (prop.kits > 0) {
+                            const subKits = prop.kits * unitPrice;
+                            productsSubtotal += subKits;
+                            blockHtml += `
+                                <div class="summary-line">
+                                    <span>Kit 57-71 (${prop.kits} pzas.)</span>
+                                    <span>$${subKits.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                                </div>
+                            `;
+                        }
+
+                        if (!isResidence) {
+                            if (prop.vajilla > 0) {
+                                const subVaj = prop.vajilla * 30;
+                                productsSubtotal += subVaj;
+                                blockHtml += `
+                                    <div class="summary-line">
+                                        <span>Vajilla (${prop.vajilla} pzas.)</span>
+                                        <span>$${subVaj.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MXN</span>
+                                    </div>
+                                `;
+                            }
+                        } else {
+                            if (prop.kits > 0) {
+                                const propBases = Math.ceil(prop.rooms * 1.2);
+                                blockHtml += `
+                                    <div class="summary-line">
+                                        <span>Vajilla (${propBases} pzas.) <span class="navy-included-tag">INCLUIDA</span></span>
+                                        <span>$0.00</span>
+                                    </div>
+                                `;
+                            }
+                        }
+
+                        blockHtml += `</div>`;
+                        summaryBreakdownContainer.innerHTML += blockHtml;
+                    });
+
+                    if (!isResidence) {
+                        vajillaPriceDisplay.innerHTML = `$30.00 <span class="unit-label">/ pza.</span>`;
+                    } else {
+                        vajillaPriceDisplay.innerHTML = `<span class="strike-price">$30.00</span><span class="included-tag">INCLUIDA</span> <span class="unit-label">/ pza.</span>`;
+                    }
+                }
+
             } else {
-                summaryTablewareRow.style.display = 'flex';
-                summaryTablewareLabel.innerText = `Vajilla (${calculatedBases} pzas.)`;
-                vajillaPriceDisplay.innerHTML = `<span class="strike-price">$30.00</span><span class="included-tag">INCLUIDA</span> <span class="unit-label">/ pza.</span>`;
-                summaryTablewarePrice.innerText = 'INCLUIDA';
-                vajillaSubtotal = 0;
+                // Modo Individual
+                const subT = grandTotalKits >= 20 ? (grandTotalKits * unitPrice) : 0;
+                productsSubtotal += subT;
+
+                let blockHtml = `<div class="property-summary-block">`;
+                blockHtml += `
+                    <div class="summary-line">
+                        <span>Kit 57-71 (${grandTotalKits} pzas.)</span>
+                        <span>$${subT.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                    </div>
+                `;
+
+                if (grandTotalKits < 100) {
+                    const vajSub = grandTotalVajilla * 30;
+                    productsSubtotal += vajSub;
+                    blockHtml += `
+                        <div class="summary-line">
+                            <span>Vajilla (${grandTotalVajilla} pzas.)</span>
+                            <span>$${vajSub.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MXN</span>
+                        </div>
+                    `;
+                    vajillaPriceDisplay.innerHTML = `$30.00 <span class="unit-label">/ pza.</span>`;
+                } else {
+                    blockHtml += `
+                        <div class="summary-line">
+                            <span>Vajilla (${calculatedBases} pzas.) <span class="navy-included-tag">INCLUIDA</span></span>
+                            <span>$0.00</span>
+                        </div>
+                    `;
+                    vajillaPriceDisplay.innerHTML = `<span class="strike-price">$30.00</span><span class="included-tag">INCLUIDA</span> <span class="unit-label">/ pza.</span>`;
+                }
+
+                blockHtml += `</div>`;
+                summaryBreakdownContainer.innerHTML = blockHtml;
             }
 
-            const productsSubtotal = (kits >= 20 ? (kits * unitPrice) : 0) + vajillaSubtotal;
             const formattedTotal = `$${productsSubtotal.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MXN + IVA`;
-            
             totalDisplay.innerText = formattedTotal;
             barTotal.innerText = formattedTotal;
         }
 
-        kitsInput.addEventListener('input', calculateOrder);
-        roomsInput.addEventListener('input', calculateOrder);
-        vajillaInput.addEventListener('input', calculateOrder);
+        // LOOP SLIDER PARA INDIVIDUAL
+        function startSliderLoop() {
+            if (sliderLoop) clearInterval(sliderLoop);
+            sliderLoop = setInterval(() => {
+                if (!isGroupMode) {
+                    const slides = document.querySelectorAll('.product-image-slider .slide-img');
+                    if (slides.length < 2) return;
+                    let activeIndex = slides[0].classList.contains('active') ? 0 : 1;
+                    slides[activeIndex].classList.remove('active');
+                    activeIndex = (activeIndex + 1) % slides.length;
+                    slides[activeIndex].classList.add('active');
+                }
+            }, 4500);
+        }
+
+        // CHECKOUT & WEBHOOK
+        const checkoutDrawer = document.getElementById('checkoutDrawer');
+        const clientName = document.getElementById('clientName');
+        const clientEmail = document.getElementById('clientEmail');
+        let isDrawerOpen = false;
 
         function handleActionClick(event) {
             event.preventDefault();
@@ -1277,47 +1385,41 @@ if (kits >= 100) {
                 const emailVal = clientEmail.value.trim();
                 
                 if (!nameVal || !emailVal || !emailVal.includes('@')) {
-                    alert('Por favor ingrese un nombre y correo electrónico institucional válido.');
+                    alert('Por favor ingrese un nombre y correo electrónico válido.');
                     return;
                 }
-                
-                document.addEventListener("DOMContentLoaded", function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const hotelSlug = urlParams.get('hotel');
 
-    if (hotelSlug && hotelesData[hotelSlug]) {
-        const hotelInfo = hotelesData[hotelSlug];
-        
-        // Inyectar el logo dinámicamente en el slot del hotel
-        const logoSlot = document.querySelector('.hotel-brand-slot img');
-        if (logoSlot) {
-            logoSlot.src = hotelInfo.logo;
-            logoSlot.alt = hotelInfo.nombre;
-        }
+                let desgloseStr = "";
+                let totalRoomsFinal = 0;
+                let totalKitsFinal = 0;
 
-        // Precargar habitaciones si el campo existe
-        const roomsInput = document.getElementById('roomsCount');
-        if (roomsInput) {
-            roomsInput.value = hotelInfo.habitaciones;
-            if (typeof calculateOrder === 'function') {
-                calculateOrder();
-            }
-        }
-    }
-});
+                if (isGroupMode) {
+                    for (const [id, data] of Object.entries(groupOrderData)) {
+                        let k = parseInt(data.kits) || 0;
+                        let v = parseInt(data.vajilla) || 0;
+                        if (k > 0 || v > 0) {
+                            desgloseStr += `${data.name}: ${k} kits, ${v} vajillas. | `;
+                            totalRoomsFinal += data.rooms;
+                            totalKitsFinal += k;
+                        }
+                    }
+                } else {
+                    totalKitsFinal = kitsInput.value;
+                    totalRoomsFinal = roomsInput.value;
+                }
 
                 const payload = {
                     nombre: nameVal,
                     email: emailVal,
-                    kits: kitsInput.value,
-                    habitaciones: roomsInput.value || 0,
-                    vajilla: kitsInput.value >= 100 ? Math.ceil((parseInt(roomsInput.value) || 0) * 1.2) : (vajillaInput.value || 0),
+                    hotel: activeHotelData ? activeHotelData.nombre : "Individual",
+                    kits: totalKitsFinal,
+                    desglose: desgloseStr,
+                    habitaciones: totalRoomsFinal || 0,
                     fechaEntrega: deliveryDate.value,
                     total: totalDisplay.innerText
                 };
 
-                const webhookUrl = 'https://hook.eu2.make.com/tu-webhook-personalizado';
-
+                const webhookUrl = 'https://hook.eu2.make.com/tu-webhook';
                 fetch(webhookUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -1328,55 +1430,34 @@ if (kits >= 100) {
             }
         }
 
-        // Transición a la confirmación: Cambia el fondo a negro, sustituye el checker por Hrod_2.webp y aplica frosted glass
         function submitOrder() {
-            orderContentWrapper.style.display = 'none';
-            successState.style.display = 'block';
-            actionBar.style.display = 'none';
-
-            // Cambiar fondo de la página a negro absoluto
+            document.getElementById('orderContentWrapper').style.display = 'none';
+            document.getElementById('success-state').style.display = 'block';
+            document.getElementById('actionBar').style.display = 'none';
             document.body.classList.add('confirmed');
-
-            // Reemplazar la imagen del hero fold por Hrod_2.webp manteniendo proporción
+            
+            const heroFold = document.getElementById('heroFold');
             heroFold.style.backgroundImage = "url('https://raw.githubusercontent.com/feraz-studio/57-71/main/Hrod_2.webp')";
-            heroFold.style.backgroundSize = "cover";
-            heroFold.style.backgroundPosition = "center";
-
-            // Aplicar estilo Frosted Glass translúcido sobre el contenedor negro
+            
+            const contentCard = document.getElementById('contentCard');
             contentCard.style.background = 'rgba(20, 20, 20, 0.75)';
-            contentCard.style.backdropFilter = 'blur(25px)';
-            contentCard.style.webkitBackdropFilter = 'blur(25px)';
             contentCard.style.borderColor = 'rgba(255, 255, 255, 0.15)';
             contentCard.style.color = '#FFFFFF';
         }
 
+        // OBSERVERS (Hero y Dock)
         const heroObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (!entry.isIntersecting) {
-                    actionBar.classList.add('visible');
-                } else {
-                    actionBar.classList.remove('visible');
-                }
+                if (!entry.isIntersecting) document.getElementById('actionBar').classList.add('visible');
+                else document.getElementById('actionBar').classList.remove('visible');
             });
         }, { threshold: 0.1 });
-        // Script de rotación en loop con crossfade
-document.addEventListener("DOMContentLoaded", function() {
-    const slides = document.querySelectorAll('.product-image-slider .slide-img');
-    if (slides.length < 2) return;
-    
-    let currentIndex = 0;
-    
-    setInterval(() => {
-        slides[currentIndex].classList.remove('active');
-        currentIndex = (currentIndex + 1) % slides.length;
-        slides[currentIndex].classList.add('active');
-    }, 4500); // 4500 ms = 4.5 segundos por foto
-});
-
-        heroObserver.observe(heroFold);
+        heroObserver.observe(document.getElementById('heroFold'));
 
         const dockObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
+                const actionBar = document.getElementById('actionBar');
+                const dockTarget = document.getElementById('dockTarget');
                 if (entry.isIntersecting) {
                     dockTarget.appendChild(actionBar);
                     actionBar.classList.add('docked');
@@ -1388,33 +1469,20 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
         }, { threshold: 0.1 });
+        dockObserver.observe(document.getElementById('dockTarget'));
 
-        dockObserver.observe(dockTarget);
-
+        // NAV SCROLL
         const topNav = document.getElementById('topNav');
         let lastScrollY = window.scrollY;
         let scrollTimer = null;
-
         window.addEventListener('scroll', () => {
             const currentScrollY = window.scrollY;
-
-            if (currentScrollY > lastScrollY && currentScrollY > 60) {
-                topNav.classList.add('hidden');
-            } else {
-                topNav.classList.remove('hidden');
-            }
-            
+            if (currentScrollY > lastScrollY && currentScrollY > 60) topNav.classList.add('hidden');
+            else topNav.classList.remove('hidden');
             lastScrollY = currentScrollY;
-
-            if(scrollTimer !== null) {
-                clearTimeout(scrollTimer);
-            }
-            scrollTimer = setTimeout(() => {
-                topNav.classList.remove('hidden');
-            }, 250);
+            if(scrollTimer !== null) clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(() => { topNav.classList.remove('hidden'); }, 250);
         });
-
-        calculateOrder();
     </script>
 </body>
 </html>
