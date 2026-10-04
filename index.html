@@ -1,9 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://github.com/feraz-studio/57-71/blob/main/Favicon%203.png">
+<style>
+/* 1. Eliminamos el cursor real en absolutamente todo */
+@media (pointer: fine) {
+    html, body, *, *:hover, a, button, .button, .image, .icon, [role="button"], input, select, textarea, option {
+        cursor: none !important;
+    }
+}
+
+/* 2. El Anillo (Outline) */
+#cursor-feraz-bocci {
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
+    border: 1.2px solid white;
+    position: fixed;
+    pointer-events: none;
+    z-index: 2147483647 !important;
+    border-radius: 50%;
+    mix-blend-mode: difference;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.08s ease-out, border 0.2s ease;
+    will-change: transform;
+}
+
+/* 3. El punto central */
+#cursor-feraz-bocci::after {
+    content: '';
+    width: 0px;
+    height: 0px;
+    background-color: white;
+    border-radius: 50%;
+    transition: width 0.2s ease, height 0.2s ease;
+}
+
+/* 4. Efecto al Hover: Aparece el punto exactamente de 4px */
+#cursor-feraz-bocci.is-hovering::after {
+    width: 4px;
+    height: 4px;
+}
+</style>
+    <!-- Open Graph / Banner para Redes Sociales -->
+    <meta property="og:title" content="Feraz — Colección 57–71 | Cotizador B2B">
+    <meta property="og:description" content="Colección de edición limitada concebida para transformar la estancia de sus huéspedes durante la temporada de automovilismo.">
+    <meta property="og:image" content="https://github.com/feraz-studio/57-71/blob/main/3_Checker.png">
+    <meta property="og:type" content="website">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feraz — Colección 57–71 | Cotizador B2B</title>
+    <title>Feraz — Colección 57–71 | Configure su pedido</title>
+    
     <style>
         @font-face {
             font-family: 'HK Grotesk';
@@ -49,7 +101,7 @@
             color: var(--text-primary);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-            padding-bottom: 60px; /* Reducido ya que no hay barra fixed */
+            padding-bottom: 60px;
             transition: background-color 0.8s ease, background-image 0.8s ease;
         }
 
@@ -57,6 +109,10 @@
             background-image: none !important;
             background-color: #000000 !important;
         }
+        body.confirmed .hero-fold {
+    height: 620px !important; /* Puedes ajustar este valor a 340px o 400px según prefieras */
+    border-radius: 0 0 24px 24px;
+}
 
         .page-container {
             width: 100%;
@@ -95,16 +151,19 @@
         .hero-fold {
             position: relative;
             width: 100%;
-            height: 480px;
+            height: 725px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            background-image: url('https://raw.githubusercontent.com/feraz-studio/57-71/main/3_Checker.png');
+            text-align: center;
+            padding: 0 24px;
+            background-image: url('https://raw.githubusercontent.com/feraz-studio/57-71/main/backf1.webp');
             background-size: cover;
             background-position: center;
             border-radius: 0 0 32px 32px;
             transition: background-image 0.6s ease;
+            overflow: hidden;
         }
 
         .hero-fold::before {
@@ -114,6 +173,54 @@
             background: rgba(0, 0, 0, 0.15);
             border-radius: 0 0 32px 32px;
             z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: flex-start;
+            gap: 12px;
+            width: 100%;
+            max-width: 430px; 
+            padding-top: 0px; 
+            margin: -280px 24px 0 auto;
+            text-align: right;
+        }
+        
+        .hero-logo-5771 {
+            width: 140px;
+            height: auto;
+            object-fit: contain;
+            object-position: right;
+            animation: zigzagBlurLeft 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1s forwards;
+            opacity: 0;
+        }
+
+        .hero-title-text {
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 600;
+            font-style: italic;
+            font-size: 18px;
+            line-height: 26px;
+            text-transform: uppercase;
+            color: #FFFFFF;
+            letter-spacing: 0.02em;
+            text-align: right;
+            animation: zigzagBlurRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1.2s forwards;
+            opacity: 0;
+        }
+
+        @keyframes zigzagBlurLeft {
+            0% { opacity: 0; transform: translateX(-40px) scale(0.95); filter: blur(12px); }
+            100% { opacity: 1; transform: translateX(0) scale(1); filter: blur(0); }
+        }
+
+        @keyframes zigzagBlurRight {
+            0% { opacity: 0; transform: translateX(40px) scale(0.95); filter: blur(12px); }
+            100% { opacity: 1; transform: translateX(0) scale(1); filter: blur(0); }
         }
 
         .content-card {
@@ -361,17 +468,17 @@
             white-space: nowrap;
         }
 
-.editorial-row input, .editorial-row select {
-    width: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    font-family: 'HK Grotesk', sans-serif;
-    font-weight: 600;
-    font-size: 16px; /* Configurado a 16px para evitar el zoom automático en iOS */
-    color: var(--text-primary);
-    padding: 4px 0;
-}
+        .editorial-row input, .editorial-row select {
+            width: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--text-primary);
+            padding: 4px 0;
+        }
 
         .editorial-row input::placeholder {
             color: #999;
@@ -464,10 +571,8 @@
             margin-top: 6px;
         }
 
-        /* EFECTO FADE-UP MUY SUAVE PARA EL RESUMEN */
         .calculation-summary {
             border-top: 1px solid rgba(0, 0, 0, 0.1);
-            
             opacity: 0;
             transform: translateY(20px);
             max-height: 0;
@@ -650,7 +755,6 @@
             stroke-linejoin: round;
         }
 
-        /* BARRA ESTÁTICA CON FADE-UP AL IGUAL QUE EL RESUMEN */
         .action-bar {
             width: 100%;
             background: linear-gradient(135deg, rgba(54, 122, 186, 0.75), rgba(215, 38, 38, 0.65));
@@ -664,8 +768,6 @@
             justify-content: space-between;
             box-shadow: 0 8px 30px rgba(0,0,0,0.12);
             border: 1px solid rgba(255,255,255,0.4);
-            
-            /* Hidden state */
             opacity: 0;
             transform: translateY(20px);
             max-height: 0;
@@ -690,29 +792,29 @@
             justify-content: center;
         }
 
-.bar-info span {
-    font-family: 'HK Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 13.5px; /* Ligeramente más estilizado para montos largos */
-    color: #FFFFFF;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-    line-height: 1.2;
-}
+        .bar-info span {
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 13.5px;
+            color: #FFFFFF;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+            line-height: 1.2;
+        }
 
-.action-btn {
-    background-color: #FFFFFF;
-    color: #1A1A1A;
-    border: 1px solid transparent;
-    padding: 9px 16px; /* Reducido un 20% en altura y laterales */
-    border-radius: 40px;
-    font-family: 'HK Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 11.5px; /* Tamaño de fuente ajustado */
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.2s;
-    white-space: nowrap; /* Evita saltos de línea en el botón */
-}
+        .action-btn {
+            background-color: #FFFFFF;
+            color: #1A1A1A;
+            border: 1px solid transparent;
+            padding: 9px 16px;
+            border-radius: 40px;
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 11.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
 
         .action-btn.outline {
             background-color: #FFFFFF !important;
@@ -790,22 +892,28 @@
         .property-bubble.active img {
             filter: brightness(0) invert(1) opacity(1);
         }
+        body.confirmed .hero-content {
+    display: none !important;
+}
     </style>
 </head>
 <body>
-
+<div id="cursor-feraz-bocci"></div>
     <div class="page-container">
-        <!-- Header minimalista -->
         <nav class="top-nav" id="topNav">
             <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/Feraz_Off%20white.svg" alt="Feraz" class="feraz-logo">
         </nav>
 
-        <div class="hero-fold" id="heroFold"></div>
+        <div class="hero-fold" id="heroFold">
+            <div class="hero-content">
+                <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/logo5771.svg" alt="57-71" class="hero-logo-5771">
+                <h2 class="hero-title-text">Una colección que respira el pulso eterno de los hermanos Rodríguez.</h2>
+            </div>
+        </div>
 
         <div class="content-card" id="contentCard">
             <div class="card-handle"></div>
 
-            <!-- CONTENEDOR DE PEDIDO -->
             <div id="orderContentWrapper">
                 <div class="info-section">
                     <div class="info-title">57-71 Hospitality Collection</div>
@@ -840,23 +948,18 @@
                 <div class="editorial-product-section expanded" id="productSection">
                     <form id="orderForm">
                         
-                        <!-- Píldora de Tier -->
                         <div class="tier-pill-wrapper">
                             <span class="tier-pill" id="tierPill">SUITE</span>
                         </div>
 
-                        <!-- Slider de imágenes principal -->
                         <div class="product-image-slider">
                             <img id="mainImage" src="https://raw.githubusercontent.com/feraz-studio/57-71/main/pedro1.webp" alt="Kit Pedro" class="slide-img active">
                             <img id="altImage" src="https://raw.githubusercontent.com/feraz-studio/57-71/main/ricardo2.webp" alt="Kit Ricardo" class="slide-img">
                         </div>
                         
-                        <!-- Carrusel de Burbujas (solo para grupos) -->
                         <div id="groupBubblesWrapper" class="group-bubbles-wrapper"></div>
 
-                        <!-- Formulario de Configuración (visible siempre) -->
                         <div id="formFieldsWrapper">
-                            <!-- Fila Kits -->
                             <div class="editorial-row">
                                 <div class="editorial-left">
                                     <input type="number" id="kitsCount" placeholder="No. de Kits" min="1" step="1" inputmode="numeric" pattern="[0-9]*">
@@ -866,7 +969,6 @@
                                 </div>
                             </div>
 
-                            <!-- Fila Habitaciones -->
                             <div class="dynamic-field-wrapper" id="roomsWrapper">
                                 <div class="editorial-row" style="margin-bottom: 0;">
                                     <div class="editorial-left">
@@ -881,10 +983,8 @@
 
                         <div id="minError" class="error-message">El monto mínimo de producción es de 20 kits.</div>
 
-                        <!-- Nota de modalidad Residence -->
                         <div class="residence-note" id="residenceNote"></div>
 
-                        <!-- Fila Vajilla -->
                         <div class="dynamic-field-wrapper active" id="vajillaWrapper">
                             <div class="editorial-row" style="margin-bottom: 0;" id="vajillaRow">
                                 <div class="editorial-left">
@@ -898,7 +998,6 @@
                             </div>
                         </div>
 
-                        <!-- Fila Fecha -->
                         <div class="editorial-row" style="margin-bottom: 0;">
                             <div class="editorial-left">
                                 <select id="deliveryDate" onchange="toggleDeliveryNote()">
@@ -912,16 +1011,15 @@
                             </div>
                         </div>
                         
-                        <!-- Nota de fecha -->
+                        <div id="dateError" class="error-message">Por favor seleccione una fecha de entrega.</div>
+
                         <div class="delivery-note-wrapper" id="deliveryNoteWrapper">
                             <div class="delivery-note">El pedido se entregará directamente en las instalaciones de su propiedad en la fecha seleccionada previo al horario de check-in. Si requiere otra ubicación, por favor comuníquese con nosotros para coordinarlo.</div>
                         </div>
 
-                        <!-- Sección Checkout (Resumen) INICIA OCULTA -->
                         <div class="calculation-summary" id="calculationSummary">
                             <div class="summary-title">RESUMEN</div>
                             
-                            <!-- Desglose por hotel/propiedad -->
                             <div id="summaryBreakdownContainer"></div>
 
                             <div class="summary-line total">
@@ -930,7 +1028,6 @@
                             </div>
                         </div>
 
-                        <!-- Cajón Desplegable -->
                         <div class="checkout-drawer" id="checkoutDrawer">
                             <div class="editorial-row" style="margin-bottom: 12px;">
                                 <div class="editorial-left">
@@ -944,7 +1041,6 @@
                             </div>
                         </div>
 
-                        <!-- BARRA ESTÁTICA DENTRO DEL FLUJO (INICIA OCULTA) -->
                         <div class="action-bar" id="actionBar">
                             <div class="bar-info" id="barInfo">
                                 <span id="barTotal">$0.00 MXN + IVA</span>
@@ -955,18 +1051,16 @@
                 </div>
             </div>
 
-            <!-- VENTANA DE CONFIRMACIÓN -->
             <div id="success-state">
-                <h2>PEDIDO RECIBIDO</h2>
-                <p>Hemos registrado su orden.<br><br>En breve recibirá su cotización formal y los siguientes pasos a seguir para garantizar la mejor experiencia para sus huéspedes.<br><br>Gracias por confiar en nosotros.</p>
+                <h2>SOLICITUD RECIBIDA</h2>
+                <p>Hemos registrado su orden.<br><br>En breve recibirá su cotización formal y los pasos a seguir para garantizar la mejor experiencia para sus huéspedes.<br><br>Gracias por confiar en nosotros.</p>
                 
                 <div class="success-logos">
-                    <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/Logo%20Hospit.png" alt="Logo Hospit" style="height: 44px;">
+                    <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/logo5771.svg" alt="Logo Hospit" style="height: 20px;">
                 </div>
 
                 <div class="success-footer">
-                    <p>Si tiene alguna pregunta, por favor no dude en contactarnos.<br></p>
-                    <p class="author-name">Fernando Quezada</p>
+<p style="margin-bottom: 32px;">Si tiene alguna pregunta, por favor no dude en contactarnos.<br><br></p>                    <p class="author-name">Fernando Quezada</p>
                     <p class="author-title">Founder & Creative Director</p>
                     <div class="success-icons">
                         <a href="https://wa.me/525549400957" target="_blank" aria-label="WhatsApp">
@@ -982,230 +1076,44 @@
     </div>
 
     <script>
-        // BASE DE DATOS COMPLETA DE HOTELES Y GRUPOS INTACTA
- const hotelesData = {
-            "casa-polanco": {
-                "nombre": "Casa Polanco",
-                "habitaciones": 19,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_CasaPolanco.png",
-                "logoScale": 1.0
-            },
-            "octavia-casa": {
-                "nombre": "Octavia Casa",
-                "habitaciones": 8,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OctaviaCasa.png",
-                "logoScale": 1.0
-            },
-            "the-alest": {
-                "nombre": "The Alest",
-                "habitaciones": 19,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Thealest.png",
-                "logoScale": 1.0
-            },
-            "uma-casa": {
-                "nombre": "Uma Casa",
-                "habitaciones": 9,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Uma.png",
-                "logoScale": 1.0
-            },
-            "wild-oscar": {
-                "nombre": "The Wild Oscar",
-                "habitaciones": 9,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_wildoscar.png",
-                "logoScale": 1.0
-            },
-            "orchid-house": {
-                "nombre": "Orchid House",
-                "habitaciones": 13,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OH.png",
-                "logoScale": 1.0
-            },
-            "kimpton-virgilio": {
-                "nombre": "Kimpton Virgilio",
-                "habitaciones": 48,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Kimpton.png",
-                "logoScale": 1.0
-            },
-            "kimpton-castelar": {
-                "nombre": "Kimpton El Castelar",
-                "habitaciones": 34,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Kimpton.png",
-                "logoScale": 1.0
-            },
-            "casa-levora": {
-                "nombre": "Casa Lévora",
-                "habitaciones": 9,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Levora.png",
-                "logoScale": 1.0
-            },
-            "casa-cuenca": {
-                "nombre": "Casa Cuenca",
-                "habitaciones": 10,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Cuenca.png",
-                "logoScale": 1.0
-            },
-            "el-alfonsa": {
-                "nombre": "El Alfonsa",
-                "habitaciones": 13,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Alfonsa.png",
-                "logoScale": 1.0
-            },
-            "casa-luciana": {
-                "nombre": "Casa Luciana",
-                "habitaciones": 8,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Luciana.png",
-                "logoScale": 1.0
-            },
-            "the-amsterdam": {
-                "nombre": "The Amsterdam",
-                "habitaciones": 14,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_The%20Amsterdam.png",
-                "logoScale": 1.0
-            },
-            "casa-mali": {
-                "nombre": "Casa Malí",
-                "habitaciones": 20,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Mali.png",
-                "logoScale": 1.0
-            },
-            "lulu-condesa": {
-                "nombre": "Lulú Condesa",
-                "habitaciones": 16,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_lulu.png",
-                "logoScale": 1.0
-            },
-            "maison-du-comte": {
-                "nombre": "Maison du Comte",
-                "habitaciones": 6,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo-MDC.png",
-                "logoScale": 1.0
-            },
-            "el-cortes": {
-                "nombre": "El Cortés",
-                "habitaciones": 15,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_El%20Cortes.png",
-                "logoScale": 1.0
-            },
-            "casa-talavera": {
-                "nombre": "Casa Talavera",
-                "habitaciones": 13,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Talavera.png",
-                "logoScale": 1.0
-            },
-            "nima": {
-                "nombre": "Nima Local House",
-                "habitaciones": 4,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Nima.png",
-                "logoScale": 1.0
-            },
-            "brick": {
-                "nombre": "Brick",
-                "habitaciones": 17,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Brick.png",
-                "logoScale": 1.0
-            },
-            "casa-margarita": {
-                "nombre": "Casa Margarita",
-                "habitaciones": 4,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Margarita.png",
-                "logoScale": 1.0
-            },
-            "casa-tenue": {
-                "nombre": "Casa Tenue",
-                "habitaciones": 8,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_casa-tenue.png",
-                "logoScale": 1.4
-            },
-        "las-alcobas": {
-                "nombre": "Las Alcobas",
-                "habitaciones": 35,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_las-alcobas.png",
-                "logoScale": 1.7
-            },
-        "casa-ofelia": {
-                "nombre": "Casa Ofelia Polanco",
-                "habitaciones": 23,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Ofelia.png",
-                "logoScale": 1.0
-        },
-        "lamartine": {
-                "nombre": "Lamartine",
-                "habitaciones": 10,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/logo_lamartine1.png",
-                "logoScale": 1.5
-        },
-            "pug-seal": {
-                "nombre": "Pug Seal",
-                "habitaciones": 46,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/logo_pug-seal.png",
-                "logoScale": 1.4
-        },
-        "casa-izel": {
-                "nombre": "Casa Izel",
-                "habitaciones": 25,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_CasaIzel.png",
-                "logoScale": 1.8
-        },
-         "campos-polanco": {
-                "nombre": "Campos Polanco",
-                "habitaciones": 12,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo-campos-polanco.png",
-                "logoScale": 1.8
-        },
-        "casa-izeba": {
-                "nombre": "Casa Izeba",
-                "habitaciones": 8,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_casa-izeba.png",
-                "logoScale": 1.5
-        },
-        "xoma": {
-                "nombre": "Xoma",
-                "habitaciones": 18,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/logo_xoma1.png",
-                "logoScale": 1.3
-        },
-        "hotel-habita": {
-                "nombre": "Hotel Habita",
-                "habitaciones": 36,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Hotel-Habita.png",
-                "logoScale": 1.9
-        },
-        "la-valise": {
-                "nombre": "La Valise",
-                "habitaciones": 8,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_la-valise.png",
-                "logoScale": 1.4
-        },
-            "colima-71": {
-                "nombre": "Colima 71",
-                "habitaciones": 16,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Colima71.png",
-                "logoScale": 1.0
-            },
-            "maison-celeste": {
-                "nombre": "Maison Celeste x Lezard",
-                "habitaciones": 13,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Maison%20Celeste.png",
-                "logoScale": 1.0
-            },
-            "roso-gh": {
-                "nombre": "Roso Guest House",
-                "habitaciones": 10,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Roso.png",
-                "logoScale": 1.0
-            },
-            "ignacia": {
-                "nombre": "Ignacia Guest House",
-                "habitaciones": 9,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Ignacia.png",
-                "logoScale": 1.0
-            },
-            "hoteldama": {
-                "nombre": "Hotel Dama",
-                "habitaciones": 17,
-                "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Dama.png",
-                "logoScale": 1.0
-            },
+        const hotelesData = {
+            "casa-polanco": { "nombre": "Casa Polanco", "habitaciones": 19, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_CasaPolanco.png", "logoScale": 1.0 },
+            "octavia-casa": { "nombre": "Octavia Casa", "habitaciones": 8, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OctaviaCasa.png", "logoScale": 1.0 },
+            "the-alest": { "nombre": "The Alest", "habitaciones": 19, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Thealest.png", "logoScale": 1.0 },
+            "uma-casa": { "nombre": "Uma Casa", "habitaciones": 9, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Uma.png", "logoScale": 1.0 },
+            "wild-oscar": { "nombre": "The Wild Oscar", "habitaciones": 9, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_wildoscar.png", "logoScale": 1.0 },
+            "orchid-house": { "nombre": "Orchid House", "habitaciones": 13, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OH.png", "logoScale": 1.0 },
+            "kimpton-virgilio": { "nombre": "Kimpton Virgilio", "habitaciones": 48, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Kimpton.png", "logoScale": 1.0 },
+            "kimpton-castelar": { "nombre": "Kimpton El Castelar", "habitaciones": 34, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Kimpton.png", "logoScale": 1.0 },
+            "casa-levora": { "nombre": "Casa Lévora", "habitaciones": 9, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Levora.png", "logoScale": 1.0 },
+            "casa-cuenca": { "nombre": "Casa Cuenca", "habitaciones": 10, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Cuenca.png", "logoScale": 1.0 },
+            "el-alfonsa": { "nombre": "El Alfonsa", "habitaciones": 13, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Alfonsa.png", "logoScale": 1.0 },
+            "casa-luciana": { "nombre": "Casa Luciana", "habitaciones": 8, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Luciana.png", "logoScale": 1.0 },
+            "the-amsterdam": { "nombre": "The Amsterdam", "habitaciones": 14, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_The%20Amsterdam.png", "logoScale": 1.0 },
+            "casa-mali": { "nombre": "Casa Malí", "habitaciones": 20, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Mali.png", "logoScale": 1.0 },
+            "lulu-condesa": { "nombre": "Lulú Condesa", "habitaciones": 16, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_lulu.png", "logoScale": 1.0 },
+            "maison-du-comte": { "nombre": "Maison du Comte", "habitaciones": 6, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo-MDC.png", "logoScale": 1.0 },
+            "el-cortes": { "nombre": "El Cortés", "habitaciones": 15, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_El%20Cortes.png", "logoScale": 1.0 },
+            "casa-talavera": { "nombre": "Casa Talavera", "habitaciones": 13, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Talavera.png", "logoScale": 1.0 },
+            "nima": { "nombre": "Nima Local House", "habitaciones": 4, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Nima.png", "logoScale": 1.0 },
+            "brick": { "nombre": "Brick", "habitaciones": 17, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Brick.png", "logoScale": 1.0 },
+            "casa-margarita": { "nombre": "Casa Margarita", "habitaciones": 4, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Margarita.png", "logoScale": 1.0 },
+            "casa-tenue": { "nombre": "Casa Tenue", "habitaciones": 8, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_casa-tenue.png", "logoScale": 1.4 },
+            "las-alcobas": { "nombre": "Las Alcobas", "habitaciones": 35, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_las-alcobas.png", "logoScale": 1.7 },
+            "casa-ofelia": { "nombre": "Casa Ofelia Polanco", "habitaciones": 23, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Ofelia.png", "logoScale": 1.0 },
+            "lamartine": { "nombre": "Lamartine", "habitaciones": 10, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/logo_lamartine1.png", "logoScale": 1.5 },
+            "pug-seal": { "nombre": "Pug Seal", "habitaciones": 46, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/logo_pug-seal.png", "logoScale": 1.4 },
+            "casa-izel": { "nombre": "Casa Izel", "habitaciones": 25, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_CasaIzel.png", "logoScale": 1.8 },
+            "campos-polanco": { "nombre": "Campos Polanco", "habitaciones": 12, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo-campos-polanco.png", "logoScale": 1.8 },
+            "casa-izeba": { "nombre": "Casa Izeba", "habitaciones": 8, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_casa-izeba.png", "logoScale": 1.5 },
+            "xoma": { "nombre": "Xoma", "habitaciones": 18, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/logo_xoma1.png", "logoScale": 1.3 },
+            "hotel-habita": { "nombre": "Hotel Habita", "habitaciones": 36, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Hotel-Habita.png", "logoScale": 1.9 },
+            "la-valise": { "nombre": "La Valise", "habitaciones": 8, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_la-valise.png", "logoScale": 1.4 },
+            "colima-71": { "nombre": "Colima 71", "habitaciones": 16, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Colima71.png", "logoScale": 1.0 },
+            "maison-celeste": { "nombre": "Maison Celeste x Lezard", "habitaciones": 13, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Maison%20Celeste.png", "logoScale": 1.0 },
+            "roso-gh": { "nombre": "Roso Guest House", "habitaciones": 10, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Roso.png", "logoScale": 1.0 },
+            "ignacia": { "nombre": "Ignacia Guest House", "habitaciones": 9, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Ignacia.png", "logoScale": 1.0 },
+            "hoteldama": { "nombre": "Hotel Dama", "habitaciones": 17, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Dama.png", "logoScale": 1.0 },
             "onto": {
                 nombre: "ONTO",
                 esGrupo: true,
@@ -1234,7 +1142,6 @@
             }
         };
 
-        // ELEMENTOS DOM
         const kitsInput = document.getElementById('kitsCount');
         const roomsWrapper = document.getElementById('roomsWrapper');
         const roomsInput = document.getElementById('roomsCount');
@@ -1242,6 +1149,7 @@
         const vajillaInput = document.getElementById('vajillaCount');
         const residenceNote = document.getElementById('residenceNote');
         const minError = document.getElementById('minError');
+        const dateError = document.getElementById('dateError');
         const tierPill = document.getElementById('tierPill');
         const kitPriceDisplay = document.getElementById('kitPriceDisplay');
         const vajillaPriceDisplay = document.getElementById('vajillaPriceDisplay');
@@ -1258,17 +1166,15 @@
         const mainImage = document.getElementById('mainImage');
         const altImage = document.getElementById('altImage');
 
-        // ESTADO GLOBAL
         let isGroupMode = false;
         let groupOrderData = {};
         let activeSelectedPropId = null;
         let activeHotelData = null;
         let sliderLoop = null;
 
-        // INICIALIZACIÓN
         document.addEventListener("DOMContentLoaded", function() {
             const urlParams = new URLSearchParams(window.location.search);
-            const hotelSlug = urlParams.get('hotel') || "";
+            const hotelSlug = urlParams.get('hotel') || "vida-lenta";
 
             if (hotelSlug && hotelesData[hotelSlug]) {
                 const hotelInfo = hotelesData[hotelSlug];
@@ -1325,7 +1231,6 @@
             }
         });
 
-        // CAMBIO DE PROPIEDAD EN MODO GRUPO
         function selectGroupProperty(propId) {
             if(!isGroupMode || !activeHotelData) return;
             activeSelectedPropId = propId;
@@ -1357,7 +1262,6 @@
             calculateOrder();
         }
 
-        // GUARDAR INPUTS Y RECALCULAR
         function handleInputUpdate() {
             if (isGroupMode && activeSelectedPropId) {
                 groupOrderData[activeSelectedPropId].kits = kitsInput.value;
@@ -1372,11 +1276,15 @@
         vajillaInput.addEventListener('input', handleInputUpdate);
 
         function toggleDeliveryNote() {
-            if (deliveryDate.value) deliveryNoteWrapper.classList.add('active');
-            else deliveryNoteWrapper.classList.remove('active');
+            if (deliveryDate.value) {
+                deliveryNoteWrapper.classList.add('active');
+                dateError.style.display = 'none';
+            } else {
+                deliveryNoteWrapper.classList.remove('active');
+            }
+            calculateOrder();
         }
 
-        // CÁLCULO GENERAL Y VISIBILIDAD DE SECCIONES OCULTAS
         function calculateOrder() {
             let grandTotalKits = 0;
             let grandTotalRooms = 0;
@@ -1418,7 +1326,6 @@
                 else tierPill.classList.remove('visible');
             }
 
-            // GESTIÓN DEL FADE UP (RESUMEN Y BARRA)
             if (grandTotalKits > 0) {
                 calculationSummary.classList.add('visible');
                 actionBar.classList.add('visible');
@@ -1428,15 +1335,22 @@
             }
 
             let calculatedBases = 0;
+            const isDateSelected = deliveryDate.value !== "";
 
-            // REGLAS Y UMBRALES
             if (grandTotalKits > 0 && grandTotalKits < 20) {
                 minError.style.display = 'block';
                 submitActionBtn.disabled = true;
                 kitPriceDisplay.innerHTML = `$0.00 <span class="unit-label">/ kit.</span>`;
             } else if (grandTotalKits >= 20) {
                 minError.style.display = 'none';
-                submitActionBtn.disabled = false;
+                
+                // Valida que exista fecha seleccionada para habilitar el botón
+                if (!isDateSelected) {
+                    submitActionBtn.disabled = true;
+                } else {
+                    submitActionBtn.disabled = false;
+                    dateError.style.display = 'none';
+                }
                 
                 if (grandTotalKits >= 100) {
                     unitPrice = 95;
@@ -1483,7 +1397,6 @@
                 residenceNote.classList.remove('active');
             }
 
-            // RENDERIZAR DESGLOSE EN RESUMEN
             summaryBreakdownContainer.innerHTML = '';
             let productsSubtotal = 0;
 
@@ -1541,7 +1454,6 @@
                 }
 
             } else {
-                // Modo Individual
                 if (grandTotalKits > 0) {
                     const subT = grandTotalKits >= 20 ? (grandTotalKits * unitPrice) : 0;
                     productsSubtotal += subT;
@@ -1585,8 +1497,33 @@
             totalDisplay.innerText = formattedTotal;
             barTotal.innerText = formattedTotal;
         }
+        (function() {
+    const dot = document.getElementById('cursor-feraz-bocci');
 
-        // LOOP SLIDER PARA INDIVIDUAL
+    if (window.matchMedia("(pointer: fine)").matches) {
+        window.addEventListener('mousemove', (e) => {
+            // Centrado (24px / 2 = 12)
+            dot.style.transform = `translate3d(${e.clientX - 12}px, ${e.clientY - 12}px, 0)`;
+        });
+
+        // Función para detectar elementos interactivos
+        const applyHover = () => {
+            const targets = document.querySelectorAll('a, button, .button, .icon, input, [role="button"]');
+            targets.forEach(el => {
+                el.addEventListener('mouseenter', () => dot.classList.add('is-hovering'));
+                el.addEventListener('mouseleave', () => dot.classList.remove('is-hovering'));
+            });
+        };
+
+        // Ejecutar en carga y cambios de sección
+        window.addEventListener('load', applyHover);
+        window.addEventListener('hashchange', () => setTimeout(applyHover, 100));
+        applyHover(); // Ejecución inmediata
+    } else {
+        if (dot) dot.remove();
+    }
+})();
+
         function startSliderLoop() {
             if (sliderLoop) clearInterval(sliderLoop);
             sliderLoop = setInterval(() => {
@@ -1601,7 +1538,6 @@
             }, 4500);
         }
 
-        // CHECKOUT & WEBHOOK
         const checkoutDrawer = document.getElementById('checkoutDrawer');
         const clientName = document.getElementById('clientName');
         const clientEmail = document.getElementById('clientEmail');
@@ -1610,13 +1546,21 @@
         function handleActionClick(event) {
             event.preventDefault();
             
+            // Validación explícita de la fecha con mensaje abajo
+            if (!deliveryDate.value) {
+                dateError.style.display = 'block';
+                deliveryDate.focus();
+                return;
+            } else {
+                dateError.style.display = 'none';
+            }
+            
             if (!isDrawerOpen) {
                 checkoutDrawer.classList.add('open');
                 submitActionBtn.innerText = "ENVIAR COTIZACIÓN";
                 submitActionBtn.classList.add('outline');
                 isDrawerOpen = true;
                 
-                // Mover scroll un poco hacia abajo para asegurar que se vea todo
                 setTimeout(() => {
                     document.querySelector('.page-container').scrollIntoView({ behavior: 'smooth', block: 'end' });
                 }, 300);
@@ -1629,7 +1573,6 @@
                     return;
                 }
 
-                // ESTRUCTURACIÓN LIMPIA DEL WEBHOOK
                 let desgloseStr = "";
                 let totalRoomsFinal = 0;
                 let totalKitsFinal = 0;
@@ -1681,24 +1624,22 @@
             }
         }
 
-function submitOrder() {
-    document.getElementById('orderContentWrapper').style.display = 'none';
-    document.getElementById('success-state').style.display = 'block';
-    document.body.classList.add('confirmed');
-    
-    // Scroll suave hasta la parte superior de la página
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+        function submitOrder() {
+            document.getElementById('orderContentWrapper').style.display = 'none';
+            document.getElementById('success-state').style.display = 'block';
+            document.body.classList.add('confirmed');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    const heroFold = document.getElementById('heroFold');
-    heroFold.style.backgroundImage = "url('https://raw.githubusercontent.com/feraz-studio/57-71/main/Hrod_2.webp')";
-    
-    const contentCard = document.getElementById('contentCard');
-    contentCard.style.background = 'rgba(20, 20, 20, 0.75)';
-    contentCard.style.borderColor = 'rgba(255, 255, 255, 0.15)';
-    contentCard.style.color = '#FFFFFF';
-}
+            const heroFold = document.getElementById('heroFold');
+            heroFold.style.backgroundImage = "url('https://raw.githubusercontent.com/feraz-studio/57-71/main/hrod4.webp')";
+            
+            const contentCard = document.getElementById('contentCard');
+            contentCard.style.background = 'rgba(20, 20, 20, 0.75)';
+            contentCard.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+            contentCard.style.color = '#FFFFFF';
+        }
 
-        // NAV SCROLL
         const topNav = document.getElementById('topNav');
         let lastScrollY = window.scrollY;
         let scrollTimer = null;
