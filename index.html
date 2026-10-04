@@ -49,7 +49,7 @@
             color: var(--text-primary);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
-            padding-bottom: 140px;
+            padding-bottom: 60px; /* Reducido ya que no hay barra fixed */
             transition: background-color 0.8s ease, background-image 0.8s ease;
         }
 
@@ -464,8 +464,23 @@
             margin-top: 6px;
         }
 
+        /* EFECTO FADE-UP MUY SUAVE PARA EL RESUMEN */
         .calculation-summary {
             border-top: 1px solid rgba(0, 0, 0, 0.1);
+            
+            opacity: 0;
+            transform: translateY(20px);
+            max-height: 0;
+            margin-top: 0;
+            padding-top: 0;
+            overflow: hidden;
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .calculation-summary.visible {
+            opacity: 1;
+            transform: translateY(0);
+            max-height: 1500px; 
             margin-top: 32px;
             padding-top: 24px;
         }
@@ -535,12 +550,7 @@
             max-height: 400px;
             opacity: 1;
             margin-top: 24px;
-        }
-
-        .button-dock-target {
-            width: 100%;
-            height: 56px;
-            margin-top: 24px;
+            margin-bottom: 12px;
         }
         
         #success-state {
@@ -640,13 +650,9 @@
             stroke-linejoin: round;
         }
 
+        /* BARRA ESTÁTICA CON FADE-UP AL IGUAL QUE EL RESUMEN */
         .action-bar {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: calc(100% - 32px);
-            max-width: 448px;
+            width: 100%;
             background: linear-gradient(135deg, rgba(54, 122, 186, 0.75), rgba(215, 38, 38, 0.65));
             backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(25px);
@@ -656,27 +662,26 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
             border: 1px solid rgba(255,255,255,0.4);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 1000;
+            
+            /* Hidden state */
             opacity: 0;
+            transform: translateY(20px);
+            max-height: 0;
+            margin-top: 0;
             pointer-events: none;
+            overflow: hidden;
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .action-bar.visible {
             opacity: 1;
+            transform: translateY(0);
+            max-height: 100px;
+            margin-top: 24px;
             pointer-events: all;
-        }
-
-        .action-bar.docked {
-            position: relative;
-            bottom: auto;
-            left: auto;
-            transform: none;
-            width: 100%;
-            max-width: 100%;
-            box-shadow: none;
+            overflow: visible;
         }
 
         .bar-info {
@@ -729,6 +734,7 @@
             display: none;
             overflow-x: auto;
             gap: 10px;
+            padding-top: 8px;
             padding-bottom: 12px;
             margin-bottom: 16px;
             scrollbar-width: none;
@@ -910,8 +916,8 @@
                             <div class="delivery-note">El pedido se entregará directamente en las instalaciones de su propiedad en la fecha seleccionada previo al horario de check-in. Si requiere otra ubicación, por favor comuníquese con nosotros para coordinarlo.</div>
                         </div>
 
-                        <!-- Sección Checkout (Resumen) -->
-                        <div class="calculation-summary">
+                        <!-- Sección Checkout (Resumen) INICIA OCULTA -->
+                        <div class="calculation-summary" id="calculationSummary">
                             <div class="summary-title">RESUMEN</div>
                             
                             <!-- Desglose por hotel/propiedad -->
@@ -937,7 +943,13 @@
                             </div>
                         </div>
 
-                        <div class="button-dock-target" id="dockTarget"></div>
+                        <!-- BARRA ESTÁTICA DENTRO DEL FLUJO (INICIA OCULTA) -->
+                        <div class="action-bar" id="actionBar">
+                            <div class="bar-info" id="barInfo">
+                                <span id="barTotal">$0.00 MXN + IVA</span>
+                            </div>
+                            <button class="action-btn" id="submitActionBtn" onclick="handleActionClick(event)" disabled>REALIZAR PEDIDO</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -966,18 +978,11 @@
                 </div>
             </div>
         </div>
-
-        <div class="action-bar" id="actionBar">
-            <div class="bar-info" id="barInfo">
-                <span id="barTotal">$0.00 MXN + IVA</span>
-            </div>
-            <button class="action-btn" id="submitActionBtn" onclick="handleActionClick(event)" disabled>REALIZAR PEDIDO</button>
-        </div>
     </div>
 
     <script>
-        // BASE DE DATOS COMPLETA DE HOTELES Y GRUPOS
-        const hotelesData = {
+        // BASE DE DATOS COMPLETA DE HOTELES Y GRUPOS INTACTA
+ const hotelesData = {
             "casa-polanco": {
                 "nombre": "Casa Polanco",
                 "habitaciones": 19,
@@ -1204,7 +1209,7 @@
                 nombre: "ONTO",
                 esGrupo: true,
                 fullWidthBubbles: true,
-                logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_onto.png",
+                logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_ONTO.png",
                 logoScale: 1.4,
                 propiedades: [
                     { id: "onto-ao", name: "Álvaro Obregón", rooms: 59, type: "text", image: "https://raw.githubusercontent.com/feraz-studio/57-71/main/alvaro-obregon.webp" },
@@ -1245,6 +1250,8 @@
         const deliveryDate = document.getElementById('deliveryDate');
         const deliveryNoteWrapper = document.getElementById('deliveryNoteWrapper');
         
+        const calculationSummary = document.getElementById('calculationSummary');
+        const actionBar = document.getElementById('actionBar');
         const summaryBreakdownContainer = document.getElementById('summaryBreakdownContainer');
         const groupBubblesWrapper = document.getElementById('groupBubblesWrapper');
         const mainImage = document.getElementById('mainImage');
@@ -1260,7 +1267,7 @@
         // INICIALIZACIÓN
         document.addEventListener("DOMContentLoaded", function() {
             const urlParams = new URLSearchParams(window.location.search);
-            const hotelSlug = urlParams.get('hotel') || "lamartine";
+            const hotelSlug = urlParams.get('hotel') || "vida-lenta";
 
             if (hotelSlug && hotelesData[hotelSlug]) {
                 const hotelInfo = hotelesData[hotelSlug];
@@ -1368,7 +1375,7 @@
             else deliveryNoteWrapper.classList.remove('active');
         }
 
-        // CÁLCULO GENERAL Y DESGLOSE DE RESUMEN
+        // CÁLCULO GENERAL Y VISIBILIDAD DE SECCIONES OCULTAS
         function calculateOrder() {
             let grandTotalKits = 0;
             let grandTotalRooms = 0;
@@ -1408,6 +1415,15 @@
 
                 if (kitsInput.value.length > 0) tierPill.classList.add('visible');
                 else tierPill.classList.remove('visible');
+            }
+
+            // GESTIÓN DEL FADE UP (RESUMEN Y BARRA)
+            if (grandTotalKits > 0) {
+                calculationSummary.classList.add('visible');
+                actionBar.classList.add('visible');
+            } else {
+                calculationSummary.classList.remove('visible');
+                actionBar.classList.remove('visible');
             }
 
             let calculatedBases = 0;
@@ -1471,9 +1487,7 @@
             let productsSubtotal = 0;
 
             if (isGroupMode) {
-                if (activeProperties.length === 0) {
-                    summaryBreakdownContainer.innerHTML = `<div class="summary-line"><span>Kit 57-71 (0 pzas.)</span><span>$0.00</span></div>`;
-                } else {
+                if (activeProperties.length > 0) {
                     const isResidence = grandTotalKits >= 100;
                     
                     activeProperties.forEach(prop => {
@@ -1527,39 +1541,43 @@
 
             } else {
                 // Modo Individual
-                const subT = grandTotalKits >= 20 ? (grandTotalKits * unitPrice) : 0;
-                productsSubtotal += subT;
+                if (grandTotalKits > 0) {
+                    const subT = grandTotalKits >= 20 ? (grandTotalKits * unitPrice) : 0;
+                    productsSubtotal += subT;
 
-                let blockHtml = `<div class="property-summary-block">`;
-                blockHtml += `
-                    <div class="summary-line">
-                        <span>Kit 57-71 (${grandTotalKits} pzas.)</span>
-                        <span>$${subT.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
-                    </div>
-                `;
-
-                if (grandTotalKits < 100) {
-                    const vajSub = grandTotalVajilla * 30;
-                    productsSubtotal += vajSub;
+                    let blockHtml = `<div class="property-summary-block">`;
                     blockHtml += `
                         <div class="summary-line">
-                            <span>Vajilla (${grandTotalVajilla} pzas.)</span>
-                            <span>$${vajSub.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MXN</span>
+                            <span>Kit 57-71 (${grandTotalKits} pzas.)</span>
+                            <span>$${subT.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                         </div>
                     `;
-                    vajillaPriceDisplay.innerHTML = `$30.00 <span class="unit-label">/ pza.</span>`;
-                } else {
-                    blockHtml += `
-                        <div class="summary-line">
-                            <span>Vajilla (${calculatedBases} pzas.) <span class="navy-included-tag">INCLUIDA</span></span>
-                            <span>$0.00</span>
-                        </div>
-                    `;
-                    vajillaPriceDisplay.innerHTML = `<span class="strike-price">$30.00</span><span class="included-tag">INCLUIDA</span> <span class="unit-label">/ pza.</span>`;
+
+                    if (grandTotalKits < 100) {
+                        if (grandTotalVajilla > 0) {
+                            const vajSub = grandTotalVajilla * 30;
+                            productsSubtotal += vajSub;
+                            blockHtml += `
+                                <div class="summary-line">
+                                    <span>Vajilla (${grandTotalVajilla} pzas.)</span>
+                                    <span>$${vajSub.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MXN</span>
+                                </div>
+                            `;
+                        }
+                        vajillaPriceDisplay.innerHTML = `$30.00 <span class="unit-label">/ pza.</span>`;
+                    } else {
+                        blockHtml += `
+                            <div class="summary-line">
+                                <span>Vajilla (${calculatedBases} pzas.) <span class="navy-included-tag">INCLUIDA</span></span>
+                                <span>$0.00</span>
+                            </div>
+                        `;
+                        vajillaPriceDisplay.innerHTML = `<span class="strike-price">$30.00</span><span class="included-tag">INCLUIDA</span> <span class="unit-label">/ pza.</span>`;
+                    }
+
+                    blockHtml += `</div>`;
+                    summaryBreakdownContainer.innerHTML = blockHtml;
                 }
-
-                blockHtml += `</div>`;
-                summaryBreakdownContainer.innerHTML = blockHtml;
             }
 
             const formattedTotal = `$${productsSubtotal.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MXN + IVA`;
@@ -1596,6 +1614,11 @@
                 submitActionBtn.innerText = "ENVIAR COTIZACIÓN";
                 submitActionBtn.classList.add('outline');
                 isDrawerOpen = true;
+                
+                // Mover scroll un poco hacia abajo para asegurar que se vea todo
+                setTimeout(() => {
+                    document.querySelector('.page-container').scrollIntoView({ behavior: 'smooth', block: 'end' });
+                }, 300);
             } else {
                 const nameVal = clientName.value.trim();
                 const emailVal = clientEmail.value.trim();
@@ -1605,6 +1628,7 @@
                     return;
                 }
 
+                // ESTRUCTURACIÓN LIMPIA DEL WEBHOOK
                 let desgloseStr = "";
                 let totalRoomsFinal = 0;
                 let totalKitsFinal = 0;
@@ -1614,14 +1638,24 @@
                         let k = parseInt(data.kits) || 0;
                         let v = parseInt(data.vajilla) || 0;
                         if (k > 0 || v > 0) {
-                            desgloseStr += `${data.name}: ${k} kits, ${v} vajillas. | `;
+                            let parts = [];
+                            if (k > 0) parts.push(`${k} kits`);
+                            if (v > 0) parts.push(`${v} vajillas`);
+                            
+                            desgloseStr += `${data.name}: ${parts.join(', ')}. | `;
                             totalRoomsFinal += data.rooms;
                             totalKitsFinal += k;
                         }
                     }
                 } else {
-                    totalKitsFinal = kitsInput.value;
-                    totalRoomsFinal = roomsInput.value;
+                    totalKitsFinal = parseInt(kitsInput.value) || 0;
+                    totalRoomsFinal = parseInt(roomsInput.value) || 0;
+                    let v = parseInt(vajillaInput.value) || 0;
+                    
+                    let parts = [];
+                    if (totalKitsFinal > 0) parts.push(`${totalKitsFinal} kits`);
+                    if (v > 0) parts.push(`${v} vajillas`);
+                    desgloseStr = parts.join(', ');
                 }
 
                 const payload = {
@@ -1649,7 +1683,6 @@
         function submitOrder() {
             document.getElementById('orderContentWrapper').style.display = 'none';
             document.getElementById('success-state').style.display = 'block';
-            document.getElementById('actionBar').style.display = 'none';
             document.body.classList.add('confirmed');
             
             const heroFold = document.getElementById('heroFold');
@@ -1660,32 +1693,6 @@
             contentCard.style.borderColor = 'rgba(255, 255, 255, 0.15)';
             contentCard.style.color = '#FFFFFF';
         }
-
-        // OBSERVERS (Hero y Dock)
-        const heroObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) document.getElementById('actionBar').classList.add('visible');
-                else document.getElementById('actionBar').classList.remove('visible');
-            });
-        }, { threshold: 0.1 });
-        heroObserver.observe(document.getElementById('heroFold'));
-
-        const dockObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                const actionBar = document.getElementById('actionBar');
-                const dockTarget = document.getElementById('dockTarget');
-                if (entry.isIntersecting) {
-                    dockTarget.appendChild(actionBar);
-                    actionBar.classList.add('docked');
-                } else {
-                    if (window.scrollY < dockTarget.offsetTop) {
-                        document.body.appendChild(actionBar);
-                        actionBar.classList.remove('docked');
-                    }
-                }
-            });
-        }, { threshold: 0.1 });
-        dockObserver.observe(document.getElementById('dockTarget'));
 
         // NAV SCROLL
         const topNav = document.getElementById('topNav');
