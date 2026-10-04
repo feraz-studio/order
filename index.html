@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feraz — Colección 57–71 | Cotizador B2B</title>
+    <style>
+        @font-face {
+            font-family: 'HK Grotesk';
+            src: url('https://raw.githubusercontent.com/feraz-studio/57-71/main/HKGrotesk-Medium.otf') format('opentype');
+            font-weight: 500;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'HK Grotesk';
+            src: url('https://raw.githubusercontent.com/feraz-studio/57-71/main/HKGrotesk-SemiBold.otf') format('opentype');
+            font-weight: 600;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'HK Grotesk';
+            src: url('https://raw.githubusercontent.com/feraz-studio/57-71/main/HKGrotesk-Bold.otf') format('opentype');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        :root {
+            --bg-color: #F0F0F0;
+            --text-primary: #1A1A1A;
+            --text-secondary: #555555;
+            --border-color: rgba(255, 255, 255, 0.6);
+            --error: #B83B3B;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'HK Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            background-image: url('https://raw.githubusercontent.com/feraz-studio/57-71/main/Back%201.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: 140px;
+            transition: background-color 0.8s ease, background-image 0.8s ease;
+        }
+
+        body.confirmed {
+            background-image: none !important;
+            background-color: #000000 !important;
+        }
+
+        .page-container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px 24px;
+            z-index: 100;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 100%);
+        }
+
+        .top-nav.hidden {
+            transform: translate(-50%, -100%);
+            opacity: 0;
+        }
+
+        .top-nav img.feraz-logo {
+            height: 18px;
+            width: auto;
+            display: block;
+        }
+
+        .hero-fold {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            background-image: url('https://raw.githubusercontent.com/feraz-studio/57-71/main/3_Checker.png');
+            background-size: cover;
+            background-position: center;
+            border-radius: 0 0 32px 32px;
+            transition: background-image 0.6s ease;
+        }
+
+        .hero-fold::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 0 0 32px 32px;
+            z-index: 1;
+        }
+
+        .content-card {
+            position: relative;
+            z-index: 10;
+            margin-top: -50px;
+            background: rgba(240, 240, 240, 0.6);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 36px 36px 28px 28px;
+            border: 1px solid var(--border-color);
+            padding: 24px 24px 40px 24px;
+            box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.08);
+            transition: background 0.6s ease, border-color 0.6s ease, backdrop-filter 0.6s ease;
+        }
+
+        .card-handle {
+            width: 36px;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 2px;
+            margin: 0 auto 24px auto;
+        }
+
+        .info-section {
+            margin-bottom: 24px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding-bottom: 24px;
+        }
+
+        .info-title {
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .info-body {
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .amenity-details {
+            background: rgba(255, 255, 255, 0.35);
+            border-radius: 20px;
+            padding: 18px 20px;
+            margin-top: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .amenity-details h4 {
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .amenity-details ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 14px;
+        }
+
+        .amenity-details li {
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 500;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            position: relative;
+            padding-left: 14px;
+        }
+
+        .amenity-details li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--text-primary);
+        }
+
+        .recommendation-tag {
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 500;
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            border-top: 1px dashed rgba(0, 0, 0, 0.15);
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+
+        .hotel-brand-slot {
+            text-align: center;
+            padding: 16px 0;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hotel-brand-slot img {
+            height: 20px;
+            width: auto;
+            object-fit: contain;
+            filter: brightness(0.2);
+        }
+
+        .section-title {
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+.editorial-product-section {
+    position: relative; /* Contenedor de referencia para la píldora */
+}
+
+.tier-pill-wrapper {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 20;
+    margin: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+/* Contenedor del slider: altura automática basada en la proporción real de la foto */
+.product-image-slider {
+    position: relative;
+    width: 100%;
+    height: 200px; /* <--- Modifica este valor para cambiar la altura del contenedor (ej. 240px, 320px) */
+      margin-top: 24px;
+    margin-bottom: 24px;
+    border-radius: 28px; /* Esquinas redondeadas al ~25% */
+    overflow: hidden;    /* Mantiene las esquinas limpias */
+    background: #0A0A0A; /* Fondo de respaldo mientras cargan las fotos */
+}
+
+/* Ambas imágenes se adaptan perfectamente al contenedor sin deformarse */
+.slide-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* Llena el contenedor de forma armónica */
+    opacity: 0;
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Imagen activa visible en el loop */
+.slide-img.active {
+    opacity: 1;
+}
+
+.tier-pill {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    color: var(--text-primary);
+    font-family: 'HK Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 30px;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.6s ease, transform 0.6s ease, background 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+/* Estilo específico cuando la píldora adopta el modo Residence dorado */
+.tier-pill.residence-tier {
+    background: rgba(217, 175, 0, 0.9) !important;
+    border-color: rgba(217, 175, 0, 0.75) !important;
+    /* Cambia este tono por uno más oscuro o intenso (por ejemplo, un dorado quemado o bronce) */
+    color: #FFFFFF !important; 
+    font-weight: 800 !important;
+}
+
+        .tier-pill.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .product-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin-bottom: 24px;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.05));
+        }
+
+        .dynamic-field-wrapper {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transform: translateY(-8px);
+            transition: max-height 0.7s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease, transform 0.5s ease, margin 0.5s ease;
+            margin-bottom: 0;
+        }
+
+        .dynamic-field-wrapper.active {
+            max-height: 120px;
+            opacity: 1;
+            transform: translateY(0);
+            margin-bottom: 12px;
+        }
+
+        .editorial-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+            transition: border-color 0.2s ease;
+        }
+
+        .editorial-row:focus-within {
+            border-color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.85);
+        }
+
+        .editorial-left {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .editorial-right {
+            text-align: right;
+            padding-left: 12px;
+            white-space: nowrap;
+        }
+
+        .editorial-row input, .editorial-row select {
+            width: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--text-primary);
+            padding: 4px 0;
+        }
+
+        .editorial-row input::placeholder {
+            color: #999;
+            font-weight: 500;
+        }
+
+        .price-display {
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .unit-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .strike-price {
+            text-decoration: line-through;
+            color: #999;
+            font-weight: 500;
+            margin-right: 4px;
+        }
+
+        .included-tag {
+            color: var(--text-primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 11px;
+            margin-right: 4px;
+        }
+
+        .error-message {
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 12px;
+            color: var(--error);
+            margin-top: -4px;
+            margin-bottom: 12px;
+            padding-left: 12px;
+            display: none;
+        }
+
+        .residence-note {
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 500;
+            font-size: 13px;
+            color: var(--text-secondary);
+            padding: 0 12px;
+            line-height: 1.5;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.7s ease, opacity 0.5s ease, margin 0.5s ease;
+            margin-bottom: 0;
+        }
+
+        .residence-note.active {
+            max-height: 100px;
+            opacity: 1;
+            margin-bottom: 12px;
+        }
+
+        .delivery-note-wrapper {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease, margin 0.5s ease;
+            margin-bottom: 0;
+        }
+
+        .delivery-note-wrapper.active {
+            max-height: 100px;
+            opacity: 1;
+            margin-bottom: 16px;
+        }
+
+        .delivery-note {
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 500;
+            font-size: 12px;
+            color: var(--text-secondary);
+            padding-left: 12px;
+            line-height: 1.4;
+            margin-top: 6px;
+        }
+
+        .calculation-summary {
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            margin-top: 32px;
+            padding-top: 24px;
+        }
+
+        .summary-title {
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .summary-line.total {
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 16px;
+            border-top: 1px dashed rgba(0, 0, 0, 0.15);
+            padding-top: 14px;
+            margin-top: 14px;
+        }
+
+        .checkout-drawer {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
+            margin-top: 0;
+        }
+
+        .checkout-drawer.open {
+            max-height: 400px;
+            opacity: 1;
+            margin-top: 24px;
+        }
+
+        .button-dock-target {
+            width: 100%;
+            height: 56px;
+            margin-top: 24px;
+        }
+        
+        /* ESTILOS DE LA VENTANA DE CONFIRMACIÓN (Frosted Glass sobre negro) */
+        #success-state {
+            display: none;
+            text-align: center;
+            padding: 8px 4px;
+        }
+
+        #success-state h2 {
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 0.0em;
+            text-transform: uppercase;
+            color: #FFFFFF;
+            margin-bottom: 12px;
+        }
+
+        #success-state p {
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 500;
+            font-size: 13px;
+            color: #B3B3B3;
+            margin-bottom: 16px;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .success-logos {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 16px 0;
+        }
+
+        .success-logos img {
+            height: 16px;
+            width: auto;
+            object-fit: contain;
+            filter: brightness(1);
+        }
+
+        .success-divider {
+            width: 24px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .success-footer {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 14px;
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .success-footer p {
+            font-size: 11.5px !important;
+            color: #888888 !important;
+            margin-bottom: 4px !important;
+        }
+
+        .success-footer .author-name {
+            font-weight: 600;
+            color: #CCCCCC !important;
+            font-size: 12px !important;
+            margin-bottom: 2px !important;
+        }
+
+        .success-footer .author-title {
+            font-weight: 500;
+            color: #888888 !important;
+            font-size: 11px !important;
+            margin-bottom: 10px !important;
+        }
+
+        .success-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 8px;
+        }
+
+        .success-icons a {
+            color: #CCCCCC;
+            transition: color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .success-icons a:hover {
+            color: #FFFFFF;
+        }
+
+        .success-icons svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.75;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Barra flotante original intacta */
+        .action-bar {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 32px);
+            max-width: 448px;
+            background: linear-gradient(135deg, rgba(54, 122, 186, 0.75), rgba(215, 38, 38, 0.65));
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            color: #FFFFFF;
+            padding: 10px 12px 10px 20px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+            border: 1px solid rgba(255,255,255,0.4);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .action-bar.visible {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .action-bar.docked {
+            position: relative;
+            bottom: auto;
+            left: auto;
+            transform: none;
+            width: 100%;
+            max-width: 100%;
+            box-shadow: none;
+        }
+
+        .bar-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .bar-info span {
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 15px;
+            color: #FFFFFF;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+            line-height: 1.2;
+        }
+
+        .action-btn {
+            background-color: #FFFFFF;
+            color: #1A1A1A;
+            border: 1px solid transparent;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .action-btn.outline {
+            background-color: #FFFFFF !important;
+            color: #1A1A1A !important;
+            border-color: #FFFFFF !important;
+        }
+
+        .action-btn:hover {
+            opacity: 0.9;
+        }
+
+        .action-btn:disabled {
+            background-color: #555555;
+            color: #888888;
+            border-color: transparent;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page-container">
+        <!-- Header minimalista sin sección de contacto -->
+        <nav class="top-nav" id="topNav">
+            <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/Feraz_Off%20white.svg" alt="Feraz" class="feraz-logo">
+        </nav>
+
+        <div class="hero-fold" id="heroFold"></div>
+
+        <div class="content-card" id="contentCard">
+            <div class="card-handle"></div>
+
+            <!-- CONTENEDOR DE PEDIDO (Se oculta por completo al enviar) -->
+            <div id="orderContentWrapper">
+                <div class="info-section">
+                    <div class="info-title">57-71 Hospitality Collection</div>
+                    <div class="info-body">
+                        Colección de edición limitada concebida para transformar la estancia de sus huéspedes durante la temporada de automovilismo. Cada kit actúa como un artefacto sensorial de cata privada producido de forma artesanal <em>on-demand</em>, asegurando una frescura absoluta.
+                    </div>
+
+                    <div class="amenity-details">
+                        <div class="info-title" style="font-size: 13px; margin-bottom: 8px;">Entregables</div>
+                        <h4>Componentes por Kit</h4>
+                        <ul>
+                            <li>1 Bombón Pedro (Vainilla de Papantla y caramelo mascabado).</li>
+                            <li>1 Bombón Ricardo (Naranja, jengibre y pimienta rosa).</li>
+                            <li>Tarjeta editorial de cata y narrativa con código QR.</li>
+                            <li>Página web personalizada con la identidad de su hotel.</li>
+                        </ul>
+
+                        <div class="recommendation-tag">
+                            <h4 style="margin-bottom: 4px;">Sugerencia de consumo</h4>
+                            <strong>Check-in Amenity:</strong> 1 kit / reservación.<br>
+                            <strong>Turndown Service:</strong> 1 kit / noche.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hotel-brand-slot">
+                    <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/Feraz_Off%20white.svg" alt="Hotel Partner">
+                </div>
+
+<div class="section-title">Configuración de Pedido</div>
+
+                <div class="editorial-product-section expanded" id="productSection">
+                    <form id="orderForm">
+                        
+                        <!-- Píldora colocada de manera fluida antes del slider -->
+                        <div class="tier-pill-wrapper">
+                            <span class="tier-pill" id="tierPill">SUITE</span>
+                        </div>
+
+                        <div class="product-image-slider">
+                            <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/pedro1.webp" alt="Kit Pedro" class="slide-img active">
+                            <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/ricardo2.webp" alt="Kit Ricardo" class="slide-img">
+                        </div>
+
+                        <!-- Fila Kits -->
+                        <div class="editorial-row">
+                            <div class="editorial-left">
+                                <input type="number" id="kitsCount" placeholder="No. de Kits" min="1" step="1">
+                            </div>
+                            <div class="editorial-right">
+                                <span class="price-display" id="kitPriceDisplay">$0.00 <span class="unit-label">/ kit.</span></span>
+                            </div>
+                        </div>
+                        <div id="minError" class="error-message">El monto mínimo de producción es de 20 kits.</div>
+
+                        <!-- Fila Habitaciones (Dinámica con fundido) -->
+                        <div class="dynamic-field-wrapper" id="roomsWrapper">
+                            <div class="editorial-row" style="margin-bottom: 0;">
+                                <div class="editorial-left">
+                                    <input type="number" id="roomsCount" value="" placeholder="No. de Habitaciones" min="1" step="1">
+                                </div>
+                                <div class="editorial-right">
+                                    <span class="price-display" style="font-size: 12px; color:#888;">habitaciones</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Nota de modalidad Residence -->
+                        <div class="residence-note" id="residenceNote"></div>
+
+                        <!-- Fila Vajilla (Dinámica con fundido) -->
+                        <div class="dynamic-field-wrapper active" id="vajillaWrapper">
+                            <div class="editorial-row" style="margin-bottom: 0;" id="vajillaRow">
+                                <div class="editorial-left">
+                                    <input type="number" id="vajillaCount" value="" placeholder="No. de piezas Vajilla" min="0" step="1">
+                                </div>
+                                <div class="editorial-right">
+                                    <span class="price-display" id="vajillaPriceDisplay">
+                                        $30.00 <span class="unit-label">/ pza.</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fila Fecha -->
+                        <div class="editorial-row" style="margin-bottom: 0;">
+                            <div class="editorial-left">
+                                <select id="deliveryDate" onchange="toggleDeliveryNote()">
+                                    <option value="" disabled selected hidden>Fecha de entrega deseada</option>
+                                    <option value="2026-10-26">Lunes 26 de octubre</option>
+                                    <option value="2026-10-27">Martes 27 de octubre</option>
+                                    <option value="2026-10-28">Miércoles 28 de octubre</option>
+                                    <option value="2026-10-29">Jueves 29 de octubre</option>
+                                    <option value="2026-10-30">Viernes 30 de octubre</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- Nota de fecha con fundido descendente suave -->
+                        <div class="delivery-note-wrapper" id="deliveryNoteWrapper">
+                            <div class="delivery-note">El pedido se entregará directamente en las instalaciones de su propiedad en la fecha seleccionada previo al horario de check-in. Si requiere otra ubicación, por favor comuníquese con nosotros para coordinarlo.</div>
+                        </div>
+
+                        <!-- Sección Checkout (Resumen) -->
+                        <div class="calculation-summary">
+                            <div class="summary-title">RESUMEN</div>
+                            
+                            <div class="summary-line">
+                                <span id="summaryKitLabel">Kit 57-71 (0 pzas.)</span>
+                                <span id="summaryUnitPrice">$0.00</span>
+                            </div>
+                            <div class="summary-line" id="summaryTablewareRow">
+                                <span id="summaryTablewareLabel">Vajilla (0 pzas.)</span>
+                                <span id="summaryTablewarePrice">$0.00</span>
+                            </div>
+                            <div class="summary-line total">
+                                <span>TOTAL</span>
+                                <span id="totalDisplay">$0.00 MXN + IVA</span>
+                            </div>
+                        </div>
+
+                        <!-- Cajón Desplegable (Nombre y Correo para Webhook) -->
+                        <div class="checkout-drawer" id="checkoutDrawer">
+                            <div class="editorial-row" style="margin-bottom: 12px;">
+                                <div class="editorial-left">
+                                    <input type="text" id="clientName" placeholder="Nombre">
+                                </div>
+                            </div>
+                            <div class="editorial-row">
+                                <div class="editorial-left">
+                                    <input type="email" id="clientEmail" placeholder="Correo electrónico">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="button-dock-target" id="dockTarget"></div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- VENTANA DE CONFIRMACIÓN (Frosted Glass y centrada) -->
+            <div id="success-state">
+                <h2>PEDIDO RECIBIDO</h2>
+                <p>Hemos registrado su orden.<br><br>En breve recibirá su cotización formal y los siguientes pasos a seguir para garantizar la mejor experiencia para sus huéspedes.<br><br>Gracias por confiar en nosotros.</p>
+                
+                <div class="success-logos">
+
+                    <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/Logo%20Hospit.png" alt="Logo Hospit" style="height: 44px;">
+                </div>
+
+                <div class="success-footer">
+                    <p>Si tiene alguna pregunta, por favor no dude en contactarnos.<br></p>
+                    <p class="author-name">Fernando Quezada</p>
+                    <p class="author-title">Founder & Creative Director</p>
+                    <div class="success-icons">
+                        <!-- Ícono WhatsApp Outline -->
+                        <a href="https://wa.me/525549400957" target="_blank" aria-label="WhatsApp">
+                            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        </a>
+                        <!-- Ícono Correo Outline -->
+                        <a href="mailto:fernando@feraz.studio" aria-label="Correo">
+                            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="action-bar" id="actionBar">
+            <div class="bar-info" id="barInfo">
+                <span id="barTotal">$0.00 MXN + IVA</span>
+            </div>
+            <button class="action-btn" id="submitActionBtn" onclick="handleActionClick(event)" disabled>REALIZAR PEDIDO</button>
+        </div>
+    </div>
+
+    <script>
+        const hotelesData = {
+    "casa-polanco": {
+        nombre: "Casa Polanco",
+        habitaciones: 19,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_CasaPolanco.png"
+    },
+    "octavia-casa": {
+        nombre: "Octavia Casa",
+        habitaciones: 8,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OctaviaCasa.png"
+    },
+    "the-alest": {
+        nombre: "The Alest",
+        habitaciones: 19,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Thealest.png"
+    },
+    "uma-casa": {
+        nombre: "Uma Casa",
+        habitaciones: 9,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Uma.png"
+    },
+    "wild-oscar": {
+        nombre: "The Wild Oscar",
+        habitaciones: 9,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_wildoscar.png"
+    },
+    "orchid-house": {
+        nombre: "Orchid House",
+        habitaciones: 13,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_OH.png"
+    },
+    "kimpton-virgilio": {
+        nombre: "Kimpton Virgilio",
+        habitaciones: 48,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Kimpton.png"
+    },
+    "kimpton-castelar": {
+        nombre: "Kimpton El Castelar",
+        habitaciones: 34,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Kimpton.png"
+    },
+    "casa-levora": {
+        nombre: "Casa Lévora",
+        habitaciones: 9,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Levora.png"
+    },
+    "casa-cuenca": {
+        nombre: "Casa Cuenca",
+        habitaciones: 10,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Cuenca.png"
+    },
+    "el-alfonsa": {
+        nombre: "El Alfonsa",
+        habitaciones: 13,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Alfonsa.png"
+    },
+    "casa-luciana": {
+        nombre: "Casa Luciana",
+        habitaciones: 8,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Luciana.png"
+    },
+    "the-amsterdam": {
+        nombre: "The Amsterdam",
+        habitaciones: 14,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_The%20Amsterdam.png"
+    },
+    "casa-mali": {
+        nombre: "Casa Malí",
+        habitaciones: 20,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Mali.png"
+    },
+    "lulu-condesa": {
+        nombre: "Lulú Condesa",
+        habitaciones: 16,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_lulu.png"
+    },
+    "maison-du-comte": {
+        nombre: "Maison du Comte",
+        habitaciones: 6,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo-MDC.png"
+    },
+    "el-cortes": {
+        nombre: "El Cortés",
+        habitaciones: 15,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_El%20Cortes.png"
+    },
+    "casa-talavera": {
+        nombre: "Casa Talavera",
+        habitaciones: 13,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Talavera.png"
+    },
+    "nima": {
+        nombre: "Nima Local House",
+        habitaciones: 4,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Nima.png"
+    },
+    "brick": {
+        nombre: "Brick",
+        habitaciones: 17,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Brick.png"
+    },
+    "casa-margarita": {
+        nombre: "Casa Margarita",
+        habitaciones: 4,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Margarita.png"
+    },
+    "onto": {
+        nombre: "ONTO",
+        habitaciones: 110,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_ONTO.png"
+    },
+    "casa-tenue": {
+        nombre: "Casa Tenue",
+        habitaciones: 8,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casa%20Tenue.png"
+    },
+    "colima-71": {
+        nombre: "Colima 71",
+        habitaciones: 16,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Colima71.png"
+    },
+    "maison-celeste": {
+        nombre: "Maison Celeste x Lezard",
+        habitaciones: 13,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Maison%20Celeste.png"
+    },
+    "roso-gh": {
+        nombre: "Roso Guest House",
+        habitaciones: 10,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Roso.png"
+    },
+    "ignacia": {
+        nombre: "Ignacia Guest House",
+        habitaciones: 9,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Ignacia.png"
+    },
+    "hoteldama": {
+        nombre: "Hotel Dama",
+        habitaciones: 17,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Dama.png"
+    },
+    "casona": {
+        nombre: "Casona",
+        habitaciones: 32,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Casona.png"
+    },
+    "sara-y-julieta": {
+        nombre: "Sara y Julieta",
+        habitaciones: 23,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Sara%20y%20Julieta.png"
+    },
+    "las-alcobas": {
+        nombre: "Las Alcobas",
+        habitaciones: 35,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Alcobas.png"
+    },
+    "casa-ofelia": {
+        nombre: "Casa Ofelia Polanco",
+        habitaciones: 23,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Ofelia.png"
+    },
+    "hotel-habita": {
+        nombre: "Hotel Habita",
+        habitaciones: 36,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Hotel-Habita.png"
+    },
+    "lamartine": {
+        nombre: "Lamartine",
+        habitaciones: 10,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Lamartine.png"
+    },
+    "campos-polanco": {
+        nombre: "Campos Polanco",
+        habitaciones: 12,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo-campos-polanco.png"
+    },
+    "pug-seal": {
+        nombre: "Pug Seal",
+        habitaciones: 46,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/logo_pug-seal.png"
+    },
+    "casa-izel": {
+        nombre: "Casa Izel",
+        habitaciones: 25,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_CasaIzel.png"
+    },
+    "la-valise": {
+        nombre: "La Valise",
+        habitaciones: 8,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_la-valise.png"
+    },
+    "casa-izeba": {
+        nombre: "Casa Izeba",
+        habitaciones: 8,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_casa-izeba.png"
+    },
+    "hotel-parian": {
+        nombre: "Hotel Parián",
+        habitaciones: 19,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_hotel-parian.png"
+    },
+    "xoma": {
+        nombre: "Xoma",
+        habitaciones: 18,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Xoma.png"
+    },
+    "casa-bosques-pension": {
+        nombre: "Pensión",
+        habitaciones: 10,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Pension.png"
+    },
+    "hotel-oculto": {
+        nombre: "Hotel Oculto",
+        habitaciones: 21,
+        logo: "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_hotel-oculto.png"
+    }
+};
+        const kitsInput = document.getElementById('kitsCount');
+        const roomsWrapper = document.getElementById('roomsWrapper');
+        const roomsInput = document.getElementById('roomsCount');
+        const vajillaWrapper = document.getElementById('vajillaWrapper');
+        const vajillaInput = document.getElementById('vajillaCount');
+        const residenceNote = document.getElementById('residenceNote');
+        const minError = document.getElementById('minError');
+        
+        const tierPill = document.getElementById('tierPill');
+        const kitPriceDisplay = document.getElementById('kitPriceDisplay');
+        const vajillaPriceDisplay = document.getElementById('vajillaPriceDisplay');
+        
+        const summaryKitLabel = document.getElementById('summaryKitLabel');
+        const summaryUnitPrice = document.getElementById('summaryUnitPrice');
+        const summaryTablewareRow = document.getElementById('summaryTablewareRow');
+        const summaryTablewareLabel = document.getElementById('summaryTablewareLabel');
+        const summaryTablewarePrice = document.getElementById('summaryTablewarePrice');
+        const totalDisplay = document.getElementById('totalDisplay');
+        const barTotal = document.getElementById('barTotal');
+        
+        const submitActionBtn = document.getElementById('submitActionBtn');
+        const orderContentWrapper = document.getElementById('orderContentWrapper');
+        const successState = document.getElementById('success-state');
+        const actionBar = document.getElementById('actionBar');
+        const dockTarget = document.getElementById('dockTarget');
+        const checkoutDrawer = document.getElementById('checkoutDrawer');
+        const clientName = document.getElementById('clientName');
+        const clientEmail = document.getElementById('clientEmail');
+        const deliveryDate = document.getElementById('deliveryDate');
+        const deliveryNoteWrapper = document.getElementById('deliveryNoteWrapper');
+        const contentCard = document.getElementById('contentCard');
+        const heroFold = document.getElementById('heroFold');
+        
+        let isDrawerOpen = false;
+
+        function toggleDeliveryNote() {
+            if (deliveryDate.value) {
+                deliveryNoteWrapper.classList.add('active');
+            } else {
+                deliveryNoteWrapper.classList.remove('active');
+            }
+        }
+
+        function calculateOrder() {
+            const rawKits = kitsInput.value;
+            const kits = parseInt(rawKits) || 0;
+            const rooms = parseInt(roomsInput.value) || 0;
+            const vajillaPzas = parseInt(vajillaInput.value) || 0;
+            let unitPrice = 0;
+
+            if (rawKits.length > 0) {
+                tierPill.classList.add('visible');
+            } else {
+                tierPill.classList.remove('visible');
+            }
+
+            let calculatedBases = 0;
+
+            if (kits > 0 && kits < 20) {
+                minError.style.display = 'block';
+                submitActionBtn.disabled = true;
+                kitPriceDisplay.innerHTML = `$0.00 <span class="unit-label">/ kit.</span>`;
+                summaryUnitPrice.innerText = '$0.00';
+            } else if (kits >= 20) {
+                minError.style.display = 'none';
+                submitActionBtn.disabled = false;
+                
+if (kits >= 100) {
+    unitPrice = 95;
+    if(tierPill.innerText !== 'RESIDENCE') {
+        tierPill.style.opacity = '0';
+        setTimeout(() => {
+            tierPill.innerText = 'RESIDENCE';
+            tierPill.classList.add('residence-tier'); // Agrega el tono dorado
+            tierPill.style.opacity = '1';
+        }, 300);
+    }
+    roomsWrapper.classList.add('active');
+    vajillaWrapper.classList.remove('active');
+    residenceNote.classList.add('active');
+
+    calculatedBases = Math.ceil(rooms * 1.2);
+    residenceNote.innerText = `Su pedido aplica para la modalidad Residence, que incluye ${calculatedBases} bases de piedra laminada de cortesía.`;
+} else {
+    unitPrice = 105;
+    if(tierPill.innerText !== 'SUITE') {
+        tierPill.style.opacity = '0';
+        setTimeout(() => {
+            tierPill.innerText = 'SUITE';
+            tierPill.classList.remove('residence-tier'); // Regresa al tono normal para Suite
+            tierPill.style.opacity = '1';
+        }, 300);
+    }
+    roomsWrapper.classList.remove('active');
+    vajillaWrapper.classList.add('active');
+    residenceNote.classList.remove('active');
+}
+                
+                kitPriceDisplay.innerHTML = `$${unitPrice}.00 <span class="unit-label">/ kit.</span>`;
+                summaryUnitPrice.innerText = `$${(kits * unitPrice).toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MXN`;
+            } else {
+                minError.style.display = 'none';
+                submitActionBtn.disabled = true;
+                kitPriceDisplay.innerHTML = `$0.00 <span class="unit-label">/ kit.</span>`;
+                roomsWrapper.classList.remove('active');
+                vajillaWrapper.classList.add('active');
+                residenceNote.classList.remove('active');
+            }
+
+            summaryKitLabel.innerText = `Kit 57-71 (${kits} pzas.)`;
+
+            let vajillaSubtotal = 0;
+            if (kits < 100) {
+                summaryTablewareRow.style.display = 'flex';
+                summaryTablewareLabel.innerText = `Vajilla (${vajillaPzas} pzas.)`;
+                vajillaSubtotal = vajillaPzas * 30;
+                vajillaPriceDisplay.innerHTML = `$30.00 <span class="unit-label">/ pza.</span>`;
+                summaryTablewarePrice.innerText = `$${vajillaSubtotal.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MXN`;
+            } else {
+                summaryTablewareRow.style.display = 'flex';
+                summaryTablewareLabel.innerText = `Vajilla (${calculatedBases} pzas.)`;
+                vajillaPriceDisplay.innerHTML = `<span class="strike-price">$30.00</span><span class="included-tag">INCLUIDA</span> <span class="unit-label">/ pza.</span>`;
+                summaryTablewarePrice.innerText = 'INCLUIDA';
+                vajillaSubtotal = 0;
+            }
+
+            const productsSubtotal = (kits >= 20 ? (kits * unitPrice) : 0) + vajillaSubtotal;
+            const formattedTotal = `$${productsSubtotal.toLocaleString('es-MX', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MXN + IVA`;
+            
+            totalDisplay.innerText = formattedTotal;
+            barTotal.innerText = formattedTotal;
+        }
+
+        kitsInput.addEventListener('input', calculateOrder);
+        roomsInput.addEventListener('input', calculateOrder);
+        vajillaInput.addEventListener('input', calculateOrder);
+
+        function handleActionClick(event) {
+            event.preventDefault();
+            
+            if (!isDrawerOpen) {
+                checkoutDrawer.classList.add('open');
+                submitActionBtn.innerText = "ENVIAR COTIZACIÓN";
+                submitActionBtn.classList.add('outline');
+                isDrawerOpen = true;
+            } else {
+                const nameVal = clientName.value.trim();
+                const emailVal = clientEmail.value.trim();
+                
+                if (!nameVal || !emailVal || !emailVal.includes('@')) {
+                    alert('Por favor ingrese un nombre y correo electrónico institucional válido.');
+                    return;
+                }
+                
+                document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const hotelSlug = urlParams.get('hotel');
+
+    if (hotelSlug && hotelesData[hotelSlug]) {
+        const hotelInfo = hotelesData[hotelSlug];
+        
+        // Inyectar el logo dinámicamente en el slot del hotel
+        const logoSlot = document.querySelector('.hotel-brand-slot img');
+        if (logoSlot) {
+            logoSlot.src = hotelInfo.logo;
+            logoSlot.alt = hotelInfo.nombre;
+        }
+
+        // Precargar habitaciones si el campo existe
+        const roomsInput = document.getElementById('roomsCount');
+        if (roomsInput) {
+            roomsInput.value = hotelInfo.habitaciones;
+            if (typeof calculateOrder === 'function') {
+                calculateOrder();
+            }
+        }
+    }
+});
+
+                const payload = {
+                    nombre: nameVal,
+                    email: emailVal,
+                    kits: kitsInput.value,
+                    habitaciones: roomsInput.value || 0,
+                    vajilla: kitsInput.value >= 100 ? Math.ceil((parseInt(roomsInput.value) || 0) * 1.2) : (vajillaInput.value || 0),
+                    fechaEntrega: deliveryDate.value,
+                    total: totalDisplay.innerText
+                };
+
+                const webhookUrl = 'https://hook.eu2.make.com/tu-webhook-personalizado';
+
+                fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                }).catch(err => console.log('Webhook dispatched'));
+
+                submitOrder();
+            }
+        }
+
+        // Transición a la confirmación: Cambia el fondo a negro, sustituye el checker por Hrod_2.webp y aplica frosted glass
+        function submitOrder() {
+            orderContentWrapper.style.display = 'none';
+            successState.style.display = 'block';
+            actionBar.style.display = 'none';
+
+            // Cambiar fondo de la página a negro absoluto
+            document.body.classList.add('confirmed');
+
+            // Reemplazar la imagen del hero fold por Hrod_2.webp manteniendo proporción
+            heroFold.style.backgroundImage = "url('https://raw.githubusercontent.com/feraz-studio/57-71/main/Hrod_2.webp')";
+            heroFold.style.backgroundSize = "cover";
+            heroFold.style.backgroundPosition = "center";
+
+            // Aplicar estilo Frosted Glass translúcido sobre el contenedor negro
+            contentCard.style.background = 'rgba(20, 20, 20, 0.75)';
+            contentCard.style.backdropFilter = 'blur(25px)';
+            contentCard.style.webkitBackdropFilter = 'blur(25px)';
+            contentCard.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+            contentCard.style.color = '#FFFFFF';
+        }
+
+        const heroObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    actionBar.classList.add('visible');
+                } else {
+                    actionBar.classList.remove('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        // Script de rotación en loop con crossfade
+document.addEventListener("DOMContentLoaded", function() {
+    const slides = document.querySelectorAll('.product-image-slider .slide-img');
+    if (slides.length < 2) return;
+    
+    let currentIndex = 0;
+    
+    setInterval(() => {
+        slides[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % slides.length;
+        slides[currentIndex].classList.add('active');
+    }, 4500); // 4500 ms = 4.5 segundos por foto
+});
+
+        heroObserver.observe(heroFold);
+
+        const dockObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    dockTarget.appendChild(actionBar);
+                    actionBar.classList.add('docked');
+                } else {
+                    if (window.scrollY < dockTarget.offsetTop) {
+                        document.body.appendChild(actionBar);
+                        actionBar.classList.remove('docked');
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+
+        dockObserver.observe(dockTarget);
+
+        const topNav = document.getElementById('topNav');
+        let lastScrollY = window.scrollY;
+        let scrollTimer = null;
+
+        window.addEventListener('scroll', () => {
+            const currentScrollY = window.scrollY;
+
+            if (currentScrollY > lastScrollY && currentScrollY > 60) {
+                topNav.classList.add('hidden');
+            } else {
+                topNav.classList.remove('hidden');
+            }
+            
+            lastScrollY = currentScrollY;
+
+            if(scrollTimer !== null) {
+                clearTimeout(scrollTimer);
+            }
+            scrollTimer = setTimeout(() => {
+                topNav.classList.remove('hidden');
+            }, 250);
+        });
+
+        calculateOrder();
+    </script>
+</body>
+</html>
