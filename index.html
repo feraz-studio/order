@@ -1850,42 +1850,61 @@
                     return;
                 }
 
-                let desgloseStr = "";
+let desgloseStr = "";
                 let totalRoomsFinal = 0;
                 let totalKitsFinal = 0;
+                let totalVajillaFinal = 0;
 
                 if (isGroupMode) {
+                    let hotelParts = [];
                     for (const [id, data] of Object.entries(groupOrderData)) {
                         let k = parseInt(data.kits) || 0;
                         let v = parseInt(data.vajilla) || 0;
-                        if (k > 0 || v > 0) {
+                        
+                        // Si aplica la modalidad Residence para este total global de kits
+                        let isResidenceGlobal = (Object.values(groupOrderData).reduce((sum, d) => sum + (parseInt(d.kits) || 0), 0) >= 100);
+                        let vCountFinal = isResidenceGlobal ? Math.ceil(data.rooms * 1.2) : v;
+
+                        if (k > 0 || vCountFinal > 0) {
                             let parts = [];
                             if (k > 0) parts.push(`${k} kits`);
-                            if (v > 0) parts.push(`${v} vajillas`);
+                            if (vCountFinal > 0) {
+                                let tagVajilla = isResidenceGlobal ? " vajillas (incluidas)" : " vajillas";
+                                parts.push(`${vCountFinal}${tagVajilla}`);
+                            }
                             
-                            desgloseStr += `${data.name} (${id}): ${parts.join(', ')}. | `;
+                            hotelParts.push(`${data.name} (${id}): ${parts.join(', ')}`);
                             totalRoomsFinal += data.rooms;
                             totalKitsFinal += k;
+                            totalVajillaFinal += vCountFinal;
                         }
                     }
+                    desgloseStr = hotelParts.join(' | ');
                 } else {
                     totalKitsFinal = parseInt(kitsInput.value) || 0;
                     totalRoomsFinal = parseInt(roomsInput.value) || 0;
                     let v = parseInt(vajillaInput.value) || 0;
-                    
+                    let isResidence = totalKitsFinal >= 100;
+                    let vCountFinal = isResidence ? Math.ceil(totalRoomsFinal * 1.2) : v;
+
                     let parts = [];
                     if (totalKitsFinal > 0) parts.push(`${totalKitsFinal} kits`);
-                    if (v > 0) parts.push(`${v} vajillas`);
+                    if (vCountFinal > 0) {
+                        let tagVajilla = isResidence ? " vajillas (incluidas)" : " vajillas";
+                        parts.push(`${vCountFinal}${tagVajilla}`);
+                    }
                     desgloseStr = parts.join(', ');
+                    totalVajillaFinal = vCountFinal;
                 }
 
-                // PAYLOAD ACTUALIZADO CON EL SLUG INCLUIDO
+                // PAYLOAD ACTUALIZADO CON EL DESGLOSE DETALLADO DE VAJILLA
                 const payload = {
                     slug: currentHotelSlug,
                     nombre: nameVal,
                     email: emailVal,
                     hotel: activeHotelData ? activeHotelData.nombre : "Individual",
                     kits: totalKitsFinal,
+                    vajillasTotales: totalVajillaFinal,
                     desglose: desgloseStr,
                     habitaciones: totalRoomsFinal || 0,
                     fechaEntrega: deliveryDate.value,
