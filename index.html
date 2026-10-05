@@ -1,10 +1,24 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feraz — Colección 57–71 | Configure su pedido</title>
+
+    <!-- Open Graph / Banner para Redes Sociales (Siempre deben ir al inicio del head) -->
+    <meta property="og:title" content="Feraz — Colección 57–71">
+    <meta property="og:description" content="Colección de edición limitada concebida para transformar la estancia de sus huéspedes durante la temporada de automovilismo.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/feraz-studio/57-71/main/3_Checker.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:type" content="website">
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/feraz-studio/57-71/main/Favicon%203.png">
+    
     <!-- Three.js para la animación 3D -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
 <style>
 /* 1. Eliminamos el cursor real en absolutamente todo */
 @media (pointer: fine) {
@@ -49,14 +63,6 @@
     height: 4px;
 }
 </style>
-    <!-- Open Graph / Banner para Redes Sociales -->
-    <meta property="og:title" content="Feraz — Colección 57–71 | Cotizador B2B">
-    <meta property="og:description" content="Colección de edición limitada concebida para transformar la estancia de sus huéspedes durante la temporada de automovilismo.">
-    <meta property="og:image" content="https://raw.githubusercontent.com/feraz-studio/57-71/main/3_Checker.png">
-    <meta property="og:type" content="website">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feraz — Colección 57–71 | Configure su pedido</title>
     
     <style>
         /* Fuentes rutadas mediante jsDelivr CDN para forzar CORS y MIME types correctos en Windows */
@@ -352,7 +358,7 @@
             text-align: center;
             padding: 0;            
             margin-top: 36px;      
-            margin-bottom: 16px;    
+            margin-bottom: 16px;     
             min-height: 50px;
             display: flex;
             align-items: center;
@@ -543,20 +549,20 @@
             margin-right: 4px;
         }
 
-.error-message {
-    font-family: 'HK Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 12px;
-    color: var(--error);
-    margin-top: 0px;       /* Distancia limpia del input superior */
-    margin-bottom: 8px;    /* Distancia limpia hacia el input inferior */
-    padding-left: 16px;    /* Alineación exacta con el texto de los inputs */
-    display: none;
-}
-#dateError {
-    margin-top: 16px;
-    margin-bottom: 0px;
-}
+        .error-message {
+            font-family: 'HK Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 12px;
+            color: var(--error);
+            margin-top: 0px;       
+            margin-bottom: 8px;    
+            padding-left: 16px;    
+            display: none;
+        }
+        #dateError {
+            margin-top: 16px;
+            margin-bottom: 0px;
+        }
 
         .residence-note {
             font-family: 'HK Grotesk', sans-serif;
@@ -1667,7 +1673,7 @@
                         : grandTotalRooms;
 
                     calculatedBases = Math.ceil(effectiveRooms * 1.2);
-                    residenceNote.innerText = `Modalidad Residence. Su pedido incluye ${calculatedBases} bases de piedra laminada de cortesía.`;
+                    residenceNote.innerText = `Su pedido aplica para la modalidad Residence, que incluye ${calculatedBases} bases de piedra laminada de cortesía.`;
                 } else {
                     unitPrice = 105;
                     if (tierPill.innerText !== 'SUITE') {
@@ -1873,7 +1879,6 @@
                 let totalKitsFinal = 0;
                 let totalVajillaFinal = 0;
                 
-                // ARREGLO ESTRUCTURADO PARA MAKE (Permite iterar con {{#each}} en el HTML del PDF)
                 let propiedadesDetalle = [];
                 let currentUnitPrice = (parseInt(kitsCount.value) >= 100) ? 95 : 105;
 
@@ -1900,7 +1905,6 @@
                             totalKitsFinal += k;
                             totalVajillaFinal += vCountFinal;
 
-                            // Objeto limpio para cada propiedad dentro del arreglo que procesará Make
                             propiedadesDetalle.push({
                                 nombreHotel: data.name,
                                 tipoTier: isResidenceGlobal ? "RESIDENCE" : "SUITE",
@@ -1930,7 +1934,6 @@
                     desgloseStr = parts.join(', ');
                     totalVajillaFinal = vCountFinal;
 
-                    // Objeto individual limpio para Make
                     propiedadesDetalle.push({
                         nombreHotel: activeHotelData ? activeHotelData.nombre : "Pedido Individual",
                         tipoTier: isResidence ? "RESIDENCE" : "SUITE",
@@ -1943,7 +1946,6 @@
                     });
                 }
 
-                // PAYLOAD ACTUALIZADO CON EL ARREGLO "propiedadesDetalle" PARA MAKE
                 const payload = {
                     slug: currentHotelSlug,
                     nombre: nameVal,
@@ -1952,7 +1954,7 @@
                     kits: totalKitsFinal,
                     vajillasTotales: totalVajillaFinal,
                     desglose: desgloseStr,
-                    propiedadesDetalle: propiedadesDetalle, // <--- Este es el nuevo arreglo estructurado
+                    propiedadesDetalle: propiedadesDetalle,
                     habitaciones: totalRoomsFinal || 0,
                     fechaEntrega: deliveryDate.value,
                     total: totalDisplay.innerText
