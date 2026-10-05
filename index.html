@@ -352,7 +352,7 @@
             text-align: center;
             padding: 0;            
             margin-top: 36px;      
-            margin-bottom: 16px;   
+            margin-bottom: 16px;    
             min-height: 50px;
             display: flex;
             align-items: center;
@@ -1850,19 +1850,23 @@
                     return;
                 }
 
-let desgloseStr = "";
+                let desgloseStr = "";
                 let totalRoomsFinal = 0;
                 let totalKitsFinal = 0;
                 let totalVajillaFinal = 0;
+                
+                // ARREGLO ESTRUCTURADO PARA MAKE (Permite iterar con {{#each}} en el HTML del PDF)
+                let propiedadesDetalle = [];
+                let currentUnitPrice = (parseInt(kitsCount.value) >= 100) ? 95 : 105;
 
                 if (isGroupMode) {
                     let hotelParts = [];
+                    let isResidenceGlobal = (Object.values(groupOrderData).reduce((sum, d) => sum + (parseInt(d.kits) || 0), 0) >= 100);
+
                     for (const [id, data] of Object.entries(groupOrderData)) {
                         let k = parseInt(data.kits) || 0;
                         let v = parseInt(data.vajilla) || 0;
                         
-                        // Si aplica la modalidad Residence para este total global de kits
-                        let isResidenceGlobal = (Object.values(groupOrderData).reduce((sum, d) => sum + (parseInt(d.kits) || 0), 0) >= 100);
                         let vCountFinal = isResidenceGlobal ? Math.ceil(data.rooms * 1.2) : v;
 
                         if (k > 0 || vCountFinal > 0) {
@@ -1877,11 +1881,23 @@ let desgloseStr = "";
                             totalRoomsFinal += data.rooms;
                             totalKitsFinal += k;
                             totalVajillaFinal += vCountFinal;
+
+                            // Objeto limpio para cada propiedad dentro del arreglo que procesará Make
+                            propiedadesDetalle.push({
+                                nombreHotel: data.name,
+                                tipoTier: isResidenceGlobal ? "RESIDENCE" : "SUITE",
+                                precioKit: currentUnitPrice,
+                                cantidadKits: k,
+                                subtotalKits: k * currentUnitPrice,
+                                vajillaIncluida: isResidenceGlobal,
+                                cantidadVajillas: vCountFinal,
+                                subtotalVajillas: isResidenceGlobal ? 0 : (vCountFinal * 30)
+                            });
                         }
                     }
                     desgloseStr = hotelParts.join(' | ');
                 } else {
-                    totalKitsFinal = parseInt(kitsInput.value) || 0;
+                    totalKitsFinal = parseInt(kitsCount.value) || 0;
                     totalRoomsFinal = parseInt(roomsInput.value) || 0;
                     let v = parseInt(vajillaInput.value) || 0;
                     let isResidence = totalKitsFinal >= 100;
@@ -1895,9 +1911,21 @@ let desgloseStr = "";
                     }
                     desgloseStr = parts.join(', ');
                     totalVajillaFinal = vCountFinal;
+
+                    // Objeto individual limpio para Make
+                    propiedadesDetalle.push({
+                        nombreHotel: activeHotelData ? activeHotelData.nombre : "Pedido Individual",
+                        tipoTier: isResidence ? "RESIDENCE" : "SUITE",
+                        precioKit: currentUnitPrice,
+                        cantidadKits: totalKitsFinal,
+                        subtotalKits: totalKitsFinal * currentUnitPrice,
+                        vajillaIncluida: isResidence,
+                        cantidadVajillas: vCountFinal,
+                        subtotalVajillas: isResidence ? 0 : (vCountFinal * 30)
+                    });
                 }
 
-                // PAYLOAD ACTUALIZADO CON EL DESGLOSE DETALLADO DE VAJILLA
+                // PAYLOAD ACTUALIZADO CON EL ARREGLO "propiedadesDetalle" PARA MAKE
                 const payload = {
                     slug: currentHotelSlug,
                     nombre: nameVal,
@@ -1906,6 +1934,7 @@ let desgloseStr = "";
                     kits: totalKitsFinal,
                     vajillasTotales: totalVajillaFinal,
                     desglose: desgloseStr,
+                    propiedadesDetalle: propiedadesDetalle, // <--- Este es el nuevo arreglo estructurado
                     habitaciones: totalRoomsFinal || 0,
                     fechaEntrega: deliveryDate.value,
                     total: totalDisplay.innerText
