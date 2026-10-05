@@ -968,21 +968,24 @@
             user-select: none;
         }
 
-.property-bubble img {
-    filter: brightness(0) !important;
-    opacity: 0.8;
-    transition: all 0.3s ease;
-    pointer-events: none;
-}
+        .property-bubble.active {
+            background: #1A1A1A !important;
+            border-color: #1A1A1A !important;
+            color: #FFFFFF !important;
+        }
 
-.property-bubble.active img {
-    filter: brightness(0) invert(1) !important; /* Mantiene la inversión a blanco solo cuando la burbuja está activa */
-    opacity: 1;
-}
+        .property-bubble img {
+            filter: brightness(0) !important;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
 
         .property-bubble.active img {
-            filter: brightness(0) invert(1) opacity(1);
+            filter: brightness(0) invert(1) !important;
+            opacity: 1;
         }
+
         body.confirmed .hero-content {
             display: none !important;
         }
@@ -1234,7 +1237,7 @@
             "roso-gh": { "nombre": "Roso Guest House", "habitaciones": 10, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Roso.png", "logoScale": 1.0 },
             "ignacia": { "nombre": "Ignacia Guest House", "habitaciones": 9, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_ignacia.png","brightness": 0, "logoScale": 3.0 },
             "hoteldama": { "nombre": "Hotel Dama", "habitaciones": 17, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_Dama.png", "logoScale": 1.4 },
-                       "hotel-parian": { "nombre": "Parián", "habitaciones": 19, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_hotel-parian.png","brightness": 0, "logoScale": 2.5 },
+            "hotel-parian": { "nombre": "Parián", "habitaciones": 19, "logo": "https://raw.githubusercontent.com/feraz-studio/logos-hoteles/main/Logo_hotel-parian.png","brightness": 0, "logoScale": 2.5 },
             "onto": {
                 nombre: "ONTO",
                 esGrupo: true,
