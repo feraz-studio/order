@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feraz — Colección 57–71 | Configure su pedido</title>
 
-    <!-- Open Graph / Banner para Redes Sociales (Siempre deben ir al inicio del head) -->
+    <!-- Open Graph / Banner para Redes Sociales -->
     <meta property="og:title" content="Feraz — Colección 57–71">
     <meta property="og:description" content="Colección de edición limitada concebida para transformar la estancia de sus huéspedes durante la temporada de automovilismo.">
     <meta property="og:image" content="https://raw.githubusercontent.com/feraz-studio/57-71/main/3_Checker.png">
@@ -17,10 +17,10 @@
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/feraz-studio/57-71/main/Favicon%203.png">
     
     <!-- Three.js para la animación 3D -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" crossorigin="anonymous"></script>
 
 <style>
-/* 1. Eliminamos el cursor real en absolutamente todo */
+/* 1. Eliminamos el cursor real en dispositivos señaladores finos */
 @media (pointer: fine) {
     html, body, *, *:hover, a, button, .button, .image, .icon, [role="button"], input, select, textarea, option {
         cursor: none !important;
@@ -65,24 +65,27 @@
 </style>
     
     <style>
-        /* Fuentes rutadas mediante jsDelivr CDN para forzar CORS y MIME types correctos en Windows */
+        /* Tipografías */
         @font-face {
             font-family: 'HK Grotesk';
             src: url('https://cdn.jsdelivr.net/gh/feraz-studio/57-71@main/HKGrotesk-Medium.otf') format('opentype');
             font-weight: 500;
             font-style: normal;
+            font-display: swap;
         }
         @font-face {
             font-family: 'HK Grotesk';
             src: url('https://cdn.jsdelivr.net/gh/feraz-studio/57-71@main/HKGrotesk-SemiBold.otf') format('opentype');
             font-weight: 600;
             font-style: normal;
+            font-display: swap;
         }
         @font-face {
             font-family: 'HK Grotesk';
             src: url('https://cdn.jsdelivr.net/gh/feraz-studio/57-71@main/HKGrotesk-Bold.otf') format('opentype');
             font-weight: 700;
             font-style: normal;
+            font-display: swap;
         }
 
         :root {
@@ -1001,12 +1004,12 @@
 <div id="cursor-feraz-bocci"></div>
     <div class="page-container">
         <nav class="top-nav" id="topNav">
-            <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/Feraz_Off%20white.svg" alt="Feraz" class="feraz-logo">
+            <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/Feraz_Off%20white.svg" alt="Feraz" class="feraz-logo" decoding="async">
         </nav>
 
         <div class="hero-fold" id="heroFold">
             <div class="hero-content">
-                <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/logo5771.svg" alt="57-71" class="hero-logo-5771">
+                <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/logo5771.svg" alt="57-71" class="hero-logo-5771" decoding="async">
                 <h2 class="hero-title-text">Una colección que respira el pulso eterno de los hermanos Rodríguez.</h2>
             </div>
         </div>
@@ -1058,7 +1061,7 @@
                 </div>
 
                 <div class="hotel-brand-slot">
-                    <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/Feraz_Off%20white.svg" alt="Feraz Partner">
+                    <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/Feraz_Off%20white.svg" alt="Feraz Partner" decoding="async">
                 </div>
 
                 <div class="section-title">Configuración de Pedido</div>
@@ -1071,8 +1074,8 @@
                         </div>
 
                         <div class="product-image-slider">
-                            <img id="mainImage" src="https://raw.githubusercontent.com/feraz-studio/57-71/main/pedro1.webp" alt="Kit Pedro" class="slide-img active">
-                            <img id="altImage" src="https://raw.githubusercontent.com/feraz-studio/57-71/main/ricardo2.webp" alt="Kit Ricardo" class="slide-img">
+                            <img id="mainImage" src="https://raw.githubusercontent.com/feraz-studio/57-71/main/pedro1.webp" alt="Kit Pedro" class="slide-img active" decoding="async">
+                            <img id="altImage" src="https://raw.githubusercontent.com/feraz-studio/57-71/main/ricardo2.webp" alt="Kit Ricardo" class="slide-img" decoding="async">
                         </div>
                         
                         <div id="groupBubblesWrapper" class="group-bubbles-wrapper"></div>
@@ -1115,7 +1118,7 @@
                                 </div>
                             </div>
                         </div>
-                  <div class="dynamic-field-wrapper" id="vajillaNoteWrapper">
+                        <div class="dynamic-field-wrapper" id="vajillaNoteWrapper">
                             <div style="font-family: 'HK Grotesk', sans-serif; font-weight: 500; font-size: 11px; color: var(--text-secondary); margin-top: 4px; margin-bottom: 8px; padding-left: 16px;">
                                 Incluida en pedidos superiores a 100 kits
                             </div>
@@ -1185,11 +1188,11 @@
                 <p>Hemos registrado su orden.<br><br>En breve recibirá su cotización formal y los pasos a seguir para garantizar la mejor experiencia para sus huéspedes.<br><br>Gracias por confiar en nosotros.</p>
                 
                 <div class="success-logos">
-                    <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/logo5771.svg" alt="Logo Hospit" style="height: 20px;">
+                    <img src="https://raw.githubusercontent.com/feraz-studio/57-71/main/logo5771.svg" alt="Logo Hospit" style="height: 20px;" decoding="async">
                 </div>
 
                 <div class="success-footer">
-                    <p style="margin-bottom: 32px;">Si tiene alguna pregunta, por favor no dude en contactarnos.<br><br></p>                
+                    <p style="margin-bottom: 32px;">Si tiene alguna pregunta, por favor no dude en contactarnos.<br><br></p>        
                     <p class="author-name">Fernando Quezada</p>
                     <p class="author-title">Founder & Creative Director</p>
                     <div class="success-icons">
@@ -1317,7 +1320,7 @@
 
         function initBonbonAnimation() {
             const container = document.getElementById('canvas-container');
-            if(!container) return;
+            if(!container || typeof THREE === 'undefined') return;
             
             scene = new THREE.Scene();
 
@@ -1418,7 +1421,6 @@
 
             scene.add(bonbonGroup);
         }
-        
 
         function animateAnimation() {
             requestAnimationFrame(animateAnimation);
@@ -1471,7 +1473,7 @@
                             bubble.innerText = p.name;
                         } else if (p.type === "logo") {
                             const scale = p.logoScale || 1.0;
-                            bubble.innerHTML = `<img src="${p.logoUrl}" alt="${p.name}" style="height:${20 * scale}px; width:auto; object-fit:contain;">`;
+                            bubble.innerHTML = `<img src="${p.logoUrl}" alt="${p.name}" style="height:${20 * scale}px; width:auto; object-fit:contain;" decoding="async">`;
                         }
 
                         bubble.onclick = () => selectGroupProperty(p.id);
@@ -1564,7 +1566,6 @@
 
             calculateOrder();
         }
-        
 
         function handleInputUpdate() {
             if (isGroupMode && activeSelectedPropId) {
@@ -1880,7 +1881,7 @@
                 let totalVajillaFinal = 0;
                 
                 let propiedadesDetalle = [];
-                let currentUnitPrice = (parseInt(kitsCount.value) >= 100) ? 95 : 105;
+                let currentUnitPrice = (parseInt(kitsInput.value) >= 100) ? 95 : 105;
 
                 if (isGroupMode) {
                     let hotelParts = [];
@@ -1919,7 +1920,7 @@
                     }
                     desgloseStr = hotelParts.join(' | ');
                 } else {
-                    totalKitsFinal = parseInt(kitsCount.value) || 0;
+                    totalKitsFinal = parseInt(kitsInput.value) || 0;
                     totalRoomsFinal = parseInt(roomsInput.value) || 0;
                     let v = parseInt(vajillaInput.value) || 0;
                     let isResidence = totalKitsFinal >= 100;
@@ -1968,13 +1969,14 @@
                 try {
                     await fetch(webhookUrl, {
                         method: 'POST',
+                        mode: 'cors',
                         headers: { 
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify(payload)
                     });
                 } catch (err) {
-                    console.log('Fallo el fetch al webhook:', err);
+                    console.log('Error en fetch al webhook:', err);
                 }
 
                 submitOrder();
